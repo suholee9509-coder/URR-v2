@@ -1,0 +1,368 @@
+import { useState, useEffect, useRef, useMemo } from 'react'
+import { Link } from 'react-router-dom'
+import { Search, X, TrendingUp, Users, Calendar, Flame } from 'lucide-react'
+import { getArtistGradient, homeRankingEvents } from '@/data/mock-home'
+import {
+  trendingSearchTerms,
+  getAllArtists,
+  getAllEvents,
+} from '@/data/mock-search'
+import { BookingStatusBadge } from '@/components/urr'
+import type { Artist } from '@/types'
+import type { SearchableEvent } from '@/data/mock-search'
+
+/* ------------------------------------------------------------------ */
+/*  helpers                                                           */
+/* ------------------------------------------------------------------ */
+
+function matchesQuery(text: string, q: string) {
+  return text.toLowerCase().includes(q.toLowerCase())
+}
+
+function formatFollowers(n: number): string {
+  if (n >= 1_000_000) return `${(n / 1_000_000).toFixed(1)}M`
+  if (n >= 1_000) return `${(n / 1_000).toFixed(1)}K`
+  return String(n)
+}
+
+/* ------------------------------------------------------------------ */
+/*  sub-components                                                    */
+/* ------------------------------------------------------------------ */
+
+function TrendingSection({
+  onSelect,
+}: {
+  onSelect: (term: string) => void
+}) {
+  return (
+    <section className="space-y-4">
+      <h2 className="text-base font-semibold flex items-center gap-2 text-muted-foreground">
+        <TrendingUp size={18} />
+        인기 검색어
+      </h2>
+      <div className="flex flex-wrap gap-2">
+        {trendingSearchTerms.map((term) => (
+          <button
+            key={term}
+            onClick={() => onSelect(term)}
+            className="rounded-full border border-border px-3.5 py-1.5 text-sm font-medium hover:bg-accent hover:text-accent-foreground transition-colors cursor-pointer"
+          >
+            {term}
+          </button>
+        ))}
+      </div>
+    </section>
+  )
+}
+
+function PopularArtistsSection({ artists }: { artists: Artist[] }) {
+  return (
+    <section className="space-y-4">
+      <h2 className="text-base font-semibold flex items-center gap-2 text-muted-foreground">
+        <Users size={18} />
+        인기 아티스트
+      </h2>
+      <div className="flex gap-4 overflow-x-auto pb-2 -mx-1 px-1 scrollbar-hide">
+        {artists.slice(0, 10).map((artist) => (
+          <Link
+            key={artist.id}
+            to={`/artists/${artist.id}`}
+            className="flex flex-col items-center gap-2 shrink-0 w-[72px] group"
+          >
+            <div
+              className="size-16 rounded-full ring-2 ring-transparent group-hover:ring-primary/40 transition-all"
+              style={{ background: getArtistGradient(artist.id) }}
+            />
+            <span className="text-xs font-medium text-center truncate w-full">
+              {artist.name}
+            </span>
+          </Link>
+        ))}
+      </div>
+    </section>
+  )
+}
+
+function PopularEventsSection() {
+  const top5 = homeRankingEvents.slice(0, 5)
+  return (
+    <section className="space-y-4">
+      <h2 className="text-base font-semibold flex items-center gap-2 text-muted-foreground">
+        <Flame size={18} />
+        인기 공연
+      </h2>
+      <div className="rounded-xl border border-border bg-card divide-y divide-border overflow-hidden">
+        {top5.map((evt, i) => (
+          <Link
+            key={evt.id}
+            to={`/events/${evt.id}`}
+            className="flex items-center gap-4 px-4 py-3 hover:bg-accent/50 transition-colors"
+          >
+            <span className="text-lg font-bold text-muted-foreground/50 w-6 text-center shrink-0">
+              {i + 1}
+            </span>
+            <div
+              className="size-11 rounded-lg shrink-0"
+              style={{ background: getArtistGradient(evt.artistId) }}
+            />
+            <div className="min-w-0 flex-1">
+              <p className="font-semibold text-sm truncate">{evt.title}</p>
+              <p className="text-xs text-muted-foreground">{evt.artistName}</p>
+            </div>
+            <BookingStatusBadge status={evt.status} />
+          </Link>
+        ))}
+      </div>
+    </section>
+  )
+}
+
+function ArtistResultRow({ artist }: { artist: Artist }) {
+  return (
+    <Link
+      to={`/artists/${artist.id}`}
+      className="flex items-center gap-4 px-4 py-3 hover:bg-accent/50 transition-colors"
+    >
+      <div
+        className="size-12 rounded-full shrink-0"
+        style={{ background: getArtistGradient(artist.id) }}
+      />
+      <div className="min-w-0 flex-1">
+        <p className="font-semibold truncate">{artist.name}</p>
+        <p className="text-sm text-muted-foreground">
+          팔로워 {formatFollowers(artist.followerCount)}
+        </p>
+      </div>
+    </Link>
+  )
+}
+
+function EventResultRow({ event }: { event: SearchableEvent }) {
+  const firstDate = event.dates[0]?.date ?? ''
+  const dateStr = firstDate
+    ? new Date(firstDate).toLocaleDateString('ko-KR', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+      })
+    : ''
+
+  return (
+    <Link
+      to={`/events/${event.id}`}
+      className="flex items-center gap-4 px-4 py-3 hover:bg-accent/50 transition-colors"
+    >
+      <div
+        className="size-[60px] rounded-lg shrink-0"
+        style={{ background: getArtistGradient(event.artistId) }}
+      />
+      <div className="min-w-0 flex-1 space-y-1">
+        <div className="flex items-center gap-2">
+          <p className="font-semibold truncate">{event.title}</p>
+          <BookingStatusBadge status={event.status} />
+        </div>
+        <p className="text-sm text-muted-foreground truncate">
+          {event.artistName} · {dateStr} · {event.venue}
+        </p>
+      </div>
+    </Link>
+  )
+}
+
+/* ------------------------------------------------------------------ */
+/*  main                                                              */
+/* ------------------------------------------------------------------ */
+
+export default function SearchPage() {
+  const [query, setQuery] = useState('')
+  const [debouncedQuery, setDebouncedQuery] = useState('')
+  const [showAllArtists, setShowAllArtists] = useState(false)
+  const [showAllEvents, setShowAllEvents] = useState(false)
+  const inputRef = useRef<HTMLInputElement>(null)
+
+  // autofocus
+  useEffect(() => {
+    inputRef.current?.focus()
+  }, [])
+
+  // 200ms debounce
+  useEffect(() => {
+    if (!query.trim()) {
+      setDebouncedQuery('')
+      return
+    }
+    const timer = setTimeout(() => setDebouncedQuery(query.trim()), 200)
+    return () => clearTimeout(timer)
+  }, [query])
+
+  // Escape → clear
+  useEffect(() => {
+    function handleKey(e: KeyboardEvent) {
+      if (e.key === 'Escape') {
+        setQuery('')
+        setDebouncedQuery('')
+        inputRef.current?.focus()
+      }
+    }
+    document.addEventListener('keydown', handleKey)
+    return () => document.removeEventListener('keydown', handleKey)
+  }, [])
+
+  // filtered results
+  const allArtists = useMemo(() => getAllArtists(), [])
+  const allEvents = useMemo(() => getAllEvents(), [])
+
+  const filteredArtists = useMemo(() => {
+    if (!debouncedQuery) return []
+    return allArtists.filter(
+      (a) =>
+        matchesQuery(a.name, debouncedQuery) ||
+        matchesQuery(a.bio, debouncedQuery),
+    )
+  }, [allArtists, debouncedQuery])
+
+  const filteredEvents = useMemo(() => {
+    if (!debouncedQuery) return []
+    return allEvents.filter(
+      (e) =>
+        matchesQuery(e.title, debouncedQuery) ||
+        matchesQuery(e.venue, debouncedQuery) ||
+        matchesQuery(e.artistName, debouncedQuery),
+    )
+  }, [allEvents, debouncedQuery])
+
+  const hasResults = filteredArtists.length > 0 || filteredEvents.length > 0
+  const isSearching = debouncedQuery.length > 0
+
+  function handleTrendingClick(term: string) {
+    setQuery(term)
+    setDebouncedQuery(term)
+    setShowAllArtists(false)
+    setShowAllEvents(false)
+  }
+
+  function handleClear() {
+    setQuery('')
+    setDebouncedQuery('')
+    setShowAllArtists(false)
+    setShowAllEvents(false)
+    inputRef.current?.focus()
+  }
+
+  const visibleArtists = showAllArtists
+    ? filteredArtists
+    : filteredArtists.slice(0, 5)
+  const visibleEvents = showAllEvents
+    ? filteredEvents
+    : filteredEvents.slice(0, 5)
+
+  return (
+    <div className="space-y-6">
+      {/* --- search input --- */}
+      <div className="relative">
+        <Search
+          size={20}
+          className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none"
+        />
+        <input
+          ref={inputRef}
+          type="text"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder="아티스트, 공연명, 장소 검색"
+          className="h-12 w-full rounded-xl border border-border bg-card pl-12 pr-12 text-sm outline-none focus:ring-2 focus:ring-primary/30 transition-shadow"
+        />
+        {query && (
+          <button
+            onClick={handleClear}
+            className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
+          >
+            <X size={18} />
+          </button>
+        )}
+      </div>
+
+      {/* --- state: empty → curation --- */}
+      {!isSearching && (
+        <div className="space-y-8">
+          <TrendingSection onSelect={handleTrendingClick} />
+          <PopularArtistsSection artists={allArtists} />
+          <PopularEventsSection />
+        </div>
+      )}
+
+      {/* --- state: results --- */}
+      {isSearching && hasResults && (
+        <div className="space-y-6">
+          {/* artists */}
+          {filteredArtists.length > 0 && (
+            <section className="space-y-2">
+              <h2 className="text-sm font-semibold text-muted-foreground flex items-center gap-2 px-1">
+                <Users size={16} />
+                아티스트
+                <span className="text-xs font-normal">
+                  ({filteredArtists.length})
+                </span>
+              </h2>
+              <div className="rounded-xl border border-border bg-card divide-y divide-border overflow-hidden">
+                {visibleArtists.map((a) => (
+                  <ArtistResultRow key={a.id} artist={a} />
+                ))}
+              </div>
+              {filteredArtists.length > 5 && !showAllArtists && (
+                <button
+                  onClick={() => setShowAllArtists(true)}
+                  className="w-full text-center text-sm text-muted-foreground hover:text-foreground py-2 transition-colors cursor-pointer"
+                >
+                  아티스트 {filteredArtists.length - 5}개 더 보기
+                </button>
+              )}
+            </section>
+          )}
+
+          {/* events */}
+          {filteredEvents.length > 0 && (
+            <section className="space-y-2">
+              <h2 className="text-sm font-semibold text-muted-foreground flex items-center gap-2 px-1">
+                <Calendar size={16} />
+                공연
+                <span className="text-xs font-normal">
+                  ({filteredEvents.length})
+                </span>
+              </h2>
+              <div className="rounded-xl border border-border bg-card divide-y divide-border overflow-hidden">
+                {visibleEvents.map((e) => (
+                  <EventResultRow key={e.id} event={e} />
+                ))}
+              </div>
+              {filteredEvents.length > 5 && !showAllEvents && (
+                <button
+                  onClick={() => setShowAllEvents(true)}
+                  className="w-full text-center text-sm text-muted-foreground hover:text-foreground py-2 transition-colors cursor-pointer"
+                >
+                  공연 {filteredEvents.length - 5}개 더 보기
+                </button>
+              )}
+            </section>
+          )}
+        </div>
+      )}
+
+      {/* --- state: no results --- */}
+      {isSearching && !hasResults && (
+        <div className="text-center py-16 space-y-4">
+          <Search size={48} className="mx-auto text-muted-foreground/30" />
+          <div className="space-y-1">
+            <p className="text-lg font-semibold">검색 결과가 없습니다</p>
+            <p className="text-sm text-muted-foreground">
+              다른 검색어를 입력하거나, 인기 검색어를 확인해 보세요.
+            </p>
+          </div>
+          <div className="pt-4">
+            <TrendingSection onSelect={handleTrendingClick} />
+          </div>
+        </div>
+      )}
+    </div>
+  )
+}
