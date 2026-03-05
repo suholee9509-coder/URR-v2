@@ -1,6 +1,7 @@
 import { cn } from '@/lib/utils'
 import { Calendar, MapPin } from 'lucide-react'
 import { BookingStatusBadge } from './BookingStatusBadge'
+import { getArtistGradient } from '@/data/mock-home'
 import type { Event } from '@/types'
 
 interface EventCardProps {
@@ -20,8 +21,17 @@ export function EventCard({ event, variant = 'default', artistName, className }:
         'group flex flex-col rounded-lg border border-border bg-card overflow-hidden cursor-pointer transition-all duration-150 hover:shadow-md hover:-translate-y-px',
         className,
       )}>
-        <div className="aspect-[3/4] bg-muted flex items-center justify-center text-muted-foreground text-sm">
-          Poster
+        <div className="aspect-[3/4] bg-muted relative overflow-hidden">
+          {event.poster ? (
+            <img src={event.poster} alt={event.title} className="absolute inset-0 w-full h-full object-cover" />
+          ) : (
+            <div
+              className="absolute inset-0 flex items-center justify-center text-white text-sm font-medium"
+              style={{ background: getArtistGradient(event.artistId) }}
+            >
+              {event.title.split(' ')[0]}
+            </div>
+          )}
         </div>
         <div className="p-3 space-y-1.5">
           <div className="flex items-start justify-between gap-2">
@@ -49,8 +59,17 @@ export function EventCard({ event, variant = 'default', artistName, className }:
       'group flex gap-4 rounded-lg border border-border bg-card p-4 cursor-pointer transition-all duration-150 hover:shadow-md hover:-translate-y-px',
       className,
     )}>
-      <div className="w-[100px] h-[140px] rounded-lg bg-muted shrink-0 flex items-center justify-center text-xs text-muted-foreground">
-        Poster
+      <div className="w-[100px] h-[140px] rounded-lg bg-muted shrink-0 overflow-hidden relative">
+        {event.poster ? (
+          <img src={event.poster} alt={event.title} className="absolute inset-0 w-full h-full object-cover" />
+        ) : (
+          <div
+            className="absolute inset-0 flex items-center justify-center text-white text-xs font-medium"
+            style={{ background: getArtistGradient(event.artistId) }}
+          >
+            {event.title.split(' ')[0]}
+          </div>
+        )}
       </div>
       <div className="flex-1 min-w-0 space-y-1.5">
         <div className="flex items-start justify-between gap-2">

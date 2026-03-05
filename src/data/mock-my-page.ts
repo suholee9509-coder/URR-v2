@@ -1,4 +1,7 @@
 import type { Ticket, Event, TransferStatus } from '@/types'
+import posterGDragon from '@/assets/Hero_G-dragon.png'
+import posterBTS from '@/assets/공연_BTS Yet to Come in Cinema.png'
+import posterAespa from '@/assets/Hero_aespa.png'
 
 // ── Transfer Record (user perspective) ──────────────────
 
@@ -26,7 +29,7 @@ const ticketEvents: Event[] = [
     title: 'G-Dragon 2026 MAMA DOME TOUR',
     venue: 'KSPO DOME (올림픽체조경기장)',
     dates: [{ id: 'gd-d1', date: '2026-06-01T18:00:00+09:00', bookingWindows: [], totalSeats: 15000, remainingSeats: 4230 }],
-    poster: '',
+    poster: posterGDragon,
     status: 'open',
   },
   {
@@ -35,7 +38,7 @@ const ticketEvents: Event[] = [
     title: 'BTS YET TO COME ENCORE IN SEOUL',
     venue: '잠실종합운동장 주경기장',
     dates: [{ id: 'bts-d1', date: '2026-08-01T19:00:00+09:00', bookingWindows: [], totalSeats: 65000, remainingSeats: 12000 }],
-    poster: '',
+    poster: posterBTS,
     status: 'open',
   },
   {
@@ -44,7 +47,7 @@ const ticketEvents: Event[] = [
     title: 'aespa LIVE SYNK : PARALLEL',
     venue: 'KSPO DOME (올림픽체조경기장)',
     dates: [{ id: 'ae-d1', date: '2026-09-20T18:00:00+09:00', bookingWindows: [], totalSeats: 15000, remainingSeats: 4500 }],
-    poster: '',
+    poster: posterAespa,
     status: 'open',
   },
   {
@@ -53,7 +56,7 @@ const ticketEvents: Event[] = [
     title: 'G-Dragon POWER CONCERT 2025',
     venue: '잠실종합운동장 주경기장',
     dates: [{ id: 'gd-past', date: '2025-12-25T18:00:00+09:00', bookingWindows: [], totalSeats: 50000, remainingSeats: 0 }],
-    poster: '',
+    poster: posterGDragon,
     status: 'closed',
   },
   {
@@ -62,7 +65,7 @@ const ticketEvents: Event[] = [
     title: 'BTS WORLD TOUR: LOVE YOURSELF 2025',
     venue: '고척스카이돔',
     dates: [{ id: 'bts-past', date: '2025-11-10T18:00:00+09:00', bookingWindows: [], totalSeats: 20000, remainingSeats: 0 }],
-    poster: '',
+    poster: posterBTS,
     status: 'closed',
   },
 ]

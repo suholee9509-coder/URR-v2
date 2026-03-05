@@ -1,4 +1,11 @@
 import type { Event, TransferListing, TransferStatus } from '@/types'
+import posterGDragon from '@/assets/Hero_G-dragon.png'
+import posterBTS from '@/assets/공연_BTS Yet to Come in Cinema.png'
+import posterAespa from '@/assets/Hero_aespa.png'
+import posterIVE from '@/assets/공연_IVE Show What i am.png'
+import posterIVEWorldTour from '@/assets/선예매임박공연_IVE The 1ST World Tour.png'
+import posterBP from '@/assets/공연_BlackPink Born Pink.png'
+import posterBPHero from '@/assets/Hero_Blackpink.png'
 
 // --- Extended artist info (agency, debut, genres) ---
 
@@ -64,7 +71,7 @@ const artistEventsMap: Record<string, Event[]> = {
         { id: 'gd-d1', date: '2026-06-01T18:00:00+09:00', bookingWindows: [], totalSeats: 15000, remainingSeats: 3200 },
         { id: 'gd-d2', date: '2026-06-02T18:00:00+09:00', bookingWindows: [], totalSeats: 15000, remainingSeats: 5100 },
       ],
-      poster: '',
+      poster: posterGDragon,
       status: 'open',
     },
     {
@@ -75,7 +82,7 @@ const artistEventsMap: Record<string, Event[]> = {
       dates: [
         { id: 'gd-d3', date: '2026-09-20T19:00:00+09:00', bookingWindows: [], totalSeats: 20000, remainingSeats: 20000 },
       ],
-      poster: '',
+      poster: posterGDragon,
       status: 'upcoming',
     },
     {
@@ -86,7 +93,7 @@ const artistEventsMap: Record<string, Event[]> = {
       dates: [
         { id: 'gd-d4', date: '2025-12-25T18:00:00+09:00', bookingWindows: [], totalSeats: 50000, remainingSeats: 0 },
       ],
-      poster: '',
+      poster: posterGDragon,
       status: 'closed',
     },
   ],
@@ -100,7 +107,7 @@ const artistEventsMap: Record<string, Event[]> = {
         { id: 'bts-d1', date: '2026-08-01T19:00:00+09:00', bookingWindows: [], totalSeats: 65000, remainingSeats: 12000 },
         { id: 'bts-d2', date: '2026-08-02T19:00:00+09:00', bookingWindows: [], totalSeats: 65000, remainingSeats: 18000 },
       ],
-      poster: '',
+      poster: posterBTS,
       status: 'open',
     },
     {
@@ -111,7 +118,7 @@ const artistEventsMap: Record<string, Event[]> = {
       dates: [
         { id: 'bts-d3', date: '2026-10-15T18:00:00+09:00', bookingWindows: [], totalSeats: 15000, remainingSeats: 15000 },
       ],
-      poster: '',
+      poster: posterBTS,
       status: 'upcoming',
     },
     {
@@ -122,7 +129,7 @@ const artistEventsMap: Record<string, Event[]> = {
       dates: [
         { id: 'bts-d4', date: '2026-04-20T17:00:00+09:00', bookingWindows: [], totalSeats: 40000, remainingSeats: 0 },
       ],
-      poster: '',
+      poster: posterBTS,
       status: 'soldout',
     },
     {
@@ -133,7 +140,7 @@ const artistEventsMap: Record<string, Event[]> = {
       dates: [
         { id: 'bts-d5', date: '2025-11-10T18:00:00+09:00', bookingWindows: [], totalSeats: 20000, remainingSeats: 0 },
       ],
-      poster: '',
+      poster: posterBTS,
       status: 'closed',
     },
   ],
@@ -146,7 +153,7 @@ const artistEventsMap: Record<string, Event[]> = {
       dates: [
         { id: 'ae-d1', date: '2026-09-20T18:00:00+09:00', bookingWindows: [], totalSeats: 15000, remainingSeats: 4500 },
       ],
-      poster: '',
+      poster: posterAespa,
       status: 'open',
     },
     {
@@ -157,7 +164,7 @@ const artistEventsMap: Record<string, Event[]> = {
       dates: [
         { id: 'ae-d2', date: '2026-11-05T19:00:00+09:00', bookingWindows: [], totalSeats: 10000, remainingSeats: 10000 },
       ],
-      poster: '',
+      poster: posterAespa,
       status: 'upcoming',
     },
     {
@@ -168,7 +175,7 @@ const artistEventsMap: Record<string, Event[]> = {
       dates: [
         { id: 'ae-d3', date: '2025-10-01T18:00:00+09:00', bookingWindows: [], totalSeats: 20000, remainingSeats: 0 },
       ],
-      poster: '',
+      poster: posterAespa,
       status: 'closed',
     },
   ],
@@ -181,7 +188,7 @@ const artistEventsMap: Record<string, Event[]> = {
       dates: [
         { id: 'ive-d1', date: '2026-07-12T18:00:00+09:00', bookingWindows: [], totalSeats: 15000, remainingSeats: 15000 },
       ],
-      poster: '',
+      poster: posterIVEWorldTour,
       status: 'upcoming',
     },
     {
@@ -192,7 +199,7 @@ const artistEventsMap: Record<string, Event[]> = {
       dates: [
         { id: 'ive-d2', date: '2026-05-18T17:00:00+09:00', bookingWindows: [], totalSeats: 10000, remainingSeats: 2300 },
       ],
-      poster: '',
+      poster: posterIVE,
       status: 'open',
     },
   ],
@@ -206,7 +213,7 @@ const artistEventsMap: Record<string, Event[]> = {
         { id: 'bp-d1', date: '2026-07-15T18:30:00+09:00', bookingWindows: [], totalSeats: 20000, remainingSeats: 1800 },
         { id: 'bp-d2', date: '2026-07-16T18:30:00+09:00', bookingWindows: [], totalSeats: 20000, remainingSeats: 3200 },
       ],
-      poster: '',
+      poster: posterBP,
       status: 'open',
     },
     {
@@ -217,7 +224,7 @@ const artistEventsMap: Record<string, Event[]> = {
       dates: [
         { id: 'bp-d3', date: '2026-12-01T18:00:00+09:00', bookingWindows: [], totalSeats: 65000, remainingSeats: 65000 },
       ],
-      poster: '',
+      poster: posterBPHero,
       status: 'upcoming',
     },
     {
@@ -228,7 +235,7 @@ const artistEventsMap: Record<string, Event[]> = {
       dates: [
         { id: 'bp-d4', date: '2025-09-20T18:00:00+09:00', bookingWindows: [], totalSeats: 20000, remainingSeats: 0 },
       ],
-      poster: '',
+      poster: posterBP,
       status: 'soldout',
     },
   ],

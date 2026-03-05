@@ -7,6 +7,11 @@ import avatarSVT from '@/assets/Artist_Seventeen.png'
 import avatarNJ from '@/assets/Artist_NewJeans.png'
 import avatarGIDLE from '@/assets/Artist_(G)I-DLE.png'
 import avatarTXT from '@/assets/Artist_TXT.png'
+import bannerSKZ from '@/assets/Stray Kids domin world tour.png'
+import bannerSVT from '@/assets/공연_Seventeen Be the Sun.png'
+import bannerNJ from '@/assets/공연_NewJeans Complexcon.png'
+import bannerGIDLE from '@/assets/선예매임박공연_(G)I-DLE World Tour.png'
+import bannerTXT from '@/assets/선예매임박공연_TXT World Tour.png'
 import heroBannerImg from '@/assets/Hero Banner.png'
 import heroGDragon from '@/assets/Hero_G-dragon.png'
 import heroBlackpink from '@/assets/Hero_Blackpink.png'
@@ -62,7 +67,7 @@ const additionalArtists: Artist[] = [
     id: 'skz',
     name: 'Stray Kids',
     avatar: avatarSKZ,
-    banner: '',
+    banner: bannerSKZ,
     bio: 'JYP Entertainment 8인조 보이그룹. 자체 프로듀싱의 대명사.',
     followerCount: 4800000,
     category: 'boygroup',
@@ -71,7 +76,7 @@ const additionalArtists: Artist[] = [
     id: 'seventeen',
     name: 'SEVENTEEN',
     avatar: avatarSVT,
-    banner: '',
+    banner: bannerSVT,
     bio: 'PLEDIS Entertainment 13인조 보이그룹. 자체 안무, 자작곡의 아이콘.',
     followerCount: 5600000,
     category: 'boygroup',
@@ -80,7 +85,7 @@ const additionalArtists: Artist[] = [
     id: 'newjeans',
     name: 'NewJeans',
     avatar: avatarNJ,
-    banner: '',
+    banner: bannerNJ,
     bio: 'ADOR 5인조 걸그룹. 새로운 시대의 K-POP 트렌드세터.',
     followerCount: 6100000,
     category: 'girlgroup',
@@ -89,7 +94,7 @@ const additionalArtists: Artist[] = [
     id: 'gidle',
     name: '(G)I-DLE',
     avatar: avatarGIDLE,
-    banner: '',
+    banner: bannerGIDLE,
     bio: 'CUBE Entertainment 5인조 걸그룹. 전원 자작곡 걸그룹의 선두주자.',
     followerCount: 3400000,
     category: 'girlgroup',
@@ -98,7 +103,7 @@ const additionalArtists: Artist[] = [
     id: 'txt',
     name: 'TXT',
     avatar: avatarTXT,
-    banner: '',
+    banner: bannerTXT,
     bio: 'BIGHIT MUSIC 5인조 보이그룹. 독보적 세계관과 음악 실험.',
     followerCount: 4200000,
     category: 'boygroup',

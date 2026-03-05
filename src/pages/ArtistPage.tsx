@@ -16,6 +16,7 @@ import { ArtistCommunityTab } from '@/components/artist/ArtistCommunityTab'
 import { ArtistEventsTab } from '@/components/artist/ArtistEventsTab'
 import { ArtistTransferTab } from '@/components/artist/ArtistTransferTab'
 import { ArtistPageSkeleton } from '@/components/artist/ArtistPageSkeleton'
+import { MembershipGate } from '@/components/artist/MembershipGate'
 
 export default function ArtistPage() {
   const { artistId } = useParams<{ artistId: string }>()
@@ -100,24 +101,36 @@ export default function ArtistPage() {
         </TabsContent>
 
         <TabsContent value="community" className="pt-6">
-          <ArtistCommunityTab posts={communityPosts} artistId={artist.id} />
+          {membership ? (
+            <ArtistCommunityTab posts={communityPosts} artistId={artist.id} />
+          ) : (
+            <MembershipGate artistId={artist.id} artistName={artist.name} />
+          )}
         </TabsContent>
 
         <TabsContent value="events" className="pt-6">
-          <ArtistEventsTab
-            upcoming={upcoming}
-            past={past}
-            artistName={artist.name}
-          />
+          {membership ? (
+            <ArtistEventsTab
+              upcoming={upcoming}
+              past={past}
+              artistName={artist.name}
+            />
+          ) : (
+            <MembershipGate artistId={artist.id} artistName={artist.name} />
+          )}
         </TabsContent>
 
         <TabsContent value="transfers" className="pt-6">
-          <ArtistTransferTab
-            listings={transferListings}
-            events={allEvents}
-            membership={membership}
-            artistId={artist.id}
-          />
+          {membership ? (
+            <ArtistTransferTab
+              listings={transferListings}
+              events={allEvents}
+              membership={membership}
+              artistId={artist.id}
+            />
+          ) : (
+            <MembershipGate artistId={artist.id} artistName={artist.name} />
+          )}
         </TabsContent>
       </Tabs>
     </div>

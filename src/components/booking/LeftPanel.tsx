@@ -161,9 +161,15 @@ export function LeftPanel() {
               <LeftPanelSkeleton />
             ) : event ? (
               <div className="p-5 space-y-4">
-                {/* 1. Poster placeholder */}
-                <div className="w-full h-[200px] rounded-xl bg-muted flex items-center justify-center">
-                  <span className="text-muted-foreground text-sm">포스터</span>
+                {/* 1. Poster */}
+                <div className="w-full h-[200px] rounded-xl bg-muted overflow-hidden relative">
+                  {event.poster ? (
+                    <img src={event.poster} alt={event.title} className="absolute inset-0 w-full h-full object-cover" />
+                  ) : (
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <span className="text-muted-foreground text-sm">포스터</span>
+                    </div>
+                  )}
                 </div>
 
                 {/* 2. Chip tags */}

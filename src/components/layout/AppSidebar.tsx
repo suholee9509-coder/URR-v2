@@ -66,7 +66,7 @@ export function AppSidebar() {
       >
         {!collapsed && (
           <Link to="/" className="flex items-center">
-            <img src={urrLogo} alt="URR" className="h-9" />
+            <img src={urrLogo} alt="URR" className="h-10" />
           </Link>
         )}
         <button

@@ -28,6 +28,10 @@ export function ArtistHeader({ artist, membership, isFollowing, onFollowToggle }
       className="relative w-full rounded-2xl overflow-hidden"
       style={{ background: getArtistGradient(artist.id) }}
     >
+      {/* Banner image */}
+      {artist.banner && (
+        <img src={artist.banner} alt={artist.name} className="absolute inset-0 w-full h-full object-cover" />
+      )}
       {/* Gradient overlay for text readability */}
       <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
 
@@ -35,12 +39,20 @@ export function ArtistHeader({ artist, membership, isFollowing, onFollowToggle }
       <div className="relative z-10 flex items-end justify-between px-8 pb-7 pt-32">
         {/* Left: Avatar + Info */}
         <div className="flex items-end gap-5">
-          <div
-            className="size-[88px] rounded-full border-[3px] border-white/30 flex items-center justify-center text-2xl text-white font-bold shrink-0 backdrop-blur-sm"
-            style={{ background: `${getArtistGradient(artist.id).replace('135deg', '180deg')}` }}
-          >
-            {artist.name.charAt(0)}
-          </div>
+          {artist.avatar ? (
+            <img
+              src={artist.avatar}
+              alt={artist.name}
+              className="size-[88px] rounded-full border-[3px] border-white/30 shrink-0 object-cover"
+            />
+          ) : (
+            <div
+              className="size-[88px] rounded-full border-[3px] border-white/30 flex items-center justify-center text-2xl text-white font-bold shrink-0 backdrop-blur-sm"
+              style={{ background: `${getArtistGradient(artist.id).replace('135deg', '180deg')}` }}
+            >
+              {artist.name.charAt(0)}
+            </div>
+          )}
 
           <div className="space-y-2 pb-1">
             <div className="flex items-center gap-3">

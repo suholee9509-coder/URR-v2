@@ -3,6 +3,7 @@ import { Calendar, MapPin, QrCode, ArrowLeftRight, XCircle } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { PriceDisplay } from './PriceDisplay'
 import { TransferStatusBadge } from './TransferStatusBadge'
+import { getArtistGradient } from '@/data/mock-home'
 import type { Ticket, Event } from '@/types'
 
 interface TicketCardProps {
@@ -25,8 +26,17 @@ export function TicketCard({ ticket, variant = 'upcoming', isListed, onViewQR, o
       variant === 'past' && 'opacity-60',
       className,
     )}>
-      <div className="w-[80px] h-[112px] rounded-lg bg-muted shrink-0 flex items-center justify-center text-xs text-muted-foreground">
-        Poster
+      <div className="w-[80px] h-[112px] rounded-lg bg-muted shrink-0 overflow-hidden relative">
+        {ticket.event.poster ? (
+          <img src={ticket.event.poster} alt={ticket.event.title} className="absolute inset-0 w-full h-full object-cover" />
+        ) : (
+          <div
+            className="absolute inset-0 flex items-center justify-center text-white text-xs font-medium"
+            style={{ background: getArtistGradient(ticket.event.artistId) }}
+          >
+            {ticket.event.title.split(' ')[0]}
+          </div>
+        )}
       </div>
       <div className="flex-1 min-w-0 space-y-1.5">
         <h4 className="text-base font-semibold line-clamp-1">{ticket.event.title}</h4>

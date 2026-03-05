@@ -221,11 +221,19 @@ export function ArtistHomeTab({
               <div className="flex">
                 {/* Poster area */}
                 <div
-                  className="w-[160px] shrink-0 flex items-center justify-center text-sm text-white font-medium relative"
+                  className="w-[160px] shrink-0 relative overflow-hidden"
                   style={{ background: getArtistGradient(artist.id) }}
                 >
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent to-black/10" />
-                  <span className="relative z-10 text-lg font-bold">{nextEvent.title.split(' ')[0]}</span>
+                  {nextEvent.poster ? (
+                    <img src={nextEvent.poster} alt={nextEvent.title} className="absolute inset-0 w-full h-full object-cover" />
+                  ) : (
+                    <>
+                      <div className="absolute inset-0 bg-gradient-to-r from-transparent to-black/10" />
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <span className="relative z-10 text-lg font-bold text-white">{nextEvent.title.split(' ')[0]}</span>
+                      </div>
+                    </>
+                  )}
                 </div>
                 {/* Info */}
                 <div className="flex-1 min-w-0 p-5 flex flex-col justify-between">
@@ -270,10 +278,16 @@ export function ArtistHomeTab({
                       )}
                     >
                       <div
-                        className="size-9 rounded-lg shrink-0 flex items-center justify-center text-[10px] text-white font-medium"
+                        className="size-9 rounded-lg shrink-0 overflow-hidden relative"
                         style={{ background: getArtistGradient(artist.id) }}
                       >
-                        {event.title.split(' ')[0]?.slice(0, 2)}
+                        {event.poster ? (
+                          <img src={event.poster} alt={event.title} className="absolute inset-0 w-full h-full object-cover" />
+                        ) : (
+                          <div className="absolute inset-0 flex items-center justify-center text-[10px] text-white font-medium">
+                            {event.title.split(' ')[0]?.slice(0, 2)}
+                          </div>
+                        )}
                       </div>
                       <div className="flex-1 min-w-0">
                         <p className="text-sm font-medium truncate group-hover:text-primary transition-colors">

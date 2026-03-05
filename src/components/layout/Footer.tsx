@@ -8,7 +8,7 @@ export function Footer() {
         <div className="flex items-start justify-between">
           {/* Left: Brand column */}
           <div className="shrink-0 space-y-7">
-            <img src={urrLogo} alt="URR" className="h-10" />
+            <img src={urrLogo} alt="URR" className="h-11" />
 
             {/* Social icons */}
             <div className="flex items-center gap-2.5 text-muted-foreground">

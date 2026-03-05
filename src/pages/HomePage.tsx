@@ -72,9 +72,9 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ===== 3. 오늘의 티켓팅 ===== */}
+      {/* ===== 3. 지금 뜨는 공연 ===== */}
       <section className="space-y-4">
-        <h2 className="text-xl font-bold">오늘의 티켓팅</h2>
+        <h2 className="text-xl font-bold">지금 뜨는 공연</h2>
         <div className="grid grid-cols-6 gap-3">
           {homeTodayTicketing.map((event, index) => (
             <Link

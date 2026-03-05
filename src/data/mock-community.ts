@@ -1,3 +1,9 @@
+import profileGDragon from '@/assets/Profile_G-Dragon.png'
+import profileBTS from '@/assets/Artist_BTS.png'
+import profileAespa from '@/assets/Profile_aespa.png'
+import profileIVE from '@/assets/Profile_IVE.png'
+import profileBP from '@/assets/Profile_BlackPink.png'
+
 export interface CommunityPost {
   id: string
   artistId: string
@@ -17,7 +23,7 @@ const artistCommunityMap: Record<string, CommunityPost[]> = {
       id: 'cp-gd-01',
       artistId: 'gdragon',
       authorName: 'G-Dragon 공식',
-      authorAvatar: '',
+      authorAvatar: profileGDragon,
       isOfficial: true,
 
       content: '2026 MAMA DOME TOUR 서울 공연이 6월 1일, 2일 양일간 KSPO DOME에서 진행됩니다. 많은 관심과 사랑 부탁드립니다. 예매 관련 자세한 사항은 공연 탭에서 확인해 주세요.',
@@ -30,7 +36,7 @@ const artistCommunityMap: Record<string, CommunityPost[]> = {
       id: 'cp-gd-02',
       artistId: 'gdragon',
       authorName: 'G-Dragon',
-      authorAvatar: '',
+      authorAvatar: profileGDragon,
       isOfficial: true,
 
       content: '연습실에서 보내는 하루. 새 앨범 작업도 순조롭게 진행 중입니다. 조금만 더 기다려 주세요 🎵',
@@ -43,7 +49,7 @@ const artistCommunityMap: Record<string, CommunityPost[]> = {
       id: 'cp-gd-03',
       artistId: 'gdragon',
       authorName: 'G-Dragon',
-      authorAvatar: '',
+      authorAvatar: profileGDragon,
       isOfficial: true,
 
       content: '오늘 하루도 고생 많았어요. VIP 여러분 항상 감사합니다 💛',
@@ -56,7 +62,7 @@ const artistCommunityMap: Record<string, CommunityPost[]> = {
       id: 'cp-gd-04',
       artistId: 'gdragon',
       authorName: 'G-Dragon 공식',
-      authorAvatar: '',
+      authorAvatar: profileGDragon,
       isOfficial: true,
 
       content: 'DETOX WORLD TOUR 티저 영상이 공개되었습니다! 고척스카이돔에서 만나요. 티저 보셨나요?',
@@ -69,7 +75,7 @@ const artistCommunityMap: Record<string, CommunityPost[]> = {
       id: 'cp-gd-05',
       artistId: 'gdragon',
       authorName: 'G-Dragon',
-      authorAvatar: '',
+      authorAvatar: profileGDragon,
       isOfficial: true,
 
       content: '작업실에서 새벽까지... 새 음악이 곧 나옵니다. 기대해 주세요.',
@@ -84,7 +90,7 @@ const artistCommunityMap: Record<string, CommunityPost[]> = {
       id: 'cp-bts-01',
       artistId: 'bts',
       authorName: 'BTS 공식',
-      authorAvatar: '',
+      authorAvatar: profileBTS,
       isOfficial: true,
 
       content: 'YET TO COME ENCORE IN SEOUL 공연이 8월 1일, 2일 잠실종합운동장에서 개최됩니다! ARMY 여러분의 많은 성원 부탁드립니다. 예매 일정은 공연 탭에서 확인해 주세요.',
@@ -97,7 +103,7 @@ const artistCommunityMap: Record<string, CommunityPost[]> = {
       id: 'cp-bts-02',
       artistId: 'bts',
       authorName: 'RM',
-      authorAvatar: '',
+      authorAvatar: profileBTS,
       isOfficial: true,
 
       content: '요즘 읽고 있는 책이 있는데, 다 읽으면 ARMY들한테 추천해 드릴게요. 날씨가 많이 추워졌는데 모두 따뜻하게 지내세요.',
@@ -110,7 +116,7 @@ const artistCommunityMap: Record<string, CommunityPost[]> = {
       id: 'cp-bts-03',
       artistId: 'bts',
       authorName: 'V',
-      authorAvatar: '',
+      authorAvatar: profileBTS,
       isOfficial: true,
 
       content: '오늘 멤버들이랑 같이 밥 먹었어요 🍕 오랜만에 다 같이 모여서 너무 좋았습니다!',
@@ -123,7 +129,7 @@ const artistCommunityMap: Record<string, CommunityPost[]> = {
       id: 'cp-bts-04',
       artistId: 'bts',
       authorName: 'BTS 공식',
-      authorAvatar: '',
+      authorAvatar: profileBTS,
       isOfficial: true,
 
       content: '2026 FAN MEETING: MAGIC SHOP 사전 등록이 곧 시작됩니다. ARMY들의 많은 참여 부탁드립니다!',
@@ -138,7 +144,7 @@ const artistCommunityMap: Record<string, CommunityPost[]> = {
       id: 'cp-ae-01',
       artistId: 'aespa',
       authorName: 'aespa 공식',
-      authorAvatar: '',
+      authorAvatar: profileAespa,
       isOfficial: true,
 
       content: 'LIVE SYNK : PARALLEL 콘서트가 9월 20일 KSPO DOME에서 개최됩니다! MY들 기대 많이 해주세요. 예매 정보는 공연 탭에서 확인하세요.',
@@ -151,7 +157,7 @@ const artistCommunityMap: Record<string, CommunityPost[]> = {
       id: 'cp-ae-02',
       artistId: 'aespa',
       authorName: 'KARINA',
-      authorAvatar: '',
+      authorAvatar: profileAespa,
       isOfficial: true,
 
       content: '오늘 촬영 끝! MY들 오늘 하루 어땠어요? 저는 새로운 도전을 해봤는데 결과물이 기대됩니다 ✨',
@@ -164,7 +170,7 @@ const artistCommunityMap: Record<string, CommunityPost[]> = {
       id: 'cp-ae-03',
       artistId: 'aespa',
       authorName: 'WINTER',
-      authorAvatar: '',
+      authorAvatar: profileAespa,
       isOfficial: true,
 
       content: '연습 끝나고 아이스크림 먹는 중 🍦 MY들도 맛있는 거 많이 드세요!',
@@ -177,7 +183,7 @@ const artistCommunityMap: Record<string, CommunityPost[]> = {
       id: 'cp-ae-04',
       artistId: 'aespa',
       authorName: 'aespa 공식',
-      authorAvatar: '',
+      authorAvatar: profileAespa,
       isOfficial: true,
 
       content: 'WORLD TOUR: MYWORLD 일정이 공개되었습니다. 서울을 시작으로 전 세계 MY들을 만나러 갑니다!',
@@ -192,7 +198,7 @@ const artistCommunityMap: Record<string, CommunityPost[]> = {
       id: 'cp-ive-01',
       artistId: 'ive',
       authorName: 'IVE 공식',
-      authorAvatar: '',
+      authorAvatar: profileIVE,
       isOfficial: true,
 
       content: 'THE 1ST WORLD TOUR: SHOW WHAT I HAVE 서울 공연이 7월 12일 KSPO DOME에서 개최됩니다! DIVE 여러분의 많은 사랑 부탁드립니다.',
@@ -205,7 +211,7 @@ const artistCommunityMap: Record<string, CommunityPost[]> = {
       id: 'cp-ive-02',
       artistId: 'ive',
       authorName: '안유진',
-      authorAvatar: '',
+      authorAvatar: profileIVE,
       isOfficial: true,
 
       content: '오늘 팬미팅 리허설했어요! DIVE들 만날 생각에 벌써부터 설레요 💕 조금만 기다려 주세요~',
@@ -218,7 +224,7 @@ const artistCommunityMap: Record<string, CommunityPost[]> = {
       id: 'cp-ive-03',
       artistId: 'ive',
       authorName: '장원영',
-      authorAvatar: '',
+      authorAvatar: profileIVE,
       isOfficial: true,
 
       content: '오늘 날씨 너무 좋아서 멤버들이랑 산책했어요 🌸 DIVE들도 좋은 하루 보내세요!',
@@ -231,7 +237,7 @@ const artistCommunityMap: Record<string, CommunityPost[]> = {
       id: 'cp-ive-04',
       artistId: 'ive',
       authorName: 'IVE 공식',
-      authorAvatar: '',
+      authorAvatar: profileIVE,
       isOfficial: true,
 
       content: '2nd FAN MEETING: I HAEVE 예매가 시작되었습니다! 잠실실내체육관에서 DIVE들을 기다리고 있을게요.',
@@ -246,7 +252,7 @@ const artistCommunityMap: Record<string, CommunityPost[]> = {
       id: 'cp-bp-01',
       artistId: 'blackpink',
       authorName: 'BLACKPINK 공식',
-      authorAvatar: '',
+      authorAvatar: profileBP,
       isOfficial: true,
 
       content: 'BORN PINK WORLD TOUR FINALE이 7월 15일, 16일 고척스카이돔에서 개최됩니다! BLINK 여러분과 함께하는 특별한 피날레가 될 거예요.',
@@ -259,7 +265,7 @@ const artistCommunityMap: Record<string, CommunityPost[]> = {
       id: 'cp-bp-02',
       artistId: 'blackpink',
       authorName: 'JENNIE',
-      authorAvatar: '',
+      authorAvatar: profileBP,
       isOfficial: true,
 
       content: '요즘 새 프로젝트 준비 중이에요! 조금만 기다려 주세요 BLINK 💖 곧 좋은 소식 들려드릴게요.',
@@ -272,7 +278,7 @@ const artistCommunityMap: Record<string, CommunityPost[]> = {
       id: 'cp-bp-03',
       artistId: 'blackpink',
       authorName: 'ROSÉ',
-      authorAvatar: '',
+      authorAvatar: profileBP,
       isOfficial: true,
 
       content: '오늘 스튜디오에서 녹음했어요 🎤 새 음악 작업이 정말 즐거워요. BLINK들이 좋아할 거예요!',
@@ -285,7 +291,7 @@ const artistCommunityMap: Record<string, CommunityPost[]> = {
       id: 'cp-bp-04',
       artistId: 'blackpink',
       authorName: 'LISA',
-      authorAvatar: '',
+      authorAvatar: profileBP,
       isOfficial: true,
 
       content: '연습 끝! 투어 준비가 착착 진행되고 있어요. BLINK들 만나는 날이 얼마 안 남았네요 😍',
@@ -298,7 +304,7 @@ const artistCommunityMap: Record<string, CommunityPost[]> = {
       id: 'cp-bp-05',
       artistId: 'blackpink',
       authorName: 'BLACKPINK 공식',
-      authorAvatar: '',
+      authorAvatar: profileBP,
       isOfficial: true,
 
       content: 'IN YOUR AREA 2026 일정이 곧 공개됩니다. BLINK 여러분의 많은 기대 부탁드립니다!',

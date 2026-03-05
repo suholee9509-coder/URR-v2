@@ -43,17 +43,28 @@ export function PostCard({ post, variant = 'default', artistGradient }: PostCard
       {/* Header */}
       <div className="flex items-center gap-3">
         {/* Author avatar */}
-        <div
-          className={cn(
-            'shrink-0 rounded-full flex items-center justify-center text-white font-bold',
-            isCompact ? 'size-8 text-xs' : 'size-10 text-sm',
-          )}
-          style={{
-            background: artistGradient ?? 'linear-gradient(135deg, #374151, #6b7280)',
-          }}
-        >
-          {post.authorName.charAt(0)}
-        </div>
+        {post.authorAvatar ? (
+          <img
+            src={post.authorAvatar}
+            alt={post.authorName}
+            className={cn(
+              'shrink-0 rounded-full object-cover',
+              isCompact ? 'size-8' : 'size-10',
+            )}
+          />
+        ) : (
+          <div
+            className={cn(
+              'shrink-0 rounded-full flex items-center justify-center text-white font-bold',
+              isCompact ? 'size-8 text-xs' : 'size-10 text-sm',
+            )}
+            style={{
+              background: artistGradient ?? 'linear-gradient(135deg, #374151, #6b7280)',
+            }}
+          >
+            {post.authorName.charAt(0)}
+          </div>
+        )}
 
         {/* Author info */}
         <div className="flex-1 min-w-0">

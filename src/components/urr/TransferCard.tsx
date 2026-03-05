@@ -3,6 +3,7 @@ import { Calendar } from 'lucide-react'
 import { PriceDisplay } from './PriceDisplay'
 import { FaceValueBadge } from './FaceValueBadge'
 import { TierBadge } from './TierBadge'
+import { getArtistGradient } from '@/data/mock-home'
 import type { TransferListing, Event } from '@/types'
 
 interface TransferCardProps {
@@ -25,8 +26,17 @@ export function TransferCard({ listing, onClick, className }: TransferCardProps)
       )}
     >
       <div className="flex items-start gap-3 mb-3">
-        <div className="w-12 h-16 rounded bg-muted shrink-0 flex items-center justify-center text-[10px] text-muted-foreground">
-          Poster
+        <div className="w-12 h-16 rounded bg-muted shrink-0 overflow-hidden relative">
+          {listing.event.poster ? (
+            <img src={listing.event.poster} alt={listing.event.title} className="absolute inset-0 w-full h-full object-cover" />
+          ) : (
+            <div
+              className="absolute inset-0 flex items-center justify-center text-[10px] text-white font-medium"
+              style={{ background: getArtistGradient(listing.event.artistId) }}
+            >
+              {listing.event.title.split(' ')[0]?.slice(0, 2)}
+            </div>
+          )}
         </div>
         <div className="min-w-0 space-y-0.5">
           <h4 className="text-sm font-semibold line-clamp-1">{listing.event.title}</h4>
