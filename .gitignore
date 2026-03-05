@@ -27,5 +27,8 @@ dist-ssr
 .env
 .env.*
 
+# Cursor
+.cursor/
+
 # Claude
 .claude/
