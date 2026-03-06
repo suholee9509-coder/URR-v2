@@ -15,12 +15,15 @@ import {
   PriceDisplay,
   FaceValueBadge,
   EventCard,
+  EventTagBadge,
   ArtistCard,
   TicketCard,
   TransferCard,
   NotificationCard,
+  PostCard,
   QueueStatusCard,
 } from '@/components/urr'
+import type { CommunityPost } from '@/data/mock-community'
 import type {
   TierLevel,
   BookingStatus,
@@ -111,6 +114,23 @@ const sampleNotifications: Notification[] = [
   { id: 'n4', type: 'payment', title: '결제 확인', description: '165,000원 결제가 완료되었습니다.', timestamp: new Date(Date.now() - 48 * 3600000).toISOString(), isRead: true, link: '/my-page' },
 ]
 
+const samplePosts: CommunityPost[] = [
+  {
+    id: 'cp1', artistId: 'gdragon', authorName: 'G-Dragon 공식', authorAvatar: '',
+    isOfficial: true,
+    content: '2026 MAMA DOME TOUR 서울 공연이 6월 1일, 2일 양일간 KSPO DOME에서 진행됩니다. 많은 관심과 사랑 부탁드립니다.',
+    images: [], likeCount: 24500, commentCount: 1820,
+    createdAt: new Date(Date.now() - 2 * 3600000).toISOString(),
+  },
+  {
+    id: 'cp2', artistId: 'gdragon', authorName: '빅뱅사랑해', authorAvatar: '',
+    isOfficial: false,
+    content: '어제 콘서트 다녀왔는데 정말 미쳤어요... 세트리스트도 완벽하고 무대 연출도 대박이었어요 ㅠㅠ 다음 공연도 꼭 가고 싶다!',
+    images: ['img1', 'img2'], likeCount: 342, commentCount: 47,
+    createdAt: new Date(Date.now() - 18 * 3600000).toISOString(),
+  },
+]
+
 // ---------------------------------------------------------------------------
 // Layout Helpers
 // ---------------------------------------------------------------------------
@@ -176,11 +196,13 @@ const TOC = [
   { id: 'transfer-card', number: '15', title: 'TransferCard' },
   { id: 'notification', number: '16', title: 'NotificationCard' },
   { id: 'queue-card', number: '17', title: 'QueueStatusCard' },
-  { id: 'input', number: '18', title: '입력 필드' },
-  { id: 'card-base', number: '19', title: '기본 카드' },
-  { id: 'skeleton', number: '20', title: '스켈레톤 · 프로그레스' },
-  { id: 'icons', number: '21', title: '아이콘 시스템' },
-  { id: 'sidebar-preview', number: '22', title: '사이드바 프리뷰' },
+  { id: 'post-card', number: '18', title: 'PostCard' },
+  { id: 'event-tag', number: '19', title: 'EventTagBadge' },
+  { id: 'input', number: '20', title: '입력 필드' },
+  { id: 'card-base', number: '21', title: '기본 카드' },
+  { id: 'skeleton', number: '22', title: '스켈레톤 · 프로그레스' },
+  { id: 'icons', number: '23', title: '아이콘 시스템' },
+  { id: 'sidebar-preview', number: '24', title: '사이드바 프리뷰' },
 ]
 
 // ---------------------------------------------------------------------------
@@ -206,7 +228,7 @@ export default function StyleGuidePage() {
       <aside className="fixed inset-y-0 left-0 z-40 hidden w-56 flex-col border-r border-border bg-card lg:flex">
         <div className="flex h-14 items-center border-b border-border px-5">
           <span className="text-sm font-semibold">Style Guide</span>
-          <Badge variant="secondary" className="ml-auto text-[10px]">v1.0</Badge>
+          <Badge variant="secondary" className="ml-auto text-[10px]">v1.2</Badge>
         </div>
         <nav className="flex-1 overflow-y-auto px-3 py-4">
           {TOC.map((item) => (
@@ -224,7 +246,7 @@ export default function StyleGuidePage() {
           ))}
         </nav>
         <div className="border-t border-border px-5 py-3">
-          <span className="text-[11px] text-muted-foreground">URR Design System v1.0</span>
+          <span className="text-[11px] text-muted-foreground">URR Design System v1.2</span>
         </div>
       </aside>
 
@@ -889,9 +911,64 @@ export default function StyleGuidePage() {
           </Section>
 
           {/* ============================================================ */}
-          {/* 18. Input */}
+          {/* 18. PostCard */}
           {/* ============================================================ */}
-          <Section id="input" number="18" title="입력 필드 (Input)">
+          <Section id="post-card" number="18" title="PostCard (커뮤니티 게시글)">
+            <p className="text-sm text-muted-foreground mb-6">
+              아티스트 소통 탭 커뮤니티 게시글 카드. Default (전체) / Compact (축소) 변형. 공식 계정 BadgeCheck 지원.
+            </p>
+
+            <SubSection title="Default">
+              <div className="space-y-4 max-w-lg">
+                {samplePosts.map((p) => (
+                  <PostCard key={p.id} post={p} />
+                ))}
+              </div>
+            </SubSection>
+
+            <SubSection title="Compact">
+              <div className="space-y-3 max-w-md">
+                {samplePosts.map((p) => (
+                  <PostCard key={p.id} post={p} variant="compact" />
+                ))}
+              </div>
+            </SubSection>
+          </Section>
+
+          {/* ============================================================ */}
+          {/* 19. EventTagBadge */}
+          {/* ============================================================ */}
+          <Section id="event-tag" number="19" title="EventTagBadge (이벤트 태그)">
+            <p className="text-sm text-muted-foreground mb-6">
+              이벤트 카드에 붙는 태그 pill. HOT(빨강), NEW/선예매(파랑), 기본(회색) 3가지 variant 자동 결정.
+            </p>
+
+            <SubSection title="모든 태그 유형">
+              <div className="flex flex-wrap gap-3 items-center">
+                <EventTagBadge tag="HOT" />
+                <EventTagBadge tag="NEW" />
+                <EventTagBadge tag="선예매" />
+                <EventTagBadge tag="일반예매" />
+                <EventTagBadge tag="콘서트" />
+                <EventTagBadge tag="팬미팅" />
+              </div>
+            </SubSection>
+
+            <SubSection title="실제 사용 예시">
+              <DemoBox label="이벤트 리스트 아이템 내 태그">
+                <div className="flex items-center gap-2">
+                  <EventTagBadge tag="HOT" />
+                  <span className="text-sm font-semibold">G-DRAGON 2026 WORLD TOUR</span>
+                  <EventTagBadge tag="선예매" />
+                </div>
+              </DemoBox>
+            </SubSection>
+          </Section>
+
+          {/* ============================================================ */}
+          {/* 20. Input */}
+          {/* ============================================================ */}
+          <Section id="input" number="20" title="입력 필드 (Input)">
             <p className="text-sm text-muted-foreground mb-6">shadcn/ui Input 기반. 검색, 가격, 인증코드 등.</p>
 
             <SubSection title="기본 입력">
@@ -931,9 +1008,9 @@ export default function StyleGuidePage() {
           </Section>
 
           {/* ============================================================ */}
-          {/* 19. Card Base */}
+          {/* 21. Card Base */}
           {/* ============================================================ */}
-          <Section id="card-base" number="19" title="기본 카드 (Card)">
+          <Section id="card-base" number="21" title="기본 카드 (Card)">
             <p className="text-sm text-muted-foreground mb-6">shadcn/ui Card 기반. 정보 그룹핑 레이아웃.</p>
 
             <div className="grid gap-6 md:grid-cols-2">
@@ -976,9 +1053,9 @@ export default function StyleGuidePage() {
           </Section>
 
           {/* ============================================================ */}
-          {/* 20. Skeleton & Progress */}
+          {/* 22. Skeleton & Progress */}
           {/* ============================================================ */}
-          <Section id="skeleton" number="20" title="스켈레톤 · 프로그레스">
+          <Section id="skeleton" number="22" title="스켈레톤 · 프로그레스">
 
             <SubSection title="Skeleton (로딩 플레이스홀더)">
               <div className="space-y-4">
@@ -1031,9 +1108,9 @@ export default function StyleGuidePage() {
           </Section>
 
           {/* ============================================================ */}
-          {/* 21. Icon System */}
+          {/* 23. Icon System */}
           {/* ============================================================ */}
-          <Section id="icons" number="21" title="아이콘 시스템 (Lucide Icons)">
+          <Section id="icons" number="23" title="아이콘 시스템 (Lucide Icons)">
             <p className="text-sm text-muted-foreground mb-6">Lucide React 전용. 도메인별 아이콘 매핑.</p>
 
             <SubSection title="네비게이션 아이콘">
@@ -1102,9 +1179,9 @@ export default function StyleGuidePage() {
           </Section>
 
           {/* ============================================================ */}
-          {/* 22. Sidebar Preview */}
+          {/* 24. Sidebar Preview */}
           {/* ============================================================ */}
-          <Section id="sidebar-preview" number="22" title="사이드바 프리뷰 (White Pattern)">
+          <Section id="sidebar-preview" number="24" title="사이드바 프리뷰 (Warm Off-White Pattern)">
             <p className="text-sm text-muted-foreground mb-6">
               화이트 사이드바 + 콘텐츠 영역 조합. 240px 기본 / 64px 접힘.
             </p>
@@ -1206,7 +1283,7 @@ export default function StyleGuidePage() {
 
           {/* Footer */}
           <div className="border-t border-border pt-8 pb-16 text-center">
-            <p className="text-sm text-muted-foreground">URR (우르르) Design System v1.0</p>
+            <p className="text-sm text-muted-foreground">URR (우르르) Design System v1.2</p>
             <p className="text-xs text-muted-foreground mt-1">Pretendard Variable · shadcn/ui · Tailwind CSS v4 · oklch</p>
           </div>
 

@@ -1,7 +1,9 @@
-# URR Design System v1.1
+# URR Design System v1.2
 
 > Single Source of Truth for URR UI development.
 > All components, tokens, and patterns documented here must be referenced during every build phase.
+>
+> **v1.2 변경사항**: 사이드바 색상 #FBFAF8 / Accent #F2F0E6 실측값 반영, PostCard·EventTagBadge 추가, EventCard·TicketCard props 업데이트, Membership/User 타입 확장, 라우트·파일 구조 전면 동기화, 커스텀 애니메이션 클래스 상세화
 >
 > **v1.1 변경사항**: Primary(#FF5E32 오렌지) / Secondary(#1F2792 네이비) 컬러 적용, 사이드바 White Pattern 전환 (220px)
 
@@ -32,19 +34,19 @@
 
 | CSS Variable | Light Value | Tailwind Class | Usage |
 |---|---|---|---|
-| `--background` | `oklch(1 0 0)` | `bg-background` | 메인 콘텐츠 배경 |
-| `--foreground` | `oklch(0.145 0 0)` | `text-foreground` | 기본 텍스트 |
-| `--card` | `oklch(1 0 0)` | `bg-card` | 카드/패널 배경 |
-| `--card-foreground` | `oklch(0.145 0 0)` | `text-card-foreground` | 카드 텍스트 |
-| `--popover` | `oklch(1 0 0)` | `bg-popover` | 팝오버/드롭다운 배경 |
-| `--popover-foreground` | `oklch(0.145 0 0)` | `text-popover-foreground` | 팝오버 텍스트 |
+| `--background` | `#FFFEFE` | `bg-background` | 메인 콘텐츠 배경 |
+| `--foreground` | `#221415` | `text-foreground` | 기본 텍스트 |
+| `--card` | `#FFFEFE` | `bg-card` | 카드/패널 배경 |
+| `--card-foreground` | `#221415` | `text-card-foreground` | 카드 텍스트 |
+| `--popover` | `#FFFEFE` | `bg-popover` | 팝오버/드롭다운 배경 |
+| `--popover-foreground` | `#221415` | `text-popover-foreground` | 팝오버 텍스트 |
 | `--primary` | `#FF5E32` | `bg-primary` | CTA, 활성 상태, 링크 (오렌지) |
 | `--primary-foreground` | `oklch(0.985 0 0)` | `text-primary-foreground` | Primary 위 텍스트 |
 | `--secondary` | `#1F2792` | `bg-secondary` | 보조 CTA, 네이비 버튼 |
 | `--secondary-foreground` | `#FFFFFF` | `text-secondary-foreground` | Secondary 위 텍스트 |
 | `--muted` | `oklch(0.968 0.003 264)` | `bg-muted` | 비활성/배경 레이어 |
 | `--muted-foreground` | `oklch(0.556 0 0)` | `text-muted-foreground` | 보조 텍스트, 힌트 |
-| `--accent` | `oklch(0.955 0.005 264)` | `bg-accent` | hover/selected 배경 |
+| `--accent` | `#F2F0E6` | `bg-accent` | hover/selected 배경 (웜 베이지) |
 | `--accent-foreground` | `oklch(0.205 0 0)` | `text-accent-foreground` | accent 위 텍스트 |
 | `--destructive` | `oklch(0.577 0.245 27)` | `bg-destructive` | 에러, 삭제, VQA 오답 |
 | `--border` | `oklch(0.922 0.004 264)` | `border-border` | 기본 border |
@@ -53,21 +55,21 @@
 
 > **Two-Tone CTA**: Primary(오렌지 #FF5E32) + Secondary(네이비 #1F2792) 2색 CTA 체계. 오렌지는 주요 액션, 네이비는 보조 액션에 사용.
 
-### 2.2 Sidebar (White Pattern — 220px)
+### 2.2 Sidebar (Warm Off-White Pattern — 220px)
 
 | CSS Variable | Light Value | Tailwind Class | Usage |
 |---|---|---|---|
-| `--sidebar` | `#FFFFFF` | `bg-sidebar` | GNB Sidebar 배경 (화이트) |
-| `--sidebar-foreground` | `oklch(0.145 0 0)` | `text-sidebar-foreground` | 사이드바 텍스트 |
+| `--sidebar` | `#FBFAF8` | `bg-sidebar` | GNB Sidebar 배경 (웜 오프화이트) |
+| `--sidebar-foreground` | `#221415` | `text-sidebar-foreground` | 사이드바 텍스트 |
 | `--sidebar-primary` | `#FF5E32` | `bg-sidebar-primary` | 활성 메뉴 / CTA 버튼 |
 | `--sidebar-primary-foreground` | `oklch(0.985 0 0)` | `text-sidebar-primary-foreground` | 활성 메뉴 텍스트 |
-| `--sidebar-accent` | `oklch(0.955 0.005 264)` | `bg-sidebar-accent` | hover/active 아이템 배경 |
+| `--sidebar-accent` | `#F2F0E6` | `bg-sidebar-accent` | hover/active 아이템 배경 (웜 베이지) |
 | `--sidebar-accent-foreground` | `oklch(0.205 0 0)` | `text-sidebar-accent-foreground` | hover/active 아이템 텍스트 |
 | `--sidebar-border` | `oklch(0.922 0.004 264)` | `border-sidebar-border` | 사이드바 내 구분선 |
 | `--sidebar-ring` | `#FF5E32` | `ring-sidebar-ring` | 사이드바 내 focus ring |
 | `--sidebar-muted-foreground` | `oklch(0.556 0 0)` | `text-sidebar-muted-foreground` | 사이드바 보조 텍스트 |
 
-> **White Sidebar**: 화이트(`#FFFFFF`) 배경 사이드바, `border-r`로 콘텐츠 영역과 구분. 기본 폭 220px, 접힘 시 64px.
+> **Warm Off-White Sidebar**: 웜 오프화이트(`#FBFAF8`) 배경 사이드바, `border-r`로 콘텐츠 영역과 구분. 기본 폭 220px, 접힘 시 64px. 추가 토큰: `--sidebar-active: #E3E1D9` (활성 아이템 강조).
 
 ### 2.3 Tier (등급)
 
@@ -383,6 +385,7 @@
 |---|---|---|---|
 | `event` | `Event` | required | 이벤트 데이터 |
 | `variant` | `'default' \| 'compact'` | `'default'` | 카드 변형 |
+| `artistName` | `string` | — | 아티스트명 (미입력 시 artistId 표시) |
 | `className` | `string` | — | 추가 클래스 |
 
 **Layout (default)**:
@@ -428,14 +431,17 @@
 |---|---|---|---|
 | `ticket` | `Ticket & { event: Event }` | required | 티켓 + 이벤트 데이터 |
 | `variant` | `'upcoming' \| 'past'` | `'upcoming'` | 카드 스타일 |
+| `isListed` | `boolean` | — | 양도 등록 상태 (TransferStatusBadge 표시) |
 | `onViewQR` | `() => void` | — | QR 보기 클릭 |
 | `onTransfer` | `() => void` | — | 양도 등록 클릭 |
+| `onCancelTransfer` | `() => void` | — | 양도 취소 클릭 |
 | `className` | `string` | — | 추가 클래스 |
 
-**Layout**: 가로 — 포스터 썸네일 | 이벤트 정보 + 좌석 정보 | 액션 버튼
+**Layout**: 가로 — 포스터 썸네일 (80x112) | 이벤트 정보 + 좌석 정보 | 액션 버튼
 - 이벤트: 제목 (T4) + 날짜 + 장소 (B4)
-- 좌석: "A구역 3열 15번" (B2, medium)
+- 좌석: "A구역 3열 15번" (B2, medium) + isListed 시 TransferStatusBadge
 - 버튼 (upcoming): [QR 보기] primary + [양도 등록] secondary
+- 버튼 (upcoming + isListed): [QR 보기] primary + [양도 취소] danger outline
 - past variant: 전체 opacity-60, 버튼 없음
 
 ```tsx
@@ -511,6 +517,51 @@
 <QueueStatusCard position={47} totalInQueue={1200} estimatedWait="2분 15초" probability={92} />
 ```
 
+### 5.14 PostCard
+
+**File**: `src/components/urr/PostCard.tsx`
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `post` | `CommunityPost` | required | 커뮤니티 게시글 데이터 (`@/data/mock-community`) |
+| `variant` | `'default' \| 'compact'` | `'default'` | 카드 변형 |
+| `artistGradient` | `string` | — | 아바타/이미지 그라데이션 배경 |
+
+**Layout (default)**: 세로 — 아바타(40px)+작성자 | 본문 (line-clamp-4) | 이미지 갤러리 | 좋아요+댓글
+**Layout (compact)**: 축소 — 아바타(32px)+작성자 | 본문 (line-clamp-2) | 좋아요+댓글
+- 공식 계정: `BadgeCheck` 아이콘 (primary 색상)
+- 시간 표시: 상대 시간 (방금 전, N분 전, N시간 전, N일 전)
+
+**Import**: `CommunityPost` 타입은 `@/data/mock-community`에서 export.
+
+```tsx
+<PostCard post={samplePost} />
+<PostCard post={samplePost} variant="compact" />
+```
+
+### 5.15 EventTagBadge
+
+**File**: `src/components/urr/EventTagBadge.tsx`
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `tag` | `string` | required | 태그 텍스트 (HOT, NEW, 선예매, 일반예매 등) |
+| `variant` | `EventTagVariant` | auto-resolve | `'default' \| 'hot' \| 'highlight'` |
+| `className` | `string` | — | 추가 클래스 |
+
+**Auto-resolve**: variant 미지정 시 tag 값에 따라 자동 결정
+- `'HOT'` → `hot` (destructive/10 + destructive 텍스트)
+- `'NEW'`, `'선예매'`, `'일반예매'` → `highlight` (booking-upcoming/10 + booking-upcoming 텍스트)
+- 기타 → `default` (muted + foreground/70 텍스트)
+
+**스타일**: `text-[10px] font-semibold px-1.5 py-0.5 rounded` (C4 크기, pill 형태)
+
+```tsx
+<EventTagBadge tag="HOT" />       // 빨간 배경 pill
+<EventTagBadge tag="NEW" />       // 파란 배경 pill
+<EventTagBadge tag="일반예매" />   // 파란 배경 pill
+```
+
 ---
 
 ## 6. Layout Patterns
@@ -576,15 +627,18 @@
 ### 6.3 Routing Structure
 
 ```
-/                         → Home
-/search                   → Search
-/events                   → Global Events
-/artists                  → Artist Directory
-/artists/:artistId        → Artist Page (tabs: home/events/transfer)
-/events/:eventId          → Booking Page (2-Panel)
-/my-page                  → My Page (tabs: membership/wallet/transfers)
-/notifications            → Notifications
-/onboarding               → Onboarding (full-screen, no sidebar)
+/                                          → Home
+/search                                    → Search
+/events                                    → Global Events
+/artists                                   → Artist Directory
+/artists/:artistId/*                       → Artist Page (tabs: home/community/events/transfers)
+/artists/:artistId/transfers/:listingId    → Transfer Detail Page
+/events/:eventId                           → Booking Page (2-Panel)
+/membership                                → Membership Join (4-Step Flow)
+/my-page/*                                 → My Page (tabs: tickets/membership/transfers/settings)
+/notifications                             → Notifications
+/onboarding                                → Onboarding (full-screen, no sidebar)
+/style-guide                               → Style Guide (dev only)
 ```
 
 네비게이션 active 상태는 React Router `useLocation()` URL 기반 판단.
@@ -621,6 +675,21 @@
 | 툴팁 표시 | Fade-in (300ms delay 후) | 150ms |
 | 툴팁 숨김 | Fade-out | 100ms |
 
+### 6.4.1 Custom Animation Classes (`index.css`)
+
+| Class | Animation | Duration | Usage |
+|---|---|---|---|
+| `.animate-pulse-timer` | scale(1→1.05→1) loop | 1s | 타이머 30초 이하 펄스 |
+| `.animate-shake` | translateX(±3px, 3회) | 400ms | VQA 오답 흔들림 |
+| `.animate-flash-green` | 연초록 배경 깜빡 | 300ms | VQA 정답 |
+| `.animate-flash-red` | 연빨강 배경 깜빡 | 300ms | VQA 오답 |
+| `.animate-counter-roll` | translateY(-8px→0) + fade | 500ms | 큐 순번 업데이트 |
+| `.seat-interactive:hover` | stroke highlight | instant | 좌석 호버 |
+| `.seat-overlay-fade-in` | opacity 0→1 | 300ms | 좌석 오버레이 |
+| `.seat-row-fade-in` | opacity+translateY stagger | 200ms | 좌석 행 순차 등장 |
+| `.seat-chair-hover` | opacity + fill transition | 150ms | 좌석 의자 호버 |
+| `.minimap-container` | opacity+scale(0.95→1)+translateY | 300ms | 미니맵 진입 |
+
 ### 6.5 State Management
 
 **Booking State Machine** (React Context + useReducer):
@@ -645,6 +714,17 @@ interface LayoutState {
   sidebarState: 'expanded' | 'collapsed'
   leftPanelState: 'expanded' | 'collapsed'  // Booking only
   expandedArtistIds: Set<string>
+}
+```
+
+**Notification State** (React Context — `src/contexts/NotificationContext.tsx`):
+
+```typescript
+interface NotificationContextValue {
+  notifications: Notification[]
+  unreadCount: number
+  markAsRead: (id: string) => void
+  markAllAsRead: () => void
 }
 ```
 
@@ -792,6 +872,9 @@ interface Membership {
   artistId: string
   artistName: string
   tier: TierLevel
+  nickname: string
+  membershipNumber: string
+  joinedAt: string
   expiresAt: string
   isActive: boolean
 }
@@ -802,8 +885,26 @@ interface User {
   email: string
   avatar: string
   tier: TierLevel
+  phoneNumber: string
+  birthDate: string
+  gender: 'male' | 'female'
+  authProvider: 'kakao' | 'naver' | 'email'
   memberships: Membership[]
   followedArtistIds: string[]
+}
+
+interface ConfirmationData {
+  bookingId: string
+  tickets: {
+    seatId: string
+    sectionName: string
+    row: string
+    seatNumber: string
+    price: number
+    tierFee: number
+  }[]
+  totalAmount: number
+  bookedAt: string
 }
 
 interface Notification {
@@ -867,28 +968,26 @@ const SEAT_STATUS_LABELS: Record<SeatStatus, string> = {
 
 ## 9. shadcn/ui Base Components
 
-현재 설치: `button`, `badge`, `card`, `input`, `tabs`, `avatar`, `separator`, `tooltip`, `skeleton`, `progress`
-
-### 추가 필요 컴포넌트
+현재 설치 (16개):
 
 | Component | shadcn name | Key Usage |
 |---|---|---|
-| Badge | `badge` | BookingStatusBadge, TransferStatusBadge 베이스 |
-| Card | `card` | EventCard, ArtistCard, TicketCard, TransferCard |
-| Dialog | `dialog` | VQA 모달, 에러 모달, QR 오버레이 |
-| Dropdown Menu | `dropdown-menu` | 날짜 선택, 필터 |
-| Input | `input` | 검색, 가격 입력, 인증코드 |
-| Checkbox | `checkbox` | 약관 동의 |
-| Select | `select` | 통신사 선택, 날짜 선택 |
-| Tabs | `tabs` | 아티스트 페이지, My Page, 온보딩 카테고리 |
-| Tooltip | `tooltip` | 좌석 호버, 정보 팁 |
-| Separator | `separator` | 사이드바 구분선 |
+| Alert Dialog | `alert-dialog` | 삭제 확인, 양도 취소 확인 |
 | Avatar | `avatar` | 아티스트, 유저 프로필 |
-| Sonner | `sonner` | Toast 알림 (shadcn toast 대신 sonner 사용) |
-| Skeleton | `skeleton` | 로딩 상태 |
+| Badge | `badge` | BookingStatusBadge, TransferStatusBadge 베이스 |
+| Button | `button` | CTA, 액션 버튼 |
+| Card | `card` | EventCard, ArtistCard, TicketCard, TransferCard |
+| Checkbox | `checkbox` | 약관 동의, 자동 로그인 |
+| Dialog | `dialog` | VQA 모달, QR 모달, 결제 모달 |
+| Input | `input` | 검색, 가격 입력, 인증코드 |
+| Label | `label` | 폼 필드 라벨 |
 | Progress | `progress` | VQA 진행, 온보딩 진행 |
-| Sheet | `sheet` | 모바일 미지원이지만 사이드 패널 대안 |
-| Popover | `popover` | 필터 드롭다운 |
+| Select | `select` | 통신사 선택, 날짜 선택 |
+| Separator | `separator` | 사이드바 구분선 |
+| Skeleton | `skeleton` | 로딩 상태 |
+| Switch | `switch` | 설정 토글 |
+| Tabs | `tabs` | 아티스트 페이지, My Page |
+| Tooltip | `tooltip` | 좌석 호버, 정보 팁 |
 
 설치 명령: `npx shadcn@latest add <component-name>`
 
@@ -932,24 +1031,24 @@ const SEAT_STATUS_LABELS: Record<SeatStatus, string> = {
 ```
 src/
 ├── components/
-│   ├── ui/                    # shadcn/ui base (15+ components)
+│   ├── ui/                    # shadcn/ui base (16 components)
+│   │   ├── alert-dialog.tsx
 │   │   ├── avatar.tsx
 │   │   ├── badge.tsx
 │   │   ├── button.tsx
 │   │   ├── card.tsx
 │   │   ├── checkbox.tsx
 │   │   ├── dialog.tsx
-│   │   ├── dropdown-menu.tsx
 │   │   ├── input.tsx
-│   │   ├── popover.tsx
+│   │   ├── label.tsx
 │   │   ├── progress.tsx
 │   │   ├── select.tsx
 │   │   ├── separator.tsx
 │   │   ├── skeleton.tsx
+│   │   ├── switch.tsx
 │   │   ├── tabs.tsx
-│   │   ├── tooltip.tsx
-│   │   └── sonner.tsx
-│   ├── urr/                   # URR domain components
+│   │   └── tooltip.tsx
+│   ├── urr/                   # URR domain components (15)
 │   │   ├── index.ts
 │   │   ├── TierBadge.tsx
 │   │   ├── BookingStatusBadge.tsx
@@ -959,51 +1058,136 @@ src/
 │   │   ├── PriceDisplay.tsx
 │   │   ├── FaceValueBadge.tsx
 │   │   ├── EventCard.tsx
+│   │   ├── EventTagBadge.tsx
 │   │   ├── ArtistCard.tsx
 │   │   ├── TicketCard.tsx
 │   │   ├── TransferCard.tsx
 │   │   ├── NotificationCard.tsx
+│   │   ├── PostCard.tsx
 │   │   └── QueueStatusCard.tsx
-│   └── layout/                # Layout components
-│       ├── index.ts
-│       ├── AppSidebar.tsx
-│       ├── SidebarNavItem.tsx
-│       ├── ArtistTreeItem.tsx
-│       ├── TopBar.tsx
-│       ├── BookingLeftPanel.tsx
-│       └── ContentArea.tsx
+│   ├── layout/                # Layout components
+│   │   ├── index.ts
+│   │   ├── AppSidebar.tsx
+│   │   ├── SidebarNavItem.tsx
+│   │   ├── ArtistTreeItem.tsx
+│   │   ├── TopBar.tsx
+│   │   ├── ContentArea.tsx
+│   │   └── Footer.tsx
+│   ├── artist/                # 아티스트 상세 페이지
+│   │   ├── ArtistHeader.tsx
+│   │   ├── ArtistHomeTab.tsx
+│   │   ├── ArtistCommunityTab.tsx
+│   │   ├── ArtistEventsTab.tsx
+│   │   ├── ArtistTransferTab.tsx
+│   │   ├── ArtistPageSkeleton.tsx
+│   │   ├── MembershipGate.tsx
+│   │   └── StaticVenuePreview.tsx
+│   ├── booking/               # 예매 플로우 (27 components)
+│   │   ├── index.ts
+│   │   ├── BookingLayout.tsx
+│   │   ├── LeftPanel.tsx
+│   │   ├── LeftPanelCollapsed.tsx
+│   │   ├── RightMain.tsx
+│   │   ├── IdleView.tsx
+│   │   ├── VQAOptionCard.tsx
+│   │   ├── QueueLeaveModal.tsx
+│   │   ├── QueuePromotionOverlay.tsx
+│   │   ├── SectionMap.tsx
+│   │   ├── SectionMapLegend.tsx
+│   │   ├── SectionListTable.tsx
+│   │   ├── SectionListInteractive.tsx
+│   │   ├── SectionSelectionView.tsx
+│   │   ├── SeatGrid.tsx
+│   │   ├── SeatInfoPanel.tsx
+│   │   ├── SeatOverlay.tsx
+│   │   ├── SeatSelectionView.tsx
+│   │   ├── UnifiedSeatView.tsx
+│   │   ├── VenueMap.tsx
+│   │   ├── Minimap.tsx
+│   │   ├── TimerExpiryModal.tsx
+│   │   ├── PaymentView.tsx
+│   │   ├── PaymentProcessingOverlay.tsx
+│   │   ├── ConfirmationView.tsx
+│   │   ├── BookingModal.tsx
+│   │   └── BookingSidePanel.tsx
+│   ├── home/                  # 홈페이지 섹션
+│   │   ├── HeroBannerCarousel.tsx
+│   │   ├── SectionHeader.tsx
+│   │   └── HomePageSkeleton.tsx
+│   ├── membership/            # 멤버십 가입 플로우
+│   │   ├── ArtistSelectStep.tsx
+│   │   ├── MembershipIntroStep.tsx
+│   │   ├── MembershipPaymentStep.tsx
+│   │   └── MembershipCompleteStep.tsx
+│   ├── my-page/               # 마이페이지 탭
+│   │   ├── MyPageHeader.tsx
+│   │   ├── MyPageSkeleton.tsx
+│   │   ├── TicketWalletTab.tsx
+│   │   ├── MembershipTab.tsx
+│   │   ├── MembershipCard.tsx
+│   │   ├── MembershipCancelDialog.tsx
+│   │   ├── TransferHistoryTab.tsx
+│   │   ├── TransferListingModal.tsx
+│   │   ├── SettingsTab.tsx
+│   │   ├── AccountDeleteDialog.tsx
+│   │   └── QRCodeModal.tsx
+│   ├── onboarding/            # 온보딩 플로우
+│   │   ├── AuthStep.tsx
+│   │   ├── IdentityStep.tsx
+│   │   └── OnboardingHero.tsx
+│   ├── transfer/              # 양도 상세 페이지
+│   │   ├── TransferInfoPanel.tsx
+│   │   └── TransferPurchaseSidebar.tsx
+│   └── common/                # 공통 컴포넌트
+│       └── PaymentDialog.tsx
 ├── contexts/
 │   ├── LayoutContext.tsx       # Sidebar/panel state
-│   └── BookingContext.tsx      # Booking state machine
+│   ├── BookingContext.tsx      # Booking state machine
+│   └── NotificationContext.tsx # 알림 상태
 ├── hooks/
 │   ├── useLayout.ts
-│   └── useBooking.ts
+│   ├── useBooking.ts
+│   ├── useCountdown.ts        # 범용 카운트다운 타이머
+│   ├── useMapTransform.ts     # 좌석맵 확대/이동
+│   ├── useNavigationBlock.ts  # 페이지 이탈 방지
+│   ├── useNotifications.ts    # 알림 Context consumer
+│   ├── useQueueSimulation.ts  # 대기열 시뮬레이션
+│   ├── useSeatTimer.ts        # 좌석 선택 제한시간
+│   └── useVQAQuiz.ts          # VQA 퀴즈 로직
 ├── types/
 │   └── index.ts               # All domain types
 ├── data/
-│   ├── mock-artists.ts
-│   ├── mock-events.ts
-│   ├── mock-tickets.ts
-│   ├── mock-transfers.ts
-│   ├── mock-notifications.ts
-│   ├── mock-vqa.ts
-│   └── mock-user.ts
+│   ├── mock-artists.ts        # 아티스트 목록 (10명)
+│   ├── mock-artist-page.ts    # 아티스트별 상세 데이터
+│   ├── mock-community.ts      # 커뮤니티 게시글
+│   ├── mock-events.ts         # 예매 이벤트
+│   ├── mock-home.ts           # 홈페이지 mock (배너, 랭킹 등)
+│   ├── mock-my-page.ts        # 마이페이지 mock (티켓, 양도)
+│   ├── mock-notifications.ts  # 알림
+│   ├── mock-search.ts         # 검색 결과
+│   ├── mock-seats.ts          # 좌석 데이터
+│   ├── mock-user.ts           # 사용자 정보
+│   └── mock-vqa.ts            # VQA 퀴즈 문제
 ├── lib/
 │   ├── utils.ts               # cn() utility
-│   └── format.ts              # formatPrice(), formatDate() helpers
+│   └── format.ts              # formatPrice(), formatTimer(), parseSeatDisplay(), formatCountdown()
 ├── pages/
-│   ├── StyleGuidePage.tsx     # 디자인 시스템 데모 (개발용)
 │   ├── HomePage.tsx
 │   ├── SearchPage.tsx
+│   ├── EventsPage.tsx
+│   ├── ArtistsPage.tsx
 │   ├── ArtistPage.tsx
 │   ├── BookingPage.tsx
+│   ├── MembershipPage.tsx
 │   ├── MyPage.tsx
-│   ├── NotificationPage.tsx
-│   └── OnboardingPage.tsx
+│   ├── TransferDetailPage.tsx
+│   ├── NotificationsPage.tsx
+│   ├── OnboardingPage.tsx
+│   └── StyleGuidePage.tsx     # 디자인 시스템 데모 (개발용)
 ├── layouts/
 │   ├── MainLayout.tsx         # Sidebar + TopBar + Content
 │   └── OnboardingLayout.tsx   # Full-screen (no sidebar)
-├── index.css                  # Design tokens (oklch + hex primary/secondary)
+├── index.css                  # Design tokens + 커스텀 애니메이션
 ├── main.tsx
 └── App.tsx                    # Router
 ```
