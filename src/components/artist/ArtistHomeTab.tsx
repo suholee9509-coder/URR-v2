@@ -1,5 +1,5 @@
 import { Link, useNavigate } from 'react-router-dom'
-import { Calendar, MapPin, ChevronRight, Crown, Ticket, ShoppingBag, MessageCircle, Mic2 } from 'lucide-react'
+import { Calendar, MapPin, ChevronRight, Crown, Ticket, ShoppingBag, MessageCircle, Mic2, Lock } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import { BookingStatusBadge } from '@/components/urr/BookingStatusBadge'
@@ -72,7 +72,7 @@ export function ArtistHomeTab({
                 </div>
                 <div>
                   <div className="flex items-center gap-2.5">
-                    <span className="text-sm font-bold">내 멤버십</span>
+                    <span className="text-sm font-bold">{TIER_LABELS[membership.tier]} 멤버십</span>
                     <TierBadge tier={membership.tier} size="sm" />
                   </div>
                   <p className="text-xs text-muted-foreground mt-0.5">
@@ -131,7 +131,7 @@ export function ArtistHomeTab({
       )}
 
       {/* ===== 2. 아티스트 소개 ===== */}
-      <section className="space-y-4">
+      <section className="space-y-6">
         <h2 className="text-xl font-bold flex items-center gap-2">
           <Mic2 size={20} className="text-muted-foreground" />
           아티스트 소개
@@ -167,13 +167,13 @@ export function ArtistHomeTab({
       </section>
 
       {/* ===== 3. 소통 프리뷰 ===== */}
-      {communityPosts.length > 0 && (
-        <section className="space-y-5">
-          <div className="flex items-center justify-between">
-            <h2 className="text-xl font-bold flex items-center gap-2">
-              <MessageCircle size={20} className="text-muted-foreground" />
-              소통
-            </h2>
+      <section className="space-y-6">
+        <div className="flex items-center justify-between">
+          <h2 className="text-xl font-bold flex items-center gap-2">
+            <MessageCircle size={20} className="text-muted-foreground" />
+            소통
+          </h2>
+          {membership?.isActive && communityPosts.length > 0 && (
             <button
               onClick={() => onNavigateTab('community')}
               className="text-sm text-muted-foreground hover:text-foreground transition-colors flex items-center gap-0.5 cursor-pointer"
@@ -181,20 +181,38 @@ export function ArtistHomeTab({
               전체 보기
               <ChevronRight size={14} />
             </button>
+          )}
+        </div>
+        {membership?.isActive ? (
+          communityPosts.length > 0 ? (
+            <div className="space-y-3">
+              {communityPosts
+                .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+                .slice(0, 2)
+                .map((post) => (
+                  <PostCard key={post.id} post={post} variant="compact" artistGradient={getArtistGradient(artist.id)} />
+                ))}
+            </div>
+          ) : (
+            <div className="rounded-xl border border-dashed border-border bg-muted/20 p-8 text-center">
+              <p className="text-sm text-muted-foreground">아직 소통 게시글이 없습니다</p>
+            </div>
+          )
+        ) : (
+          <div className="rounded-xl border border-dashed border-border bg-muted/20 p-8 text-center space-y-3">
+            <Lock size={24} className="mx-auto text-muted-foreground/40" />
+            <p className="text-sm text-muted-foreground">
+              멤버십 회원만 소통 콘텐츠를 이용할 수 있습니다
+            </p>
+            <Button size="sm" variant="outline" onClick={() => navigate(`/membership?artistId=${artist.id}`)}>
+              멤버십 가입하기
+            </Button>
           </div>
-          <div className="space-y-3">
-            {communityPosts
-              .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
-              .slice(0, 2)
-              .map((post) => (
-                <PostCard key={post.id} post={post} variant="compact" artistGradient={getArtistGradient(artist.id)} />
-              ))}
-          </div>
-        </section>
-      )}
+        )}
+      </section>
 
       {/* ===== 4. 공연 (다음 공연 + 공연 일정 통합) ===== */}
-      <section className="space-y-5">
+      <section className="space-y-6">
         <div className="flex items-center justify-between">
           <h2 className="text-xl font-bold flex items-center gap-2">
             <Ticket size={20} className="text-muted-foreground" />
@@ -311,13 +329,13 @@ export function ArtistHomeTab({
       </section>
 
       {/* ===== 5. 양도 마켓 ===== */}
-      {listedTransfers.length > 0 && (
-        <section className="space-y-5">
-          <div className="flex items-center justify-between">
-            <h2 className="text-xl font-bold flex items-center gap-2">
-              <ShoppingBag size={20} className="text-muted-foreground" />
-              양도 마켓
-            </h2>
+      <section className="space-y-6">
+        <div className="flex items-center justify-between">
+          <h2 className="text-xl font-bold flex items-center gap-2">
+            <ShoppingBag size={20} className="text-muted-foreground" />
+            양도 마켓
+          </h2>
+          {membership?.isActive && listedTransfers.length > 0 && (
             <button
               onClick={() => onNavigateTab('transfers')}
               className="text-sm text-muted-foreground hover:text-foreground transition-colors flex items-center gap-0.5 cursor-pointer"
@@ -325,14 +343,32 @@ export function ArtistHomeTab({
               {listedTransfers.length}건 전체 보기
               <ChevronRight size={14} />
             </button>
+          )}
+        </div>
+        {membership?.isActive ? (
+          listedTransfers.length > 0 ? (
+            <div className="grid grid-cols-3 gap-4">
+              {listedTransfers.slice(0, 3).map((listing) => (
+                <TransferCard key={listing.id} listing={listing} onClick={() => navigate(`/artists/${artist.id}/transfers/${listing.id}`)} />
+              ))}
+            </div>
+          ) : (
+            <div className="rounded-xl border border-dashed border-border bg-muted/20 p-8 text-center">
+              <p className="text-sm text-muted-foreground">현재 양도 가능한 티켓이 없습니다</p>
+            </div>
+          )
+        ) : (
+          <div className="rounded-xl border border-dashed border-border bg-muted/20 p-8 text-center space-y-3">
+            <Lock size={24} className="mx-auto text-muted-foreground/40" />
+            <p className="text-sm text-muted-foreground">
+              멤버십 회원만 양도 마켓을 이용할 수 있습니다
+            </p>
+            <Button size="sm" variant="outline" onClick={() => navigate(`/membership?artistId=${artist.id}`)}>
+              멤버십 가입하기
+            </Button>
           </div>
-          <div className="grid grid-cols-3 gap-4">
-            {listedTransfers.slice(0, 3).map((listing) => (
-              <TransferCard key={listing.id} listing={listing} onClick={() => navigate(`/artists/${artist.id}/transfers/${listing.id}`)} />
-            ))}
-          </div>
-        </section>
-      )}
+        )}
+      </section>
     </div>
   )
 }
