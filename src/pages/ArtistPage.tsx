@@ -109,15 +109,11 @@ export default function ArtistPage() {
         </TabsContent>
 
         <TabsContent value="events" className="pt-6">
-          {membership ? (
-            <ArtistEventsTab
-              upcoming={upcoming}
-              past={past}
-              artistName={artist.name}
-            />
-          ) : (
-            <MembershipGate artistId={artist.id} artistName={artist.name} />
-          )}
+          <ArtistEventsTab
+            upcoming={upcoming}
+            past={past}
+            artistName={artist.name}
+          />
         </TabsContent>
 
         <TabsContent value="transfers" className="pt-6">
