@@ -95,7 +95,7 @@ function PopularEventsSection() {
         {top5.map((evt, i) => (
           <Link
             key={evt.id}
-            to={`/events/${evt.id}`}
+            to={`/events/${evt.id}/detail`}
             className="flex items-center gap-4 px-4 py-3 hover:bg-accent/50 transition-colors"
           >
             <span className="text-lg font-bold text-muted-foreground/50 w-6 text-center shrink-0">
@@ -149,7 +149,7 @@ function EventResultRow({ event }: { event: SearchableEvent }) {
 
   return (
     <Link
-      to={`/events/${event.id}`}
+      to={`/events/${event.id}/detail`}
       className="flex items-center gap-4 px-4 py-3 hover:bg-accent/50 transition-colors"
     >
       <div

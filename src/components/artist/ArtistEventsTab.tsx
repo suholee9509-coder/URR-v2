@@ -29,7 +29,7 @@ export function ArtistEventsTab({ upcoming, past, artistName }: ArtistEventsTabP
           <h2 className="text-lg font-bold">다가오는 공연</h2>
           <div className="space-y-3">
             {upcoming.map((event) => (
-              <Link key={event.id} to={`/events/${event.id}`} className="block">
+              <Link key={event.id} to={`/events/${event.id}/detail`} className="block">
                 <EventCard event={event} artistName={artistName} />
               </Link>
             ))}
@@ -43,7 +43,7 @@ export function ArtistEventsTab({ upcoming, past, artistName }: ArtistEventsTabP
           <h2 className="text-lg font-bold text-muted-foreground">지난 공연</h2>
           <div className="space-y-3 opacity-60">
             {past.map((event) => (
-              <Link key={event.id} to={`/events/${event.id}`} className="block">
+              <Link key={event.id} to={`/events/${event.id}/detail`} className="block">
                 <EventCard event={event} artistName={artistName} />
               </Link>
             ))}

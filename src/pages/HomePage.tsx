@@ -79,7 +79,7 @@ export default function HomePage() {
           {homeTodayTicketing.map((event, index) => (
             <Link
               key={event.id}
-              to={`/events/${event.id}`}
+              to={`/events/${event.id}/detail`}
               className="group min-w-0"
             >
               {/* Poster with rank number */}
@@ -136,7 +136,7 @@ export default function HomePage() {
           {homeRankingEvents.map((event, index) => (
             <Link
               key={event.id}
-              to={`/events/${event.id}`}
+              to={`/events/${event.id}/detail`}
               className="group flex items-center gap-3 py-3 border-b border-border hover:bg-[#F6F5EE] transition-colors rounded-sm px-1 -mx-1"
             >
               {/* Rank number */}
@@ -196,7 +196,7 @@ export default function HomePage() {
           {homePreSaleEvents.map((event) => (
             <Link
               key={event.id + event.openDateTime}
-              to={`/events/${event.id}`}
+              to={`/events/${event.id}/detail`}
               className="group flex gap-3 p-3 rounded-lg border border-border hover:bg-[#F6F5EE] transition-colors bg-card"
             >
               {/* Thumbnail */}

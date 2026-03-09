@@ -16,6 +16,7 @@ import NotificationsPage from '@/pages/NotificationsPage'
 import OnboardingPage from '@/pages/OnboardingPage'
 import TransferDetailPage from '@/pages/TransferDetailPage'
 import MembershipPage from '@/pages/MembershipPage'
+import EventDetailPage from '@/pages/EventDetailPage'
 import StyleGuidePage from '@/pages/StyleGuidePage'
 
 function App() {
@@ -38,6 +39,7 @@ function App() {
                 <Route path="/artists" element={<ArtistsPage />} />
                 <Route path="/artists/:artistId/transfers/:listingId" element={<TransferDetailPage />} />
                 <Route path="/artists/:artistId/*" element={<ArtistPage />} />
+                <Route path="/events/:eventId/detail" element={<EventDetailPage />} />
                 <Route path="/events/:eventId" element={<BookingPage />} />
                 <Route path="/membership" element={<MembershipPage />} />
                 <Route path="/my-page/*" element={<MyPage />} />

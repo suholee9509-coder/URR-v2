@@ -58,7 +58,7 @@ export function HeroBannerCarousel({ banners }: HeroBannerCarouselProps) {
         {banners.map((banner) => (
           <Link
             key={banner.id}
-            to={`/events/${banner.id}`}
+            to={`/events/${banner.id}/detail`}
             className="relative w-full h-full shrink-0 block"
           >
             {/* Background: image or gradient fallback */}

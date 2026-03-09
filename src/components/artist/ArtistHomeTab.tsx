@@ -215,7 +215,7 @@ export function ArtistHomeTab({
           <div className="space-y-3">
             {/* Featured next event */}
             <Link
-              to={`/events/${nextEvent.id}`}
+              to={`/events/${nextEvent.id}/detail`}
               className="group block rounded-xl overflow-hidden border border-border bg-card hover:border-primary/20 transition-all"
             >
               <div className="flex">
@@ -271,7 +271,7 @@ export function ArtistHomeTab({
                   return (
                     <Link
                       key={event.id}
-                      to={`/events/${event.id}`}
+                      to={`/events/${event.id}/detail`}
                       className={cn(
                         'group flex items-center gap-3 px-4 py-3 hover:bg-accent/30 transition-colors',
                         idx > 0 && 'border-t border-border',

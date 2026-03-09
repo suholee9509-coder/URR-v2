@@ -16,7 +16,7 @@ import type { EventCategoryFilter, EventListItem } from '@/data/mock-events-page
 function PopularEventCard({ event }: { event: EventListItem }) {
   return (
     <Link
-      to={`/events/${event.id}`}
+      to={`/events/${event.id}/detail`}
       className="group shrink-0 w-[240px] rounded-xl overflow-hidden relative block"
     >
       {/* Poster image */}
@@ -63,7 +63,7 @@ function PopularEventCard({ event }: { event: EventListItem }) {
 
 function EventGridCard({ event }: { event: EventListItem }) {
   return (
-    <Link to={`/events/${event.id}`} className="group min-w-0">
+    <Link to={`/events/${event.id}/detail`} className="group min-w-0">
       <div className="relative w-full aspect-[4/5] rounded-lg overflow-hidden bg-muted">
         <img
           src={event.poster}
@@ -96,7 +96,7 @@ function EventGridCard({ event }: { event: EventListItem }) {
 function EventListRow({ event }: { event: EventListItem }) {
   return (
     <Link
-      to={`/events/${event.id}`}
+      to={`/events/${event.id}/detail`}
       className="group flex items-center gap-4 py-3 px-2 -mx-2 rounded-lg hover:bg-[#F6F5EE] transition-colors"
     >
       <div className="w-[72px] aspect-[3/4] rounded-lg overflow-hidden bg-muted shrink-0">
@@ -106,14 +106,14 @@ function EventListRow({ event }: { event: EventListItem }) {
           className="w-full h-full object-cover"
         />
       </div>
-      <div className="flex-1 min-w-0 space-y-0.5">
-        <h3 className="text-sm font-semibold truncate group-hover:text-primary transition-colors">
+      <div className="flex-1 min-w-0 space-y-1.5">
+        <h3 className="text-base font-semibold truncate group-hover:text-primary transition-colors">
           {event.title}
         </h3>
-        <p className="text-xs text-muted-foreground truncate">
+        <p className="text-[13px] text-muted-foreground truncate">
           {event.artistName} · {event.venue}
         </p>
-        <p className="text-xs text-muted-foreground">{event.dateRange}</p>
+        <p className="text-[13px] text-muted-foreground">{event.dateRange}</p>
       </div>
     </Link>
   )
