@@ -266,3 +266,12 @@
 .minimap-container {
   animation: minimap-in 300ms ease-out forwards;
 }
+
+/* Hide scrollbar but keep scrolling */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}

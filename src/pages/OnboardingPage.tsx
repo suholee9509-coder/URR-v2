@@ -21,19 +21,7 @@ export default function OnboardingPage() {
         setEmailData({ email: data.email!, password: data.password! })
       }
 
-      // Social login → always treat as existing user (mock)
-      if (data.provider !== 'email') {
-        navigate('/')
-        return
-      }
-
-      // Email login → redirect home (existing user)
-      if (data.mode === 'login') {
-        navigate('/')
-        return
-      }
-
-      // Email register → go to identity verification
+      // All auth methods → go to identity verification
       setFlowState('identity')
     },
     [navigate],

@@ -22,6 +22,8 @@ import {
   NotificationCard,
   PostCard,
   QueueStatusCard,
+  FilterChip,
+  ViewToggle,
 } from '@/components/urr'
 import type { CommunityPost } from '@/data/mock-community'
 import type {
@@ -203,6 +205,7 @@ const TOC = [
   { id: 'skeleton', number: '22', title: '스켈레톤 · 프로그레스' },
   { id: 'icons', number: '23', title: '아이콘 시스템' },
   { id: 'sidebar-preview', number: '24', title: '사이드바 프리뷰' },
+  { id: 'filter-chip', number: '25', title: 'FilterChip · ViewToggle' },
 ]
 
 // ---------------------------------------------------------------------------
@@ -212,6 +215,9 @@ const TOC = [
 export default function StyleGuidePage() {
   const [activeSection, setActiveSection] = useState('colors')
   const [selectedArtists, setSelectedArtists] = useState<Set<string>>(new Set(['a1']))
+
+  const [demoFilter, setDemoFilter] = useState('all')
+  const [demoView, setDemoView] = useState<'grid' | 'list'>('grid')
 
   const toggleArtist = (id: string) => {
     setSelectedArtists(prev => {
@@ -1278,6 +1284,68 @@ export default function StyleGuidePage() {
                   </div>
                 </div>
               </div>
+            </SubSection>
+          </Section>
+
+          {/* ============================================================ */}
+          {/* 25. FilterChip · ViewToggle */}
+          {/* ============================================================ */}
+          <Section id="filter-chip" number="25" title="FilterChip · ViewToggle">
+            <p className="text-sm text-muted-foreground mb-6">
+              카테고리 필터 칩과 그리드/리스트 뷰 전환 토글. 아티스트 탭, 공연 탭 등에서 공용 사용. 높이 32px 통일.
+            </p>
+
+            <SubSection title="FilterChip (카테고리 필터)">
+              <div className="space-y-4">
+                <DemoBox label="아티스트 탭 예시">
+                  <FilterChip
+                    options={[
+                      { value: 'all', label: '전체' },
+                      { value: 'group', label: '그룹' },
+                      { value: 'solo', label: '솔로' },
+                      { value: 'new', label: 'NEW' },
+                    ]}
+                    value={demoFilter}
+                    onChange={setDemoFilter}
+                  />
+                </DemoBox>
+                <DemoBox label="공연 탭 예시">
+                  <FilterChip
+                    options={[
+                      { value: 'all', label: '전체' },
+                      { value: 'concert', label: '콘서트' },
+                      { value: 'fanmeeting', label: '팬미팅' },
+                      { value: 'domestic', label: '내한공연' },
+                      { value: 'festival', label: '페스티벌' },
+                    ]}
+                    value="all"
+                    onChange={() => {}}
+                  />
+                </DemoBox>
+              </div>
+            </SubSection>
+
+            <SubSection title="ViewToggle (뷰 전환)">
+              <DemoBox label="그리드/리스트 토글">
+                <ViewToggle value={demoView} onChange={setDemoView} />
+              </DemoBox>
+            </SubSection>
+
+            <SubSection title="조합 사용 (실제 레이아웃)">
+              <DemoBox label="공연 탭 필터 바">
+                <div className="flex items-center justify-between">
+                  <FilterChip
+                    options={[
+                      { value: 'all', label: '전체' },
+                      { value: 'concert', label: '콘서트' },
+                      { value: 'fanmeeting', label: '팬미팅' },
+                    ]}
+                    value="all"
+                    onChange={() => {}}
+                  />
+                  <ViewToggle value={demoView} onChange={setDemoView} />
+                </div>
+              </DemoBox>
             </SubSection>
           </Section>
 

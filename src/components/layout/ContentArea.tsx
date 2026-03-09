@@ -16,7 +16,7 @@ export function ContentArea({ children }: ContentAreaProps) {
     <main className={cn('flex-1', isFullWidth ? 'overflow-hidden' : 'overflow-y-auto')}>
       <div
         className={cn(
-          !isFullWidth && 'px-8 py-6 max-w-[1200px] mx-auto',
+          !isFullWidth && 'px-8 pt-10 pb-6 max-w-[1200px] mx-auto',
           isFullWidth && 'h-full',
         )}
       >

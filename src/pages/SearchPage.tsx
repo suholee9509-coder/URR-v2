@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useMemo } from 'react'
 import { Link } from 'react-router-dom'
-import { Search, X, TrendingUp, Users, Calendar, Flame } from 'lucide-react'
+import { Search, X, TrendingUp, Users, Calendar, Flame, SlidersHorizontal, ChevronDown, ListFilter } from 'lucide-react'
 import { getArtistGradient, homeRankingEvents } from '@/data/mock-home'
 import {
   trendingSearchTerms,
@@ -178,7 +178,13 @@ export default function SearchPage() {
   const [debouncedQuery, setDebouncedQuery] = useState('')
   const [showAllArtists, setShowAllArtists] = useState(false)
   const [showAllEvents, setShowAllEvents] = useState(false)
+  const [filterType, setFilterType] = useState<'all' | 'artist' | 'event'>('all')
+  const [sortBy, setSortBy] = useState<'popular' | 'latest' | 'name'>('popular')
+  const [showFilterDropdown, setShowFilterDropdown] = useState(false)
+  const [showSortDropdown, setShowSortDropdown] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
+  const filterRef = useRef<HTMLDivElement>(null)
+  const sortRef = useRef<HTMLDivElement>(null)
 
   // autofocus
   useEffect(() => {
@@ -195,17 +201,31 @@ export default function SearchPage() {
     return () => clearTimeout(timer)
   }, [query])
 
-  // Escape → clear
+  // Escape → clear, close dropdowns on outside click
   useEffect(() => {
     function handleKey(e: KeyboardEvent) {
       if (e.key === 'Escape') {
         setQuery('')
         setDebouncedQuery('')
+        setShowFilterDropdown(false)
+        setShowSortDropdown(false)
         inputRef.current?.focus()
       }
     }
+    function handleClickOutside(e: MouseEvent) {
+      if (filterRef.current && !filterRef.current.contains(e.target as Node)) {
+        setShowFilterDropdown(false)
+      }
+      if (sortRef.current && !sortRef.current.contains(e.target as Node)) {
+        setShowSortDropdown(false)
+      }
+    }
     document.addEventListener('keydown', handleKey)
-    return () => document.removeEventListener('keydown', handleKey)
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => {
+      document.removeEventListener('keydown', handleKey)
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
   }, [])
 
   // filtered results
@@ -213,23 +233,33 @@ export default function SearchPage() {
   const allEvents = useMemo(() => getAllEvents(), [])
 
   const filteredArtists = useMemo(() => {
-    if (!debouncedQuery) return []
-    return allArtists.filter(
+    if (!debouncedQuery || filterType === 'event') return []
+    const results = allArtists.filter(
       (a) =>
         matchesQuery(a.name, debouncedQuery) ||
         matchesQuery(a.bio, debouncedQuery),
     )
-  }, [allArtists, debouncedQuery])
+    if (sortBy === 'name') return [...results].sort((a, b) => a.name.localeCompare(b.name, 'ko'))
+    // 'popular' = default order (by followerCount desc), 'latest' = same for artists
+    return [...results].sort((a, b) => b.followerCount - a.followerCount)
+  }, [allArtists, debouncedQuery, filterType, sortBy])
 
   const filteredEvents = useMemo(() => {
-    if (!debouncedQuery) return []
-    return allEvents.filter(
+    if (!debouncedQuery || filterType === 'artist') return []
+    const results = allEvents.filter(
       (e) =>
         matchesQuery(e.title, debouncedQuery) ||
         matchesQuery(e.venue, debouncedQuery) ||
         matchesQuery(e.artistName, debouncedQuery),
     )
-  }, [allEvents, debouncedQuery])
+    if (sortBy === 'name') return [...results].sort((a, b) => a.title.localeCompare(b.title, 'ko'))
+    if (sortBy === 'latest') return [...results].sort((a, b) => {
+      const dateA = a.dates[0]?.date ?? ''
+      const dateB = b.dates[0]?.date ?? ''
+      return dateB.localeCompare(dateA)
+    })
+    return results // popular = default order
+  }, [allEvents, debouncedQuery, filterType, sortBy])
 
   const hasResults = filteredArtists.length > 0 || filteredEvents.length > 0
   const isSearching = debouncedQuery.length > 0
@@ -258,28 +288,88 @@ export default function SearchPage() {
 
   return (
     <div className="space-y-6">
-      {/* --- search input --- */}
-      <div className="relative">
-        <Search
-          size={20}
-          className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none"
-        />
-        <input
-          ref={inputRef}
-          type="text"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          placeholder="아티스트, 공연명, 장소 검색"
-          className="h-12 w-full rounded-xl border border-border bg-card pl-12 pr-12 text-sm outline-none focus:ring-2 focus:ring-primary/30 transition-shadow"
-        />
-        {query && (
+      {/* --- search input + filter + sort --- */}
+      <div className="flex items-center gap-3">
+        <div className="relative flex-1">
+          <Search
+            size={20}
+            className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none"
+          />
+          <input
+            ref={inputRef}
+            type="text"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="공연명 또는 아티스트명을 검색하세요"
+            className="h-12 w-full rounded-xl border border-border bg-card pl-12 pr-12 text-sm outline-none focus:ring-2 focus:ring-primary/30 transition-shadow"
+          />
+          {query && (
+            <button
+              onClick={handleClear}
+              className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
+            >
+              <X size={18} />
+            </button>
+          )}
+        </div>
+
+        {/* Filter dropdown */}
+        <div ref={filterRef} className="relative">
           <button
-            onClick={handleClear}
-            className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
+            onClick={() => { setShowFilterDropdown((v) => !v); setShowSortDropdown(false) }}
+            className="h-12 flex items-center gap-2 px-4 rounded-xl border border-border bg-card text-sm font-medium hover:bg-accent transition-colors cursor-pointer whitespace-nowrap"
           >
-            <X size={18} />
+            <SlidersHorizontal size={16} className="text-muted-foreground" />
+            필터
+            <ChevronDown size={14} className="text-muted-foreground" />
           </button>
-        )}
+          {showFilterDropdown && (
+            <div className="absolute right-0 top-full mt-1.5 w-40 rounded-xl border border-border bg-card shadow-lg z-50 py-1 overflow-hidden">
+              {([
+                { value: 'all', label: '전체' },
+                { value: 'artist', label: '아티스트만' },
+                { value: 'event', label: '공연만' },
+              ] as const).map((opt) => (
+                <button
+                  key={opt.value}
+                  onClick={() => { setFilterType(opt.value); setShowFilterDropdown(false); setShowAllArtists(false); setShowAllEvents(false) }}
+                  className={`w-full text-left px-4 py-2.5 text-sm hover:bg-accent transition-colors cursor-pointer ${filterType === opt.value ? 'text-primary font-semibold' : 'text-foreground'}`}
+                >
+                  {opt.label}
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
+
+        {/* Sort dropdown */}
+        <div ref={sortRef} className="relative">
+          <button
+            onClick={() => { setShowSortDropdown((v) => !v); setShowFilterDropdown(false) }}
+            className="h-12 flex items-center gap-2 px-4 rounded-xl border border-border bg-card text-sm font-medium hover:bg-accent transition-colors cursor-pointer whitespace-nowrap"
+          >
+            <ListFilter size={16} className="text-muted-foreground" />
+            {sortBy === 'popular' ? '인기순' : sortBy === 'latest' ? '최신순' : '이름순'}
+            <ChevronDown size={14} className="text-muted-foreground" />
+          </button>
+          {showSortDropdown && (
+            <div className="absolute right-0 top-full mt-1.5 w-36 rounded-xl border border-border bg-card shadow-lg z-50 py-1 overflow-hidden">
+              {([
+                { value: 'popular', label: '인기순' },
+                { value: 'latest', label: '최신순' },
+                { value: 'name', label: '이름순' },
+              ] as const).map((opt) => (
+                <button
+                  key={opt.value}
+                  onClick={() => { setSortBy(opt.value); setShowSortDropdown(false) }}
+                  className={`w-full text-left px-4 py-2.5 text-sm hover:bg-accent transition-colors cursor-pointer ${sortBy === opt.value ? 'text-primary font-semibold' : 'text-foreground'}`}
+                >
+                  {opt.label}
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
       </div>
 
       {/* --- state: empty → curation --- */}
