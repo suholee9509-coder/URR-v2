@@ -7,12 +7,6 @@ interface EventDetailHeroProps {
   event: EventDetail
 }
 
-function formatDateKorean(isoDate: string): string {
-  const d = new Date(isoDate)
-  const weekdays = ['일', '월', '화', '수', '목', '금', '토']
-  return `${d.getFullYear()}년 ${d.getMonth() + 1}월 ${d.getDate()}일 (${weekdays[d.getDay()]}) ${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`
-}
-
 function formatDateRange(dates: { date: string }[]): string {
   if (dates.length === 0) return ''
   const first = new Date(dates[0].date)

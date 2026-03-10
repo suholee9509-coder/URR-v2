@@ -237,7 +237,7 @@ function QueueContent() {
 // ── Main BookingModal ─────────────────────────────────
 
 export function BookingModal() {
-  const { bookingState, resetBooking } = useBooking()
+  const { resetBooking } = useBooking()
 
   return (
     <div className="fixed inset-0 z-40">

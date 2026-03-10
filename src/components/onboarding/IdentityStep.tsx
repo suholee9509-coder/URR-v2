@@ -296,7 +296,7 @@ export function IdentityStep({ onComplete, onBack }: IdentityStepProps) {
       <Button
         size="lg"
         className="w-full mt-16"
-        disabled={!isCodeValid || verificationState === 'duplicate'}
+        disabled={!isCodeValid || (verificationState as VerificationState) === 'duplicate'}
         onClick={handleVerify}
       >
         {verificationState === 'verifying' ? '확인 중...' : verificationState === 'duplicate' ? '자동 로그인 중...' : '시작하기'}

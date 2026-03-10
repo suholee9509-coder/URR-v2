@@ -26,16 +26,6 @@ function SectionCard({
   )
 }
 
-function InfoTableRow({ label, value }: { label: string; value: string }) {
-  return (
-    <tr className="border-b border-border last:border-b-0">
-      <td className="py-3 px-4 text-sm text-muted-foreground bg-muted/30 w-[120px] shrink-0 font-medium">
-        {label}
-      </td>
-      <td className="py-3 px-4 text-sm">{value}</td>
-    </tr>
-  )
-}
 
 export function SalesInfoTab({ event }: SalesInfoTabProps) {
   return (

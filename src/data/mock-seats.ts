@@ -11,18 +11,18 @@ const SECTION_LAYOUT: Record<string, { rows: number; seatsPerRow: number }> = {
 
 // --- Max bookable seats per tier ---
 export const MAX_SEATS_PER_TIER: Record<TierLevel, number> = {
-  diamond: 4,
-  gold: 4,
-  silver: 2,
-  bronze: 2,
+  lightning: 4,
+  thunder: 4,
+  cloud: 2,
+  mist: 2,
 }
 
 // --- Tier-based additional taken seats (cumulative from higher tiers) ---
 const TIER_EXTRA_TAKEN_RATIO: Record<TierLevel, number> = {
-  diamond: 0,
-  gold: 0.05,    // 5% additional seats taken by diamond
-  silver: 0.12,  // 12% cumulative (diamond + gold)
-  bronze: 0.18,  // 18% cumulative (diamond + gold + silver)
+  lightning: 0,
+  thunder: 0.05,    // 5% additional seats taken by lightning
+  cloud: 0.12,  // 12% cumulative (lightning + thunder)
+  mist: 0.18,  // 18% cumulative (lightning + thunder + cloud)
 }
 
 // Simple seeded pseudo-random for deterministic seat generation
