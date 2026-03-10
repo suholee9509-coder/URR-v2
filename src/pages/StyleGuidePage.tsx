@@ -72,8 +72,8 @@ const sampleEvent: Event = {
   id: 'e1', artistId: 'G-Dragon', title: 'G-DRAGON 2026 WORLD TOUR [COUP D\'ETAT]',
   venue: '잠실종합운동장 올림픽주경기장', poster: '',
   dates: [{ id: 'd1', date: '2026-04-15T19:00:00', bookingWindows: [
-    { tier: 'diamond' as TierLevel, opensAt: '2026-04-01T12:00:00', fee: 0 },
-    { tier: 'gold' as TierLevel, opensAt: '2026-04-02T12:00:00', fee: 3000 },
+    { tier: 'lightning' as TierLevel, opensAt: '2026-04-01T12:00:00', fee: 0 },
+    { tier: 'thunder' as TierLevel, opensAt: '2026-04-02T12:00:00', fee: 3000 },
   ], totalSeats: 50000, remainingSeats: 12450 }],
   status: 'open',
 }
@@ -103,16 +103,16 @@ const sampleTicket: Ticket & { event: Event } = {
 
 const sampleTransfer: TransferListing & { event: Event } = {
   id: 'tr1', ticketId: 'tk2', eventId: 'e1', sellerId: 'u2',
-  sellerTier: 'gold', sellerTransactionCount: 12,
+  sellerTier: 'thunder', sellerTransactionCount: 12,
   price: 180000, faceValue: 165000, section: 'B구역', seatInfo: '5열 22번',
   status: 'listed', createdAt: '2026-03-01T09:00:00',
   event: sampleEvent,
 }
 
 const sampleNotifications: Notification[] = [
-  { id: 'n1', type: 'booking', title: 'G-DRAGON 월드투어 예매 오픈', description: 'Diamond 등급 예매가 시작되었습니다. 지금 예매하세요!', timestamp: new Date(Date.now() - 30 * 60000).toISOString(), isRead: false, link: '/events/e1' },
+  { id: 'n1', type: 'booking', title: 'G-DRAGON 월드투어 예매 오픈', description: '라이트닝 등급 예매가 시작되었습니다. 지금 예매하세요!', timestamp: new Date(Date.now() - 30 * 60000).toISOString(), isRead: false, link: '/events/e1' },
   { id: 'n2', type: 'transfer', title: '양도 거래 완료', description: 'aespa LIVE TOUR 티켓 양도가 완료되었습니다.', timestamp: new Date(Date.now() - 3 * 3600000).toISOString(), isRead: false, link: '/my-page' },
-  { id: 'n3', type: 'tier', title: '등급 업그레이드!', description: 'Silver → Gold 등급으로 승급되었습니다. 축하합니다!', timestamp: new Date(Date.now() - 24 * 3600000).toISOString(), isRead: true, link: '/my-page' },
+  { id: 'n3', type: 'tier', title: '등급 업그레이드!', description: '클라우드 → 썬더 등급으로 승급되었습니다. 축하합니다!', timestamp: new Date(Date.now() - 24 * 3600000).toISOString(), isRead: true, link: '/my-page' },
   { id: 'n4', type: 'payment', title: '결제 확인', description: '165,000원 결제가 완료되었습니다.', timestamp: new Date(Date.now() - 48 * 3600000).toISOString(), isRead: true, link: '/my-page' },
 ]
 
@@ -300,14 +300,14 @@ export default function StyleGuidePage() {
 
             <SubSection title="등급 (Tier)">
               <div className="flex flex-wrap gap-4">
-                <Swatch label="Diamond" className="bg-tier-diamond" />
-                <Swatch label="Diamond BG" className="bg-tier-diamond-bg" />
-                <Swatch label="Gold" className="bg-tier-gold" />
-                <Swatch label="Gold BG" className="bg-tier-gold-bg" />
-                <Swatch label="Silver" className="bg-tier-silver" />
-                <Swatch label="Silver BG" className="bg-tier-silver-bg" />
-                <Swatch label="Bronze" className="bg-tier-bronze" />
-                <Swatch label="Bronze BG" className="bg-tier-bronze-bg" />
+                <Swatch label="Lightning" className="bg-tier-lightning" />
+                <Swatch label="Lightning BG" className="bg-tier-lightning-bg" />
+                <Swatch label="Thunder" className="bg-tier-thunder" />
+                <Swatch label="Thunder BG" className="bg-tier-thunder-bg" />
+                <Swatch label="Cloud" className="bg-tier-cloud" />
+                <Swatch label="Cloud BG" className="bg-tier-cloud-bg" />
+                <Swatch label="Mist" className="bg-tier-mist" />
+                <Swatch label="Mist BG" className="bg-tier-mist-bg" />
               </div>
             </SubSection>
 
@@ -573,7 +573,7 @@ export default function StyleGuidePage() {
           {/* ============================================================ */}
           <Section id="tier-badge" number="06" title="TierBadge (등급 배지)">
             <p className="text-sm text-muted-foreground mb-6">
-              4개 등급: Diamond, Gold, Silver, Bronze. 이모지 + 라벨 구조. 읽기 전용 (클릭 불가).
+              4개 등급: 라이트닝, 썬더, 클라우드, 미스트. 아이콘 + 라벨 구조. 읽기 전용 (클릭 불가).
             </p>
 
             <SubSection title="Default 사이즈">
@@ -614,7 +614,7 @@ export default function StyleGuidePage() {
                   <div className="size-10 rounded-full bg-muted flex items-center justify-center text-sm text-muted-foreground">JK</div>
                   <div>
                     <p className="text-sm font-medium">김수호</p>
-                    <TierBadge tier="diamond" size="sm" />
+                    <TierBadge tier="lightning" size="sm" />
                   </div>
                 </div>
               </DemoBox>
@@ -871,11 +871,11 @@ export default function StyleGuidePage() {
               <div className="grid grid-cols-3 gap-4">
                 <TransferCard listing={sampleTransfer} onClick={() => {}} />
                 <TransferCard listing={{
-                  ...sampleTransfer, id: 'tr2', price: 165000, sellerTier: 'diamond',
+                  ...sampleTransfer, id: 'tr2', price: 165000, sellerTier: 'lightning',
                   sellerTransactionCount: 45, section: 'VIP구역', seatInfo: '1열 3번',
                 }} onClick={() => {}} />
                 <TransferCard listing={{
-                  ...sampleTransfer, id: 'tr3', price: 220000, sellerTier: 'silver',
+                  ...sampleTransfer, id: 'tr3', price: 220000, sellerTier: 'cloud',
                   sellerTransactionCount: 3, section: 'C구역', seatInfo: '12열 7번',
                 }} onClick={() => {}} />
               </div>
@@ -1028,9 +1028,9 @@ export default function StyleGuidePage() {
                   </CardHeader>
                   <CardContent>
                     <div className="flex items-center gap-3">
-                      <TierBadge tier="diamond" size="lg" />
+                      <TierBadge tier="lightning" size="lg" />
                       <div>
-                        <p className="text-2xl font-bold">Diamond</p>
+                        <p className="text-2xl font-bold">라이트닝</p>
                         <p className="text-xs text-muted-foreground">2026.12.31 만료</p>
                       </div>
                     </div>
@@ -1209,7 +1209,7 @@ export default function StyleGuidePage() {
                         <div className="size-9 rounded-full bg-muted flex items-center justify-center text-xs text-muted-foreground">SH</div>
                         <div>
                           <p className="text-sm font-medium">김수호</p>
-                          <TierBadge tier="diamond" size="sm" />
+                          <TierBadge tier="lightning" size="sm" />
                         </div>
                       </div>
                     </div>

@@ -9,17 +9,17 @@ import type { Membership, TierLevel } from '@/types'
 import { TIER_LABELS } from '@/types'
 
 const NEXT_TIER: Record<TierLevel, TierLevel | null> = {
-  bronze: 'silver',
-  silver: 'gold',
-  gold: 'diamond',
-  diamond: null,
+  mist: 'cloud',
+  cloud: 'thunder',
+  thunder: 'lightning',
+  lightning: null,
 }
 
 const TIER_COLORS: Record<TierLevel, string> = {
-  bronze: '#CD7F32',
-  silver: '#94A3B8',
-  gold: '#EAB308',
-  diamond: '#8B5CF6',
+  mist: '#D5CCC0',
+  cloud: '#7E8CDA',
+  thunder: '#1F2792',
+  lightning: '#FF5E32',
 }
 
 interface MembershipCardProps {

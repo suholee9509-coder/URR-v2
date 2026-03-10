@@ -30,7 +30,7 @@ const MOCK_MELON_RESULT = {
   totalStreams: 1247,
   artistRatio: 34.2,
   fanScore: 72,
-  tier: 'gold' as TierLevel,
+  tier: 'thunder' as TierLevel,
 }
 
 export function MembershipProfileStep({ artist, onComplete }: MembershipProfileStepProps) {
@@ -59,7 +59,7 @@ export function MembershipProfileStep({ artist, onComplete }: MembershipProfileS
     return () => clearTimeout(timer)
   }, [nickname])
 
-  const resultTier: TierLevel = melonState === 'done' ? MOCK_MELON_RESULT.tier : 'silver'
+  const resultTier: TierLevel = melonState === 'done' ? MOCK_MELON_RESULT.tier : 'cloud'
 
   const handleMelonLink = () => {
     if (!melonId.trim()) return
@@ -141,7 +141,7 @@ export function MembershipProfileStep({ artist, onComplete }: MembershipProfileS
             <>
               <p className="text-xs text-muted-foreground leading-relaxed">
                 멜론 스트리밍 데이터를 연동하면 청취량에 따라 더 높은 등급을 받을 수 있습니다.
-                연동하지 않으면 Silver 등급으로 시작합니다.
+                연동하지 않으면 클라우드 등급으로 시작합니다.
               </p>
               <div className="space-y-3">
                 <div>
@@ -198,7 +198,7 @@ export function MembershipProfileStep({ artist, onComplete }: MembershipProfileS
                 <div className="border-t border-border pt-2 mt-2 flex items-center justify-between">
                   <span className="text-xs text-muted-foreground">부여 등급</span>
                   <div className="flex items-center gap-1.5">
-                    <TierBadge tier="silver" size="sm" />
+                    <TierBadge tier="cloud" size="sm" />
                     <span className="text-xs text-muted-foreground">→</span>
                     <TierBadge tier={MOCK_MELON_RESULT.tier} size="sm" />
                   </div>

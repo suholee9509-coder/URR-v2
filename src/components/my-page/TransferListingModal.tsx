@@ -23,7 +23,7 @@ interface TransferListingModalProps {
 type Step = 'price-input' | 'fee-preview' | 'success'
 
 function getFeeRate(tier: TierLevel): number {
-  return tier === 'diamond' || tier === 'gold' ? 0.05 : 0.10
+  return tier === 'lightning' || tier === 'thunder' ? 0.05 : 0.10
 }
 
 function parseNumber(str: string): number {

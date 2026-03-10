@@ -19,10 +19,10 @@ const tierBenefits: {
   transferFee: string
   vqa: boolean
 }[] = [
-  { tier: 'diamond', booking: '우선 예매', openTiming: '개별 오픈', fee: '1,000원', transferFee: '5%', vqa: false },
-  { tier: 'gold', booking: '우선 예매', openTiming: 'Diamond +1시간', fee: '2,000원', transferFee: '5%', vqa: false },
-  { tier: 'silver', booking: '일반 예매', openTiming: 'Gold +2일', fee: '3,000원', transferFee: '10%', vqa: true },
-  { tier: 'bronze', booking: '일반 예매', openTiming: 'Silver +1시간', fee: '4,000원', transferFee: '10%', vqa: true },
+  { tier: 'lightning', booking: '우선 예매', openTiming: '개별 오픈', fee: '1,000원', transferFee: '5%', vqa: false },
+  { tier: 'thunder', booking: '우선 예매', openTiming: '라이트닝 +1시간', fee: '2,000원', transferFee: '5%', vqa: false },
+  { tier: 'cloud', booking: '일반 예매', openTiming: '썬더 +2일', fee: '3,000원', transferFee: '10%', vqa: true },
+  { tier: 'mist', booking: '일반 예매', openTiming: '클라우드 +1시간', fee: '4,000원', transferFee: '10%', vqa: true },
 ]
 
 export function MembershipIntroStep({ artist, onBack, onSubscribe }: MembershipIntroStepProps) {
@@ -61,7 +61,7 @@ export function MembershipIntroStep({ artist, onBack, onSubscribe }: MembershipI
         </div>
         <p className="text-sm text-muted-foreground leading-relaxed">
           {artist.name} 멤버십에 가입하면 선예매 우선권, 양도 마켓 이용, 전용 굿즈 구매 등
-          다양한 혜택을 누릴 수 있습니다. 가입 시 Silver 등급으로 시작하며, 멜론 연동을 통해
+          다양한 혜택을 누릴 수 있습니다. 가입 시 클라우드 등급으로 시작하며, 멜론 연동을 통해
           더 높은 등급을 받을 수 있습니다.
         </p>
       </div>
@@ -107,7 +107,7 @@ export function MembershipIntroStep({ artist, onBack, onSubscribe }: MembershipI
           </table>
         </div>
         <p className="text-xs text-muted-foreground">
-          * VQA 면제: Diamond, Gold 등급은 본인인증 절차(VQA)가 면제됩니다
+          * VQA 면제: 라이트닝, 썬더 등급은 본인인증 절차(VQA)가 면제됩니다
         </p>
       </div>
 

@@ -1,6 +1,6 @@
 // === Enums & Literals ===
 
-export type TierLevel = 'diamond' | 'gold' | 'silver' | 'bronze'
+export type TierLevel = 'lightning' | 'thunder' | 'cloud' | 'mist'
 export type BookingStatus = 'open' | 'upcoming' | 'soldout' | 'closed'
 export type TransferStatus = 'listed' | 'sold' | 'completed' | 'cancelled'
 export type SeatStatus = 'available' | 'selected' | 'taken' | 'locked'
@@ -149,17 +149,17 @@ export interface VQAQuestion {
 // === Label Constants ===
 
 export const TIER_LABELS: Record<TierLevel, string> = {
-  diamond: 'Diamond',
-  gold: 'Gold',
-  silver: 'Silver',
-  bronze: 'Bronze',
+  lightning: '라이트닝',
+  thunder: '썬더',
+  cloud: '클라우드',
+  mist: '미스트',
 }
 
 export const TIER_EMOJIS: Record<TierLevel, string> = {
-  diamond: '💎',
-  gold: '🥇',
-  silver: '🥈',
-  bronze: '🥉',
+  lightning: '🌩️',
+  thunder: '⚡',
+  cloud: '☁️',
+  mist: '🌫️',
 }
 
 export const BOOKING_STATUS_LABELS: Record<BookingStatus, string> = {

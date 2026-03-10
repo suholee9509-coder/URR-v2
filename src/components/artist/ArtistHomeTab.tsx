@@ -78,12 +78,12 @@ export function ArtistHomeTab({
                   <p className="text-xs text-muted-foreground mt-0.5">
                     {new Date(membership.expiresAt).toLocaleDateString('ko-KR', { year: 'numeric', month: 'long', day: 'numeric' })} 만료
                     <span className="mx-1.5 text-border">·</span>
-                    {membership.tier === 'diamond' ? '최우선 예매 · VQA 면제' : membership.tier === 'gold' ? '우선 예매 · VQA 면제' : membership.tier === 'silver' ? '선예매 · VQA 필요' : '일반 예매 · VQA 필요'}
+                    {membership.tier === 'lightning' ? '최우선 예매 · VQA 면제' : membership.tier === 'thunder' ? '우선 예매 · VQA 면제' : membership.tier === 'cloud' ? '선예매 · VQA 필요' : '일반 예매 · VQA 필요'}
                   </p>
                 </div>
               </div>
               <div className="flex items-center gap-6 text-xs text-muted-foreground">
-                {(['diamond', 'gold', 'silver', 'bronze'] as const).map((tier) => (
+                {(['lightning', 'thunder', 'cloud', 'mist'] as const).map((tier) => (
                   <div
                     key={tier}
                     className={cn(
@@ -116,7 +116,7 @@ export function ArtistHomeTab({
               </div>
               <div className="flex items-center gap-4 shrink-0">
                 <div className="hidden lg:flex items-center gap-4 text-xs text-muted-foreground">
-                  {(['diamond', 'gold', 'silver', 'bronze'] as const).map((tier) => (
+                  {(['lightning', 'thunder', 'cloud', 'mist'] as const).map((tier) => (
                     <div key={tier} className="text-center">
                       <span className="text-base">{TIER_EMOJIS[tier]}</span>
                       <p className="text-[10px] mt-0.5">{TIER_LABELS[tier]}</p>

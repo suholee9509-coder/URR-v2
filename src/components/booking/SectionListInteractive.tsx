@@ -12,10 +12,10 @@ interface SectionListInteractiveProps {
 }
 
 const SECTION_COLORS: Record<string, string> = {
-  'sec-vip': '#22C55E',
-  'sec-r': '#22C55E',
-  'sec-s': '#F97316',
-  'sec-a': '#F97316',
+  'sec-vip': '#0080FF',
+  'sec-r': '#FC68AF',
+  'sec-s': '#8A07FD',
+  'sec-a': '#02AD4A',
   'sec-b': '#EF4444',
   'sec-c': '#EF4444',
 }

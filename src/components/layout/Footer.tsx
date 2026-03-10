@@ -57,9 +57,9 @@ export function Footer() {
             <div className="space-y-4">
               <h4 className="text-sm font-bold">URR 요금제</h4>
               <nav className="flex flex-col gap-2.5 text-sm text-muted-foreground">
-                <a href="#" className="hover:text-foreground transition-colors">멤버십 Diamond</a>
-                <a href="#" className="hover:text-foreground transition-colors">멤버십 Gold</a>
-                <a href="#" className="hover:text-foreground transition-colors">멤버십 Silver</a>
+                <a href="#" className="hover:text-foreground transition-colors">멤버십 라이트닝</a>
+                <a href="#" className="hover:text-foreground transition-colors">멤버십 썬더</a>
+                <a href="#" className="hover:text-foreground transition-colors">멤버십 클라우드</a>
               </nav>
             </div>
           </div>

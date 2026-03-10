@@ -45,14 +45,14 @@ function getSectionDescription(section: string): string {
 
 function getSellerReliability(tier: TierLevel): { label: string; className: string } {
   switch (tier) {
-    case 'diamond':
-      return { label: '최고 신뢰 판매자', className: 'text-tier-diamond' }
-    case 'gold':
-      return { label: '우수 판매자', className: 'text-tier-gold' }
-    case 'silver':
-      return { label: '일반 판매자', className: 'text-tier-silver' }
+    case 'lightning':
+      return { label: '최고 신뢰 판매자', className: 'text-tier-lightning' }
+    case 'thunder':
+      return { label: '우수 판매자', className: 'text-tier-thunder' }
+    case 'cloud':
+      return { label: '일반 판매자', className: 'text-tier-cloud' }
     default:
-      return { label: '신규 판매자', className: 'text-tier-bronze' }
+      return { label: '신규 판매자', className: 'text-tier-mist' }
   }
 }
 

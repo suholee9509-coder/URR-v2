@@ -75,14 +75,14 @@
 
 | CSS Variable | Light Value | Tailwind Class | Emoji | Usage |
 |---|---|---|---|---|
-| `--tier-diamond` | `oklch(0.65 0.18 295)` | `text-tier-diamond` | 💎 | Diamond 등급 (바이올렛) |
-| `--tier-diamond-bg` | `oklch(0.94 0.04 295)` | `bg-tier-diamond-bg` | — | Diamond 배지 배경 |
-| `--tier-gold` | `oklch(0.75 0.15 85)` | `text-tier-gold` | 🥇 | Gold 등급 (앰버) |
-| `--tier-gold-bg` | `oklch(0.95 0.04 85)` | `bg-tier-gold-bg` | — | Gold 배지 배경 |
-| `--tier-silver` | `oklch(0.55 0.02 264)` | `text-tier-silver` | 🥈 | Silver 등급 (쿨 그레이) |
-| `--tier-silver-bg` | `oklch(0.95 0.005 264)` | `bg-tier-silver-bg` | — | Silver 배지 배경 |
-| `--tier-bronze` | `oklch(0.60 0.12 55)` | `text-tier-bronze` | 🥉 | Bronze 등급 (코퍼) |
-| `--tier-bronze-bg` | `oklch(0.95 0.03 55)` | `bg-tier-bronze-bg` | — | Bronze 배지 배경 |
+| `--tier-lightning` | `#FF5E32` | `text-tier-lightning` | 🌩️ | Lightning 등급 (오렌지) |
+| `--tier-lightning-bg` | `oklch(0.94 0.04 295)` | `bg-tier-lightning-bg` | — | Lightning 배지 배경 |
+| `--tier-thunder` | `#1F2792` | `text-tier-thunder` | ⚡ | Thunder 등급 (네이비) |
+| `--tier-thunder-bg` | `oklch(0.95 0.04 85)` | `bg-tier-thunder-bg` | — | Thunder 배지 배경 |
+| `--tier-cloud` | `#7E8CDA` | `text-tier-cloud` | ☁️ | Cloud 등급 (라벤더 블루) |
+| `--tier-cloud-bg` | `oklch(0.95 0.005 264)` | `bg-tier-cloud-bg` | — | Cloud 배지 배경 |
+| `--tier-mist` | `#D5CCC0` | `text-tier-mist` | 🌫️ | Mist 등급 (웜 그레이) |
+| `--tier-mist-bg` | `oklch(0.95 0.03 55)` | `bg-tier-mist-bg` | — | Mist 배지 배경 |
 
 ### 2.4 Seat (좌석 상태)
 
@@ -94,6 +94,17 @@
 | `--seat-locked` | `oklch(0.80 0.15 85)` | `text-seat-locked` | 타인 점유 (노랑) |
 
 배경 사용 시: `bg-seat-available`, `bg-seat-selected`, `bg-seat-taken`, `bg-seat-locked`
+
+### 2.4.1 Seat Grade (좌석 등급)
+
+| CSS Variable | Light Value | Tailwind Class | Usage |
+|---|---|---|---|
+| `--seat-grade-a` | `#02AD4A` | `text-seat-grade-a` | A석 (그린) |
+| `--seat-grade-s` | `#8A07FD` | `text-seat-grade-s` | S석 (퍼플) |
+| `--seat-grade-r` | `#FC68AF` | `text-seat-grade-r` | R석 (핑크) |
+| `--seat-grade-vip` | `#0080FF` | `text-seat-grade-vip` | VIP석 (블루) |
+
+배경 사용 시: `bg-seat-grade-a`, `bg-seat-grade-s`, `bg-seat-grade-r`, `bg-seat-grade-vip`
 
 ### 2.5 Booking Status (예매 상태)
 
@@ -116,10 +127,10 @@
 
 | CSS Variable | Light Value | Tailwind Class | Usage |
 |---|---|---|---|
-| `--success` | `oklch(0.55 0.17 152)` | `text-success` | 성공 피드백, VQA 정답 |
-| `--warning` | `oklch(0.75 0.15 85)` | `text-warning` | 경고, 타이머 1분 남음 |
-| `--danger` | `oklch(0.577 0.245 27)` | `text-danger` | 에러, 타이머 30초 남음 |
-| `--info` | `oklch(0.55 0.2 260)` | `text-info` | 안내 메시지 |
+| `--success` | `#22C55E` | `text-success` | 성공 피드백, VQA 정답 |
+| `--warning` | `#F59E0B` | `text-warning` | 경고, 타이머 1분 남음 |
+| `--danger` | `#E7000B` | `text-danger` | 에러, 타이머 30초 남음 |
+| `--info` | `#3B82F6` | `text-info` | 안내 메시지 |
 
 ### 2.8 Face Value Comparison (정가 대비)
 
@@ -221,22 +232,28 @@
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `tier` | `TierLevel` | required | `'diamond' \| 'gold' \| 'silver' \| 'bronze'` |
+| `tier` | `TierLevel` | required | `'lightning' \| 'thunder' \| 'cloud' \| 'mist'` |
 | `size` | `'default' \| 'sm' \| 'lg'` | `'default'` | 뱃지 크기 |
-| `showLabel` | `boolean` | `true` | `false`: 이모지만 표시 (접근성 주의: tooltip 필요) |
+| `showLabel` | `boolean` | `true` | `false`: 아이콘만 표시 (접근성 주의: tooltip 필요) |
 | `className` | `string` | — | 추가 클래스 |
 
 **Display**:
-- default: Emoji + text label in pill (`bg-tier-*-bg text-tier-*`)
+- default: Lucide icon + text label in pill (`bg-tier-*-bg text-tier-*`)
 - sm: 작은 pill, 12px 텍스트
 - lg: 큰 pill, 16px 텍스트, 사이드바 프로필 영역
 
-**Accessibility Rule**: 이모지만 표시할 때는 반드시 `aria-label` 또는 tooltip 제공. TierBadge는 **읽기 전용** — 절대 클릭 불가.
+**Tier Badge Icons** (Lucide):
+- Mist: `Haze`
+- Cloud: `Cloud`
+- Thunder: `CloudLightning`
+- Lightning: `Zap`
+
+**Accessibility Rule**: 아이콘만 표시할 때는 반드시 `aria-label` 또는 tooltip 제공. TierBadge는 **읽기 전용** — 절대 클릭 불가.
 
 ```tsx
-<TierBadge tier="diamond" />              // 💎 Diamond
-<TierBadge tier="gold" size="sm" />       // 🥇 Gold (작은 크기)
-<TierBadge tier="bronze" showLabel={false} /> // 🥉 (이모지만, tooltip)
+<TierBadge tier="lightning" />              // 🌩️ 라이트닝
+<TierBadge tier="thunder" size="sm" />       // ⚡ 썬더 (작은 크기)
+<TierBadge tier="mist" showLabel={false} /> // 🌫️ (이모지만, tooltip)
 ```
 
 ### 5.2 BookingStatusBadge
@@ -758,16 +775,16 @@ interface NotificationContextValue {
 | 에러 | `AlertCircle` | 에러 피드백 |
 | 경고 | `AlertTriangle` | 경고 피드백 |
 
-### Tier Emojis
+### Tier Icons & Emojis
 
-| Tier | Emoji | Usage |
-|---|---|---|
-| Diamond | 💎 | TierBadge, 프로필, 큐, 수수료 |
-| Gold | 🥇 | TierBadge, 프로필, 큐, 수수료 |
-| Silver | 🥈 | TierBadge, 프로필, 큐, 수수료 |
-| Bronze | 🥉 | TierBadge, 프로필, 큐, 수수료 |
+| Tier | Lucide Icon | Emoji | Usage |
+|---|---|---|---|
+| Lightning (라이트닝) | `Zap` | 🌩️ | TierBadge, 프로필, 큐, 수수료 |
+| Thunder (썬더) | `CloudLightning` | ⚡ | TierBadge, 프로필, 큐, 수수료 |
+| Cloud (클라우드) | `Cloud` | ☁️ | TierBadge, 프로필, 큐, 수수료 |
+| Mist (미스트) | `Haze` | 🌫️ | TierBadge, 프로필, 큐, 수수료 |
 
-**Rule**: Tier emoji는 항상 text label과 함께 사용 (접근성). emoji 단독 사용 금지.
+**Rule**: Tier 아이콘/emoji는 항상 text label과 함께 사용 (접근성). 아이콘/emoji 단독 사용 금지.
 
 ---
 
@@ -780,7 +797,7 @@ interface NotificationContextValue {
 ```typescript
 // === Enums & Literals ===
 
-type TierLevel = 'diamond' | 'gold' | 'silver' | 'bronze'
+type TierLevel = 'lightning' | 'thunder' | 'cloud' | 'mist'
 type BookingStatus = 'open' | 'upcoming' | 'soldout' | 'closed'
 type TransferStatus = 'listed' | 'sold' | 'completed' | 'cancelled'
 type SeatStatus = 'available' | 'selected' | 'taken' | 'locked'
@@ -929,17 +946,17 @@ interface VQAQuestion {
 
 ```typescript
 const TIER_LABELS: Record<TierLevel, string> = {
-  diamond: 'Diamond',
-  gold: 'Gold',
-  silver: 'Silver',
-  bronze: 'Bronze',
+  lightning: '라이트닝',
+  thunder: '썬더',
+  cloud: '클라우드',
+  mist: '미스트',
 }
 
 const TIER_EMOJIS: Record<TierLevel, string> = {
-  diamond: '💎',
-  gold: '🥇',
-  silver: '🥈',
-  bronze: '🥉',
+  lightning: '🌩️',
+  thunder: '⚡',
+  cloud: '☁️',
+  mist: '🌫️',
 }
 
 const BOOKING_STATUS_LABELS: Record<BookingStatus, string> = {
@@ -997,14 +1014,14 @@ const SEAT_STATUS_LABELS: Record<SeatStatus, string> = {
 
 ### Do
 
-- CSS 변수 토큰만 사용 (`bg-primary`, `text-tier-diamond`, `bg-seat-available` 등)
+- CSS 변수 토큰만 사용 (`bg-primary`, `text-tier-lightning`, `bg-seat-available` 등)
 - 컴포넌트 variant는 CVA (class-variance-authority)로 정의
 - 클래스 병합은 `cn()` (`src/lib/utils.ts`)
 - 도메인 컴포넌트는 `src/components/urr/`에 생성하고 `index.ts` barrel export
 - 레이아웃 컴포넌트는 `src/components/layout/`에 생성하고 `index.ts` barrel export
 - shadcn/ui 기존 컴포넌트 우선 활용 → 커스텀은 최후 수단
 - 모든 가격은 `₩{comma}` 형식 사용 (`Intl.NumberFormat`)
-- TierBadge는 항상 emoji + text label 함께 사용 (접근성)
+- TierBadge는 항상 icon + text label 함께 사용 (접근성)
 - 타이머는 반드시 monospace 폰트 (JetBrains Mono)
 - 좌석맵에는 반드시 SeatStatusLegend 포함 (색상만으로 정보 전달 금지)
 - 에러 메시지는 한국어, 인간적, 복구 액션 포함

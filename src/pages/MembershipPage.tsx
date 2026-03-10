@@ -84,7 +84,7 @@ export default function MembershipPage() {
         <MembershipCompleteStep
           artist={selectedArtist}
           nickname={profileData?.nickname ?? ''}
-          tier={profileData?.tier ?? 'silver'}
+          tier={profileData?.tier ?? 'cloud'}
         />
       )}
     </div>

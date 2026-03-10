@@ -1,11 +1,11 @@
 import { cn } from '@/lib/utils'
 
 const SECTION_COLORS: Record<string, string> = {
-  'sec-vip': '#047ffe',
-  'sec-floor-r': '#ff68b5',
-  'sec-r': '#8807fd',
-  'sec-s': '#0aab49',
-  'sec-a': '#fe8304',
+  'sec-vip': '#0080FF',
+  'sec-floor-r': '#FC68AF',
+  'sec-r': '#FC68AF',
+  'sec-s': '#8A07FD',
+  'sec-a': '#02AD4A',
 }
 
 const DIMMED = '#9CA3AF'

@@ -12,7 +12,7 @@ import { TIER_LABELS, TIER_EMOJIS } from '@/types'
 import type { TierLevel } from '@/types'
 import { LeftPanelCollapsed } from './LeftPanelCollapsed'
 
-const TIER_ORDER: TierLevel[] = ['diamond', 'gold', 'silver', 'bronze']
+const TIER_ORDER: TierLevel[] = ['lightning', 'thunder', 'cloud', 'mist']
 
 function formatCompactDate(isoDate: string): string {
   const d = new Date(isoDate)

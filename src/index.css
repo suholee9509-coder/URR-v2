@@ -46,14 +46,20 @@
     --color-sidebar-muted-foreground: var(--sidebar-muted-foreground);
 
     /* Tier */
-    --color-tier-diamond: var(--tier-diamond);
-    --color-tier-diamond-bg: var(--tier-diamond-bg);
-    --color-tier-gold: var(--tier-gold);
-    --color-tier-gold-bg: var(--tier-gold-bg);
-    --color-tier-silver: var(--tier-silver);
-    --color-tier-silver-bg: var(--tier-silver-bg);
-    --color-tier-bronze: var(--tier-bronze);
-    --color-tier-bronze-bg: var(--tier-bronze-bg);
+    --color-tier-lightning: var(--tier-lightning);
+    --color-tier-lightning-bg: var(--tier-lightning-bg);
+    --color-tier-thunder: var(--tier-thunder);
+    --color-tier-thunder-bg: var(--tier-thunder-bg);
+    --color-tier-cloud: var(--tier-cloud);
+    --color-tier-cloud-bg: var(--tier-cloud-bg);
+    --color-tier-mist: var(--tier-mist);
+    --color-tier-mist-bg: var(--tier-mist-bg);
+
+    /* Seat Grade */
+    --color-seat-grade-vip: var(--seat-grade-vip);
+    --color-seat-grade-r: var(--seat-grade-r);
+    --color-seat-grade-s: var(--seat-grade-s);
+    --color-seat-grade-a: var(--seat-grade-a);
 
     /* Seat Status */
     --color-seat-available: var(--seat-available);
@@ -115,14 +121,20 @@
     --sidebar-muted-foreground: oklch(0.556 0 0);
 
     /* Tier (멤버십 등급) */
-    --tier-diamond: oklch(0.65 0.18 295);
-    --tier-diamond-bg: oklch(0.94 0.04 295);
-    --tier-gold: oklch(0.75 0.15 85);
-    --tier-gold-bg: oklch(0.95 0.04 85);
-    --tier-silver: oklch(0.55 0.02 264);
-    --tier-silver-bg: oklch(0.95 0.005 264);
-    --tier-bronze: oklch(0.60 0.12 55);
-    --tier-bronze-bg: oklch(0.95 0.03 55);
+    --tier-lightning: #FF5E32;
+    --tier-lightning-bg: #FF5E3220;
+    --tier-thunder: #1F2792;
+    --tier-thunder-bg: #1F279220;
+    --tier-cloud: #7E8CDA;
+    --tier-cloud-bg: #7E8CDA20;
+    --tier-mist: #D5CCC0;
+    --tier-mist-bg: #D5CCC020;
+
+    /* Seat Grade (좌석 등급) */
+    --seat-grade-vip: #0080FF;
+    --seat-grade-r: #FC68AF;
+    --seat-grade-s: #8A07FD;
+    --seat-grade-a: #02AD4A;
 
     /* Seat Status (좌석 상태) */
     --seat-available: oklch(0.60 0.17 152);
@@ -142,10 +154,10 @@
     --transfer-cancelled: oklch(0.556 0 0);
 
     /* System Feedback */
-    --success: oklch(0.55 0.17 152);
-    --warning: oklch(0.75 0.15 85);
-    --danger: oklch(0.577 0.245 27);
-    --info: oklch(0.55 0.2 260);
+    --success: #22C55E;
+    --warning: #F59E0B;
+    --danger: #E7000B;
+    --info: #3B82F6;
 }
 
 @layer base {
