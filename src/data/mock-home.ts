@@ -7,6 +7,15 @@ import featKwon from '@/assets/추천아티스트_권정렬.png'
 import featAkmu from '@/assets/추천아티스트_악동뮤지션.png'
 import featRiize from '@/assets/추천아티스트_라이즈.png'
 import featIU from '@/assets/추천아티스트_아이유.png'
+import featAespa from '@/assets/추천 아티스트_aespa.png'
+import featNMIXX from '@/assets/추천 아티스트_NMIXX.png'
+import featTXT from '@/assets/추천 아티스트_TXT.png'
+import featTours from '@/assets/추천 아티스트_투어스.png'
+
+// NEW 아티스트 이미지
+import newArtistKwon from '@/assets/새로운 아티스트_권정렬.png'
+import newArtistAkmu from '@/assets/새로운 아티스트_악동뮤지션.png'
+import newArtistRiize from '@/assets/새로운 아티스트_라이즈.png'
 
 import avatarSKZ from '@/assets/Artist_Stray Kids.png'
 import avatarSVT from '@/assets/Artist_Seventeen.png'
@@ -360,17 +369,15 @@ export const featuredArtists: FeaturedArtist[] = [
   { id: 'akmu', name: '악동뮤지션', image: featAkmu, followerCount: 1420000, category: 'group' },
   { id: 'kwon', name: '권정렬', image: featKwon, followerCount: 1420000, category: 'solo' },
   { id: 'riize', name: 'RIIZE', image: featRiize, followerCount: 1420000, category: 'new' },
-  { id: 'iu', name: 'IU', image: featIU, followerCount: 1420000, category: 'solo' },
-  { id: 'akmu-2', name: '악동뮤지션', image: featAkmu, followerCount: 1420000, category: 'group' },
-  { id: 'kwon-2', name: '권정렬', image: featKwon, followerCount: 1420000, category: 'solo' },
-  { id: 'riize-2', name: 'RIIZE', image: featRiize, followerCount: 1420000, category: 'new' },
+  { id: 'iu', name: 'IU', image: featIU, followerCount: 7800000, category: 'solo' },
+  { id: 'aespa-feat', name: 'aespa', image: featAespa, followerCount: 5500000, category: 'group' },
+  { id: 'nmixx-feat', name: 'NMIXX', image: featNMIXX, followerCount: 2800000, category: 'group' },
+  { id: 'txt-feat', name: 'TXT', image: featTXT, followerCount: 4300000, category: 'group' },
+  { id: 'tours-feat', name: '투어스', image: featTours, followerCount: 1200000, category: 'new' },
   { id: 'newjeans-feat', name: 'NewJeans', image: avatarNJ, followerCount: 6100000, category: 'new' },
   { id: 'straykids-feat', name: 'Stray Kids', image: avatarSKZ, followerCount: 5800000, category: 'group' },
   { id: 'seventeen-feat', name: 'SEVENTEEN', image: avatarSVT, followerCount: 5200000, category: 'group' },
-  { id: 'txt-feat', name: 'TXT', image: avatarTXT, followerCount: 4300000, category: 'group' },
   { id: 'gidle-feat', name: '(G)I-DLE', image: avatarGIDLE, followerCount: 3900000, category: 'group' },
-  { id: 'iu-2', name: 'IU', image: featIU, followerCount: 7800000, category: 'solo' },
-  { id: 'riize-3', name: 'RIIZE', image: featRiize, followerCount: 1420000, category: 'new' },
 ]
 
 // --- 주목할 만한 NEW 아티스트 ---
@@ -387,7 +394,7 @@ export const newArtistCards: NewArtistCard[] = [
   {
     id: 'riize',
     name: 'RIIZE',
-    profileImage: featRiize,
+    profileImage: newArtistRiize,
     label: '신인상 수상',
     title: 'RIIZE, 데뷔와 동시에 음원차트 올킬',
     description: 'SM의 새로운 보이그룹 RIIZE가 데뷔 앨범으로 주요 음원차트를 석권하며 신인상을 수상했습니다.',
@@ -395,7 +402,7 @@ export const newArtistCards: NewArtistCard[] = [
   {
     id: 'akmu',
     name: '악동뮤지션',
-    profileImage: featAkmu,
+    profileImage: newArtistAkmu,
     label: '컴백 확정',
     title: '악동뮤지션, 2년 만의 정규앨범 컴백',
     description: '악동뮤지션이 2년 만에 정규앨범으로 돌아옵니다. 타이틀곡 선공개가 예정되어 있습니다.',
@@ -403,7 +410,7 @@ export const newArtistCards: NewArtistCard[] = [
   {
     id: 'kwon',
     name: '권정렬',
-    profileImage: featKwon,
+    profileImage: newArtistKwon,
     label: '단독 콘서트',
     title: '권정렬, 첫 단독 콘서트 개최 확정',
     description: '10CM 권정렬이 첫 단독 콘서트를 개최합니다. 전석 매진이 예상되는 뜨거운 관심입니다.',
