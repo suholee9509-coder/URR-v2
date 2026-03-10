@@ -1,10 +1,26 @@
-import { ChevronDown, Loader2, Music, RefreshCw, XCircle } from 'lucide-react'
+import { useState } from 'react'
+import { Check, ChevronDown, Loader2, Music, Pencil, RefreshCw, XCircle } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
 import { TierBadge } from '@/components/urr/TierBadge'
 import { getArtistGradient } from '@/data/mock-home'
 import { cn } from '@/lib/utils'
-import type { Membership } from '@/types'
+import type { Membership, TierLevel } from '@/types'
 import { TIER_LABELS } from '@/types'
+
+const NEXT_TIER: Record<TierLevel, TierLevel | null> = {
+  bronze: 'silver',
+  silver: 'gold',
+  gold: 'diamond',
+  diamond: null,
+}
+
+const TIER_COLORS: Record<TierLevel, string> = {
+  bronze: '#CD7F32',
+  silver: '#94A3B8',
+  gold: '#EAB308',
+  diamond: '#8B5CF6',
+}
 
 interface MembershipCardProps {
   membership: Membership
@@ -15,6 +31,7 @@ interface MembershipCardProps {
   onMelonLink: () => void
   onCancel?: () => void
   isCancelling?: boolean
+  onNicknameChange?: (membershipId: string, nickname: string) => void
 }
 
 export function MembershipCard({
@@ -26,7 +43,11 @@ export function MembershipCard({
   onMelonLink,
   onCancel,
   isCancelling,
+  onNicknameChange,
 }: MembershipCardProps) {
+  const [isEditingNickname, setIsEditingNickname] = useState(false)
+  const [nicknameInput, setNicknameInput] = useState(membership.nickname)
+
   const expiryDate = new Date(membership.expiresAt).toLocaleDateString('ko-KR', {
     year: 'numeric',
     month: '2-digit',
@@ -34,6 +55,20 @@ export function MembershipCard({
   })
 
   const gradient = getArtistGradient(membership.artistId)
+
+  const nextTier = NEXT_TIER[membership.tier]
+  const progress = membership.tierProgress
+  const progressPercent = progress
+    ? Math.min(100, Math.round((progress.current / progress.required) * 100))
+    : 0
+
+  const handleNicknameSave = () => {
+    const trimmed = nicknameInput.trim()
+    if (trimmed && trimmed !== membership.nickname) {
+      onNicknameChange?.(membership.id, trimmed)
+    }
+    setIsEditingNickname(false)
+  }
 
   return (
     <div className="rounded-lg border border-border bg-card overflow-hidden">
@@ -91,14 +126,84 @@ export function MembershipCard({
 
       {/* Expanded management section */}
       {isExpanded && (
-        <div className="border-t border-border bg-muted/30 px-4 py-4 space-y-3">
+        <div className="border-t border-border bg-muted/30 px-5 py-5 space-y-6">
+          {/* Nickname */}
+          <div>
+            <label className="text-xs font-medium text-muted-foreground mb-1.5 block">활동 닉네임</label>
+            {isEditingNickname ? (
+              <div className="flex items-center gap-2">
+                <Input
+                  value={nicknameInput}
+                  onChange={(e) => setNicknameInput(e.target.value)}
+                  onKeyDown={(e) => e.key === 'Enter' && handleNicknameSave()}
+                  className="h-8 text-sm w-[160px]"
+                  maxLength={12}
+                  autoFocus
+                />
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="h-8 w-8 p-0 text-green-600 hover:text-green-700 hover:bg-green-50"
+                  onClick={handleNicknameSave}
+                >
+                  <Check size={16} />
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="h-8 w-8 p-0 text-muted-foreground"
+                  onClick={() => {
+                    setNicknameInput(membership.nickname)
+                    setIsEditingNickname(false)
+                  }}
+                >
+                  <XCircle size={16} />
+                </Button>
+              </div>
+            ) : (
+              <div className="flex items-center gap-2">
+                <span className="text-sm font-medium">{membership.nickname}</span>
+                <button
+                  onClick={() => setIsEditingNickname(true)}
+                  className="text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  <Pencil size={13} />
+                </button>
+              </div>
+            )}
+          </div>
+
+          {/* Tier progress */}
+          {progress && (
+            <div>
+            <label className="text-xs font-medium text-muted-foreground mb-1.5 block">등급 진행</label>
+            <div className="flex items-center gap-3 max-w-[320px]">
+              <span className="text-xs tabular-nums font-medium shrink-0">{progressPercent}%</span>
+              <div className="flex-1 h-1.5 bg-muted rounded-full overflow-hidden">
+                <div
+                  className="h-full rounded-full transition-all duration-500"
+                  style={{
+                    width: `${progressPercent}%`,
+                    backgroundColor: TIER_COLORS[membership.tier],
+                  }}
+                />
+              </div>
+              <span className="text-xs font-medium text-muted-foreground shrink-0">
+                {nextTier ? TIER_LABELS[nextTier] : '최고 등급'}
+              </span>
+            </div>
+            </div>
+          )}
+
           {/* Tier verification status */}
-          <div className="text-sm">
-            <span className="text-muted-foreground">등급 인증: </span>
-            <span className="font-medium">{TIER_LABELS[membership.tier]} 등급 인증 완료</span>
+          <div>
+            <label className="text-xs font-medium text-muted-foreground mb-1.5 block">등급 인증</label>
+            <p className="text-sm font-medium">{TIER_LABELS[membership.tier]} 등급 인증 완료</p>
           </div>
 
           {/* Actions */}
+          <div>
+          <label className="text-xs font-medium text-muted-foreground mb-1.5 block">멤버십 관리</label>
           <div className="flex items-center gap-2">
             {/* Melon linking */}
             {isMelonLinked ? (
@@ -158,6 +263,7 @@ export function MembershipCard({
                 )}
               </Button>
             )}
+          </div>
           </div>
         </div>
       )}

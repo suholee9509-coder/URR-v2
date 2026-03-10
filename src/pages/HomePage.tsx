@@ -55,7 +55,7 @@ export default function HomePage() {
 
       {/* ===== 2. 인기 아티스트 ===== */}
       <section className="space-y-4">
-        <SectionHeader title="인기 아티스트" linkHref="/artists" linkLabel="더 보기" />
+        <SectionHeader title="인기 아티스트" linkHref="/artists" linkLabel="아티스트 더보기" />
         <div className="grid grid-cols-10 gap-2">
           {homePopularArtists.map((artist) => (
             <Link
@@ -128,7 +128,7 @@ export default function HomePage() {
       <section className="space-y-4">
         <div className="flex items-center justify-between">
           <h2 className="text-xl font-bold">인기 공연 랭킹</h2>
-          <span className="text-xs text-muted-foreground border border-border rounded-md px-3 py-1.5">
+          <span className="text-xs text-muted-foreground">
             이번 주
           </span>
         </div>
@@ -186,9 +186,9 @@ export default function HomePage() {
           <h2 className="text-xl font-bold">선예매 오픈 임박</h2>
           <Link
             to="/events"
-            className="text-sm text-muted-foreground hover:text-foreground transition-colors border border-border rounded-full px-4 py-1.5 flex items-center gap-1"
+            className="text-sm text-muted-foreground hover:text-foreground transition-colors border border-border rounded-full pl-4 pr-3 py-1.5 flex items-center gap-1"
           >
-            오픈 예정 공연 전체보기
+            공연 더보기
             <ChevronRight size={14} />
           </Link>
         </div>

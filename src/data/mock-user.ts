@@ -21,6 +21,7 @@ export const mockUser: User = {
       joinedAt: '2025-01-15T00:00:00Z',
       expiresAt: '2026-12-31T23:59:59Z',
       isActive: true,
+      tierProgress: { current: 5000, required: 5000 },
     },
     {
       id: 'mem-002',
@@ -32,6 +33,7 @@ export const mockUser: User = {
       joinedAt: '2025-03-20T00:00:00Z',
       expiresAt: '2026-06-30T23:59:59Z',
       isActive: true,
+      tierProgress: { current: 3800, required: 5000 },
     },
     {
       id: 'mem-003',
@@ -43,6 +45,7 @@ export const mockUser: User = {
       joinedAt: '2025-06-01T00:00:00Z',
       expiresAt: '2026-09-15T23:59:59Z',
       isActive: true,
+      tierProgress: { current: 1200, required: 3000 },
     },
     {
       id: 'mem-004',
@@ -52,8 +55,9 @@ export const mockUser: User = {
       nickname: '아이브최고',
       membershipNumber: 'IVE-2025-0085',
       joinedAt: '2025-08-10T00:00:00Z',
-      expiresAt: '2025-12-01T23:59:59Z',
-      isActive: false,
+      expiresAt: '2026-08-10T23:59:59Z',
+      isActive: true,
+      tierProgress: { current: 350, required: 1000 },
     },
   ],
   followedArtistIds: ['gdragon', 'bts', 'aespa', 'ive'],

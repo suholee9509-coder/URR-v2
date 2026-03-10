@@ -26,7 +26,7 @@ export function RightMain() {
     <div className="flex-1 min-w-0 h-full overflow-y-auto bg-background">
       {isLoading ? (
         <RightMainSkeleton />
-      ) : bookingState === 'idle' || bookingState === 'vqa' || bookingState === 'queue' ? (
+      ) : bookingState === 'idle' || bookingState === 'queue' ? (
         <IdleView />
       ) : bookingState === 'seats-section' || bookingState === 'seats-individual' || bookingState === 'payment' ? (
         <div key="seats-unified" className="h-full animate-in fade-in duration-200">
@@ -38,8 +38,8 @@ export function RightMain() {
         </div>
       ) : null}
 
-      {/* BookingModal overlays on top when VQA or Queue is active */}
-      {(bookingState === 'vqa' || bookingState === 'queue') && <BookingModal />}
+      {/* BookingModal overlays on top when Queue is active */}
+      {bookingState === 'queue' && <BookingModal />}
 
       {/* PaymentView overlays on top of SeatSelectionView */}
       {bookingState === 'payment' && <PaymentView />}

@@ -1,27 +1,33 @@
-import { useState } from 'react'
+import { useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { PartyPopper, Music2, Loader2, CheckCircle2 } from 'lucide-react'
+import { PartyPopper } from 'lucide-react'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import { TierBadge } from '@/components/urr/TierBadge'
-import type { Artist } from '@/types'
+import type { Artist, TierLevel } from '@/types'
 
 interface MembershipCompleteStepProps {
   artist: Artist
+  nickname: string
+  tier: TierLevel
 }
 
-type MelonState = 'idle' | 'linking' | 'done'
-
-export function MembershipCompleteStep({ artist }: MembershipCompleteStepProps) {
+export function MembershipCompleteStep({ artist, nickname, tier }: MembershipCompleteStepProps) {
   const navigate = useNavigate()
-  const [melonState, setMelonState] = useState<MelonState>('idle')
 
-  const handleMelonLink = () => {
-    setMelonState('linking')
-    setTimeout(() => {
-      setMelonState('done')
-    }, 1000)
-  }
+  const membershipNumber = useMemo(() => {
+    const prefix = artist.id.toUpperCase().slice(0, 3)
+    const year = new Date().getFullYear()
+    const hash = artist.id.split('').reduce((acc, c) => acc + c.charCodeAt(0), 0)
+    const suffix = String(hash % 10000).padStart(4, '0')
+    return `${prefix}-${year}-${suffix}`
+  }, [artist])
+
+  const expiryDate = useMemo(() => {
+    const d = new Date()
+    d.setFullYear(d.getFullYear() + 1)
+    return `${d.getFullYear()}년 ${d.getMonth() + 1}월 ${d.getDate()}일`
+  }, [])
 
   return (
     <div className="flex flex-col items-center text-center py-8 space-y-8">
@@ -40,7 +46,7 @@ export function MembershipCompleteStep({ artist }: MembershipCompleteStepProps) 
 
       {/* Membership card */}
       <div className="w-full max-w-sm rounded-xl border border-border bg-card p-6 space-y-4">
-        <div className="flex items-center gap-3 justify-center">
+        <div className="flex items-center gap-3">
           <Avatar className="size-10">
             <AvatarImage src={artist.avatar} alt={artist.name} />
             <AvatarFallback className="text-sm font-bold bg-muted">
@@ -50,63 +56,24 @@ export function MembershipCompleteStep({ artist }: MembershipCompleteStepProps) 
           <div className="text-left">
             <p className="text-sm font-semibold">{artist.name}</p>
             <div className="flex items-center gap-1.5 mt-0.5">
-              <TierBadge tier="bronze" size="sm" />
+              <TierBadge tier={tier} size="sm" />
             </div>
           </div>
         </div>
-      </div>
-
-      {/* Melon integration */}
-      <div className="w-full max-w-sm rounded-xl border border-dashed border-primary/30 bg-primary/[0.03] p-5 space-y-4">
-        {melonState === 'idle' && (
-          <>
-            <div className="flex items-center gap-2 justify-center">
-              <Music2 size={18} className="text-primary" />
-              <p className="text-sm font-semibold">멜론 연동으로 등급 UP!</p>
-            </div>
-            <p className="text-xs text-muted-foreground leading-relaxed">
-              멜론 스트리밍 데이터를 연동하면 청취량에 따라 더 높은 등급을 받을 수 있습니다
-            </p>
-            <div className="flex flex-col gap-2">
-              <Button size="sm" onClick={handleMelonLink} className="gap-1.5">
-                <Music2 size={14} />
-                멜론 연동하기
-              </Button>
-              <button
-                onClick={() => navigate(`/artists/${artist.id}`)}
-                className="text-xs text-muted-foreground hover:text-foreground transition-colors"
-              >
-                나중에 하기
-              </button>
-            </div>
-          </>
-        )}
-
-        {melonState === 'linking' && (
-          <div className="flex flex-col items-center gap-3 py-2">
-            <Loader2 size={24} className="animate-spin text-primary" />
-            <p className="text-sm text-muted-foreground">멜론 데이터 확인 중...</p>
+        <div className="border-t border-border pt-3 space-y-1.5">
+          <div className="flex justify-between text-xs">
+            <span className="text-muted-foreground">닉네임</span>
+            <span className="font-medium">{nickname}</span>
           </div>
-        )}
-
-        {melonState === 'done' && (
-          <div className="space-y-3">
-            <div className="flex items-center gap-2 justify-center text-green-600">
-              <CheckCircle2 size={18} />
-              <p className="text-sm font-semibold">연동 완료!</p>
-            </div>
-            <p className="text-xs text-muted-foreground">
-              멜론 청취 데이터 기반으로 등급이 확인되었습니다
-            </p>
-            <div className="flex items-center justify-center gap-3">
-              <div className="flex items-center gap-1.5">
-                <TierBadge tier="bronze" size="sm" />
-                <span className="text-xs text-muted-foreground">→</span>
-                <TierBadge tier="gold" size="sm" />
-              </div>
-            </div>
+          <div className="flex justify-between text-xs">
+            <span className="text-muted-foreground">멤버십 번호</span>
+            <span className="font-medium">{membershipNumber}</span>
           </div>
-        )}
+          <div className="flex justify-between text-xs">
+            <span className="text-muted-foreground">만료일</span>
+            <span className="font-medium">{expiryDate}</span>
+          </div>
+        </div>
       </div>
 
       {/* Navigation */}

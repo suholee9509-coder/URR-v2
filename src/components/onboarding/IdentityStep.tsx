@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { ArrowLeft } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -11,7 +12,7 @@ import {
 } from '@/components/ui/select'
 import { cn } from '@/lib/utils'
 
-type VerificationState = 'idle' | 'sent' | 'expired' | 'verifying'
+type VerificationState = 'idle' | 'sent' | 'expired' | 'verifying' | 'duplicate'
 
 interface IdentityStepProps {
   onComplete: (data: {
@@ -29,7 +30,24 @@ function formatTimer(seconds: number): string {
   return `${m}:${s.toString().padStart(2, '0')}`
 }
 
+function isUnder14(dobStr: string): boolean {
+  if (dobStr.length !== 8) return false
+  const year = parseInt(dobStr.slice(0, 4), 10)
+  const month = parseInt(dobStr.slice(4, 6), 10)
+  const day = parseInt(dobStr.slice(6, 8), 10)
+  if (isNaN(year) || isNaN(month) || isNaN(day)) return false
+  const birth = new Date(year, month - 1, day)
+  const today = new Date()
+  let age = today.getFullYear() - birth.getFullYear()
+  const monthDiff = today.getMonth() - birth.getMonth()
+  if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birth.getDate())) {
+    age--
+  }
+  return age < 14
+}
+
 export function IdentityStep({ onComplete, onBack }: IdentityStepProps) {
+  const navigate = useNavigate()
   const [carrier, setCarrier] = useState('')
   const [name, setName] = useState('')
   const [dob, setDob] = useState('')
@@ -40,6 +58,8 @@ export function IdentityStep({ onComplete, onBack }: IdentityStepProps) {
   const [verificationState, setVerificationState] = useState<VerificationState>('idle')
   const [code, setCode] = useState('')
   const [timerSeconds, setTimerSeconds] = useState(180)
+
+  const isMinor = isUnder14(dob)
 
   useEffect(() => {
     if (verificationState !== 'sent') return
@@ -53,7 +73,7 @@ export function IdentityStep({ onComplete, onBack }: IdentityStepProps) {
     return () => clearInterval(id)
   }, [verificationState, timerSeconds])
 
-  const canSendCode = phone.length >= 10 && carrier && name.trim() && dob.length === 8 && gender !== null && nationality !== null
+  const canSendCode = phone.length >= 10 && carrier && name.trim() && dob.length === 8 && gender !== null && nationality !== null && !isMinor
 
   const handleSendCode = () => {
     setVerificationState('sent')
@@ -71,6 +91,14 @@ export function IdentityStep({ onComplete, onBack }: IdentityStepProps) {
     if (code.length !== 6) return
     setVerificationState('verifying')
     setTimeout(() => {
+      // Mock CI 중복 체크: 01099999999 → 기존 계정 존재
+      if (phone === '01099999999') {
+        setVerificationState('duplicate')
+        setTimeout(() => {
+          navigate('/')
+        }, 1500)
+        return
+      }
       onComplete({
         userName: name,
         phoneNumber: phone,
@@ -134,7 +162,11 @@ export function IdentityStep({ onComplete, onBack }: IdentityStepProps) {
             placeholder="YYYYMMDD"
             maxLength={8}
             inputMode="numeric"
+            className={isMinor ? 'border-destructive focus-visible:ring-destructive/30' : ''}
           />
+          {isMinor && (
+            <p className="text-xs text-destructive mt-1.5">만 14세 미만은 가입할 수 없습니다</p>
+          )}
         </div>
 
         {/* Gender */}
@@ -247,6 +279,15 @@ export function IdentityStep({ onComplete, onBack }: IdentityStepProps) {
                 </Button>
               </div>
             )}
+
+            {verificationState === 'duplicate' && (
+              <div className="rounded-lg bg-primary/10 border border-primary/30 px-4 py-3 space-y-1">
+                <p className="text-sm font-medium text-primary">이미 가입된 계정이 존재합니다</p>
+                <p className="text-xs text-muted-foreground">
+                  기존 계정(카카오)으로 자동 로그인합니다...
+                </p>
+              </div>
+            )}
           </div>
         )}
       </div>
@@ -255,10 +296,10 @@ export function IdentityStep({ onComplete, onBack }: IdentityStepProps) {
       <Button
         size="lg"
         className="w-full mt-16"
-        disabled={!isCodeValid}
+        disabled={!isCodeValid || verificationState === 'duplicate'}
         onClick={handleVerify}
       >
-        {verificationState === 'verifying' ? '확인 중...' : '시작하기'}
+        {verificationState === 'verifying' ? '확인 중...' : verificationState === 'duplicate' ? '자동 로그인 중...' : '시작하기'}
       </Button>
     </div>
   )

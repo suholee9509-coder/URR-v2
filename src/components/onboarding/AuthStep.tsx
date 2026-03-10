@@ -49,6 +49,9 @@ function validateEmail(email: string): string | null {
   return null
 }
 
+/** Mock existing accounts for duplicate check */
+const EXISTING_EMAILS = ['wooru@urr.kr', 'test@urr.kr', 'admin@urr.kr']
+
 export function AuthStep({ onComplete }: AuthStepProps) {
   const [mode, setMode] = useState<AuthMode>('login')
   const [email, setEmail] = useState('')
@@ -65,6 +68,8 @@ export function AuthStep({ onComplete }: AuthStepProps) {
   const [attempted, setAttempted] = useState(false)
 
   const emailError = validateEmail(email)
+  const isDuplicateEmail =
+    mode === 'register' && !emailError && email.length > 0 && EXISTING_EMAILS.includes(email.toLowerCase())
   const passwordError = password && password.length < 8 ? '비밀번호는 8자 이상이어야 합니다' : null
   const confirmError =
     mode === 'register' && passwordConfirm && password !== passwordConfirm
@@ -72,13 +77,14 @@ export function AuthStep({ onComplete }: AuthStepProps) {
       : null
 
   const showEmailError = emailError && (emailTouched || attempted)
+  const showDuplicateEmail = isDuplicateEmail && (emailTouched || attempted)
   const showPasswordError = passwordError && (passwordTouched || attempted)
   const showConfirmError = confirmError && (confirmTouched || attempted)
 
-  const isEmailValid = email.length > 0 && !emailError
+  const isEmailValid = email.length > 0 && !emailError && !isDuplicateEmail
   const isPasswordValid = password.length >= 8
 
-  const canSubmitLogin = isEmailValid && isPasswordValid
+  const canSubmitLogin = email.length > 0 && !emailError && isPasswordValid
   const canSubmitRegister =
     isEmailValid && isPasswordValid && password === passwordConfirm && passwordConfirm.length > 0
 
@@ -166,10 +172,13 @@ export function AuthStep({ onComplete }: AuthStepProps) {
             onChange={(e) => setEmail(e.target.value)}
             onBlur={() => setEmailTouched(true)}
             placeholder="이메일 주소"
-            className={showEmailError ? 'border-destructive focus-visible:ring-destructive/30' : ''}
+            className={(showEmailError || showDuplicateEmail) ? 'border-destructive focus-visible:ring-destructive/30' : ''}
           />
           {showEmailError && (
             <p className="text-xs text-destructive mt-1.5">{emailError}</p>
+          )}
+          {showDuplicateEmail && (
+            <p className="text-xs text-destructive mt-1.5">이미 가입된 이메일입니다.</p>
           )}
         </div>
 

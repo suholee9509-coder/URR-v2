@@ -2,9 +2,10 @@ import { useState, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { AuthStep } from '@/components/onboarding/AuthStep'
 import { IdentityStep } from '@/components/onboarding/IdentityStep'
+import { SignupCompleteStep } from '@/components/onboarding/SignupCompleteStep'
 import { OnboardingHero } from '@/components/onboarding/OnboardingHero'
 
-type FlowState = 'auth' | 'identity' | 'done'
+type FlowState = 'auth' | 'identity' | 'complete'
 type AuthProvider = 'kakao' | 'naver' | 'email'
 
 export default function OnboardingPage() {
@@ -12,28 +13,33 @@ export default function OnboardingPage() {
   const [flowState, setFlowState] = useState<FlowState>('auth')
   const [, setAuthProvider] = useState<AuthProvider | null>(null)
   const [, setEmailData] = useState<{ email: string; password: string } | null>(null)
+  const [userName, setUserName] = useState('')
 
-  // Step 1: Auth (social or email) → mock API call
+  // Step 1: Auth (social or email)
   const handleAuthComplete = useCallback(
     (data: { provider: AuthProvider; email?: string; password?: string; mode?: 'login' | 'register' }) => {
       setAuthProvider(data.provider)
-      if (data.provider === 'email') {
-        setEmailData({ email: data.email!, password: data.password! })
+
+      // 소셜 로그인 or 이메일 로그인 → 바로 홈
+      if (data.provider !== 'email' || data.mode === 'login') {
+        navigate('/')
+        return
       }
 
-      // All auth methods → go to identity verification
+      // 이메일 회원가입 → 본인인증 단계로
+      setEmailData({ email: data.email!, password: data.password! })
       setFlowState('identity')
     },
     [navigate],
   )
 
-  // Step 2: Identity verification complete → signup done → redirect
+  // Step 2: Identity verification complete → 가입 완료 화면
   const handleIdentityComplete = useCallback(
-    (_data: { userName: string; phoneNumber: string; birthDate: string; gender: 'male' | 'female' }) => {
-      // Mock: create account with authProvider + identity data + email data
-      navigate('/')
+    (data: { userName: string; phoneNumber: string; birthDate: string; gender: 'male' | 'female' }) => {
+      setUserName(data.userName)
+      setFlowState('complete')
     },
-    [navigate],
+    [],
   )
 
   const heroStep = flowState === 'auth' ? 1 : 2
@@ -50,6 +56,7 @@ export default function OnboardingPage() {
               onBack={() => setFlowState('auth')}
             />
           )}
+          {flowState === 'complete' && <SignupCompleteStep userName={userName} />}
         </div>
       </div>
 

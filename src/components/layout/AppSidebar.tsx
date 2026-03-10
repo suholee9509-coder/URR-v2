@@ -30,9 +30,10 @@ export function AppSidebar() {
 
   const collapsed = !isSidebarExpanded
 
-  // Resolve followed artists
-  const followedArtists = mockUser.followedArtistIds
-    .map((id) => mockArtists.find((a) => a.id === id))
+  // Resolve membership artists (only active memberships)
+  const membershipArtists = mockUser.memberships
+    .filter((m) => m.isActive)
+    .map((m) => mockArtists.find((a) => a.id === m.artistId))
     .filter(Boolean) as typeof mockArtists
 
   // Auto-expand artist tree when navigating to an artist page
@@ -45,10 +46,10 @@ export function AppSidebar() {
 
   // Determine visible artists
   const visibleArtists =
-    showAllArtists || followedArtists.length <= MAX_VISIBLE_ARTISTS
-      ? followedArtists
-      : followedArtists.slice(0, MAX_VISIBLE_ARTISTS)
-  const hiddenCount = followedArtists.length - MAX_VISIBLE_ARTISTS
+    showAllArtists || membershipArtists.length <= MAX_VISIBLE_ARTISTS
+      ? membershipArtists
+      : membershipArtists.slice(0, MAX_VISIBLE_ARTISTS)
+  const hiddenCount = membershipArtists.length - MAX_VISIBLE_ARTISTS
 
   return (
     <aside
@@ -131,17 +132,17 @@ export function AppSidebar() {
           </div>
         )}
 
-        {followedArtists.length === 0 ? (
+        {membershipArtists.length === 0 ? (
           !collapsed && (
             <div className="px-4 py-3">
               <p className="text-[13px] text-sidebar-muted-foreground leading-relaxed">
-                아직 팔로우한 아티스트가 없습니다
+                가입한 멤버십이 없습니다
               </p>
               <Link
-                to="/artists"
+                to="/membership"
                 className="text-[13px] text-primary font-medium hover:underline mt-1 inline-block"
               >
-                아티스트 찾기
+                멤버십 가입하기
               </Link>
             </div>
           )

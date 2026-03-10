@@ -69,10 +69,18 @@ function PopularArtistsSection({ artists }: { artists: Artist[] }) {
             to={`/artists/${artist.id}`}
             className="flex flex-col items-center gap-2 shrink-0 w-[72px] group"
           >
-            <div
-              className="size-16 rounded-full ring-2 ring-transparent group-hover:ring-primary/40 transition-all"
-              style={{ background: getArtistGradient(artist.id) }}
-            />
+            {artist.avatar ? (
+              <img
+                src={artist.avatar}
+                alt={artist.name}
+                className="size-16 rounded-full object-cover ring-2 ring-transparent group-hover:ring-primary/40 transition-all"
+              />
+            ) : (
+              <div
+                className="size-16 rounded-full ring-2 ring-transparent group-hover:ring-primary/40 transition-all"
+                style={{ background: getArtistGradient(artist.id) }}
+              />
+            )}
             <span className="text-xs font-medium text-center truncate w-full">
               {artist.name}
             </span>
@@ -101,10 +109,18 @@ function PopularEventsSection() {
             <span className="text-lg font-bold text-muted-foreground/50 w-6 text-center shrink-0">
               {i + 1}
             </span>
-            <div
-              className="size-11 rounded-lg shrink-0"
-              style={{ background: getArtistGradient(evt.artistId) }}
-            />
+            {evt.profileImage ? (
+              <img
+                src={evt.profileImage}
+                alt={evt.title}
+                className="size-11 rounded-lg shrink-0 object-cover"
+              />
+            ) : (
+              <div
+                className="size-11 rounded-lg shrink-0"
+                style={{ background: getArtistGradient(evt.artistId) }}
+              />
+            )}
             <div className="min-w-0 flex-1">
               <p className="font-semibold text-sm truncate">{evt.title}</p>
               <p className="text-xs text-muted-foreground">{evt.artistName}</p>
@@ -123,10 +139,18 @@ function ArtistResultRow({ artist }: { artist: Artist }) {
       to={`/artists/${artist.id}`}
       className="flex items-center gap-4 px-4 py-3 hover:bg-accent/50 transition-colors"
     >
-      <div
-        className="size-12 rounded-full shrink-0"
-        style={{ background: getArtistGradient(artist.id) }}
-      />
+      {artist.avatar ? (
+        <img
+          src={artist.avatar}
+          alt={artist.name}
+          className="size-12 rounded-full shrink-0 object-cover"
+        />
+      ) : (
+        <div
+          className="size-12 rounded-full shrink-0"
+          style={{ background: getArtistGradient(artist.id) }}
+        />
+      )}
       <div className="min-w-0 flex-1">
         <p className="font-semibold truncate">{artist.name}</p>
         <p className="text-sm text-muted-foreground">
@@ -152,10 +176,18 @@ function EventResultRow({ event }: { event: SearchableEvent }) {
       to={`/events/${event.id}/detail`}
       className="flex items-center gap-4 px-4 py-3 hover:bg-accent/50 transition-colors"
     >
-      <div
-        className="size-[60px] rounded-lg shrink-0"
-        style={{ background: getArtistGradient(event.artistId) }}
-      />
+      {event.poster ? (
+        <img
+          src={event.poster}
+          alt={event.title}
+          className="size-[60px] rounded-lg shrink-0 object-cover"
+        />
+      ) : (
+        <div
+          className="size-[60px] rounded-lg shrink-0"
+          style={{ background: getArtistGradient(event.artistId) }}
+        />
+      )}
       <div className="min-w-0 flex-1 space-y-1">
         <div className="flex items-center gap-2">
           <p className="font-semibold truncate">{event.title}</p>

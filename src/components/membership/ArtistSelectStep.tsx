@@ -72,10 +72,7 @@ export function ArtistSelectStep({ artists, memberships, onSelect }: ArtistSelec
 
       {artists.length === 0 && (
         <div className="rounded-xl border border-dashed border-border bg-muted/20 p-10 text-center">
-          <p className="text-sm text-muted-foreground">팔로우한 아티스트가 없습니다</p>
-          <p className="text-xs text-muted-foreground mt-1">
-            아티스트를 팔로우하고 멤버십에 가입해보세요
-          </p>
+          <p className="text-sm text-muted-foreground">등록된 아티스트가 없습니다</p>
         </div>
       )}
     </div>

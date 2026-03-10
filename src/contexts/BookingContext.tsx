@@ -186,12 +186,9 @@ export function BookingProvider({ eventId, children }: BookingProviderProps) {
   }, [])
 
   const startBooking = useCallback(() => {
-    if (userTier === 'diamond' || userTier === 'gold') {
-      dispatch({ type: 'TRANSITION_STATE', payload: 'queue' })
-    } else {
-      dispatch({ type: 'TRANSITION_STATE', payload: 'vqa' })
-    }
-  }, [userTier])
+    // VQA 제거 — 모든 티어 바로 대기열로 진입
+    dispatch({ type: 'TRANSITION_STATE', payload: 'queue' })
+  }, [])
 
   const selectSection = useCallback((sectionId: string) => {
     dispatch({ type: 'SELECT_SECTION', payload: sectionId })

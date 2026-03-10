@@ -16,12 +16,13 @@ const tierBenefits: {
   booking: string
   openTiming: string
   fee: string
+  transferFee: string
   vqa: boolean
 }[] = [
-  { tier: 'diamond', booking: '우선 예매', openTiming: '개별 오픈', fee: '1,000원', vqa: false },
-  { tier: 'gold', booking: '우선 예매', openTiming: 'Diamond +1시간', fee: '2,000원', vqa: false },
-  { tier: 'silver', booking: '일반 예매', openTiming: 'Gold +2일', fee: '3,000원', vqa: true },
-  { tier: 'bronze', booking: '일반 예매', openTiming: 'Silver +1시간', fee: '5,000원', vqa: true },
+  { tier: 'diamond', booking: '우선 예매', openTiming: '개별 오픈', fee: '1,000원', transferFee: '5%', vqa: false },
+  { tier: 'gold', booking: '우선 예매', openTiming: 'Diamond +1시간', fee: '2,000원', transferFee: '5%', vqa: false },
+  { tier: 'silver', booking: '일반 예매', openTiming: 'Gold +2일', fee: '3,000원', transferFee: '10%', vqa: true },
+  { tier: 'bronze', booking: '일반 예매', openTiming: 'Silver +1시간', fee: '4,000원', transferFee: '10%', vqa: true },
 ]
 
 export function MembershipIntroStep({ artist, onBack, onSubscribe }: MembershipIntroStepProps) {
@@ -60,7 +61,7 @@ export function MembershipIntroStep({ artist, onBack, onSubscribe }: MembershipI
         </div>
         <p className="text-sm text-muted-foreground leading-relaxed">
           {artist.name} 멤버십에 가입하면 선예매 우선권, 양도 마켓 이용, 전용 굿즈 구매 등
-          다양한 혜택을 누릴 수 있습니다. 가입 시 Bronze 등급으로 시작하며, 멜론 연동을 통해
+          다양한 혜택을 누릴 수 있습니다. 가입 시 Silver 등급으로 시작하며, 멜론 연동을 통해
           더 높은 등급을 받을 수 있습니다.
         </p>
       </div>
@@ -75,8 +76,9 @@ export function MembershipIntroStep({ artist, onBack, onSubscribe }: MembershipI
                 <th className="text-left px-4 py-3 font-semibold">티어</th>
                 <th className="text-left px-4 py-3 font-semibold">예매</th>
                 <th className="text-left px-4 py-3 font-semibold">오픈 시점</th>
-                <th className="text-left px-4 py-3 font-semibold">수수료</th>
-                <th className="text-center px-4 py-3 font-semibold">VQA</th>
+                <th className="text-left px-4 py-3 font-semibold">예매 수수료</th>
+                <th className="text-left px-4 py-3 font-semibold">양도 수수료</th>
+                <th className="text-center px-4 py-3 font-semibold">VQA 면제</th>
               </tr>
             </thead>
             <tbody>
@@ -91,6 +93,7 @@ export function MembershipIntroStep({ artist, onBack, onSubscribe }: MembershipI
                   <td className="px-4 py-3 text-muted-foreground">{row.booking}</td>
                   <td className="px-4 py-3 text-muted-foreground">{row.openTiming}</td>
                   <td className="px-4 py-3 text-muted-foreground">{row.fee}</td>
+                  <td className="px-4 py-3 text-muted-foreground">{row.transferFee}</td>
                   <td className="px-4 py-3 text-center">
                     {row.vqa ? (
                       <X size={14} className="mx-auto text-muted-foreground/50" />

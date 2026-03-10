@@ -9,9 +9,10 @@ import type { Membership } from '@/types'
 interface MembershipTabProps {
   memberships: Membership[]
   onCancelMembership: (membershipId: string) => void
+  onNicknameChange?: (membershipId: string, nickname: string) => void
 }
 
-export function MembershipTab({ memberships, onCancelMembership }: MembershipTabProps) {
+export function MembershipTab({ memberships, onCancelMembership, onNicknameChange }: MembershipTabProps) {
   const [expandedId, setExpandedId] = useState<string | null>(null)
   const [melonLinkedMap, setMelonLinkedMap] = useState<Record<string, boolean>>({})
   const [linkingId, setLinkingId] = useState<string | null>(null)
@@ -82,6 +83,7 @@ export function MembershipTab({ memberships, onCancelMembership }: MembershipTab
             onMelonLink={() => handleMelonLink(m.id)}
             onCancel={() => handleCancelRequest(m.id)}
             isCancelling={isCancelling && cancelTargetId === m.id}
+            onNicknameChange={onNicknameChange}
           />
         ))}
       </div>

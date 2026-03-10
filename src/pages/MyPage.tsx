@@ -42,6 +42,15 @@ export default function MyPage() {
     }))
   }
 
+  const handleNicknameChange = (membershipId: string, nickname: string) => {
+    setUser((prev) => ({
+      ...prev,
+      memberships: prev.memberships.map((m) =>
+        m.id === membershipId ? { ...m, nickname } : m
+      ),
+    }))
+  }
+
   useEffect(() => {
     setIsLoading(true)
     const timer = setTimeout(() => setIsLoading(false), 1200)
@@ -69,6 +78,7 @@ export default function MyPage() {
           <MembershipTab
             memberships={user.memberships}
             onCancelMembership={handleCancelMembership}
+            onNicknameChange={handleNicknameChange}
           />
         </TabsContent>
 

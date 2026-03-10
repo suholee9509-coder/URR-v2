@@ -97,6 +97,8 @@ export interface Membership {
   joinedAt: string
   expiresAt: string
   isActive: boolean
+  /** Tier progress: current points / required points for next tier */
+  tierProgress?: { current: number; required: number }
 }
 
 export interface User {

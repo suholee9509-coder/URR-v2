@@ -3,202 +3,10 @@ import { Clock, X } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import { useBooking } from '@/hooks/useBooking'
-import { useVQAQuiz } from '@/hooks/useVQAQuiz'
 import { useQueueSimulation } from '@/hooks/useQueueSimulation'
 import { useNavigationBlock } from '@/hooks/useNavigationBlock'
-import { VQAOptionCard, type OptionState } from './VQAOptionCard'
 import { VenueMap } from './VenueMap'
 import { QueueLeaveModal } from './QueueLeaveModal'
-
-// ── VQA Sub-components (extracted from VQAModal) ──────
-
-function VQATimer({ seconds }: { seconds: number }) {
-  const colorClass =
-    seconds <= 5
-      ? 'text-danger'
-      : seconds <= 10
-        ? 'text-warning'
-        : 'text-foreground'
-
-  return (
-    <span
-      className={cn(
-        'font-mono font-bold text-lg tabular-nums transition-colors duration-300',
-        colorClass,
-        seconds <= 10 && 'animate-pulse-timer',
-      )}
-    >
-      {seconds}
-    </span>
-  )
-}
-
-function ProgressDots({ current, total }: { current: number; total: number }) {
-  return (
-    <div className="flex items-center gap-3">
-      <div className="flex gap-1.5">
-        {Array.from({ length: total }).map((_, i) => (
-          <span
-            key={i}
-            className={cn(
-              'size-2 rounded-full transition-colors duration-200',
-              i <= current ? 'bg-primary' : 'bg-border',
-            )}
-          />
-        ))}
-      </div>
-      <span className="text-sm font-medium text-muted-foreground tabular-nums">
-        {current + 1}/{total}
-      </span>
-    </div>
-  )
-}
-
-function VQAResultContent({
-  resultType,
-  correctCount,
-  totalQuestions,
-  attemptsUsed,
-  maxAttempts,
-  onRetry,
-  onExit,
-}: {
-  resultType: 'passed' | 'failed-can-retry' | 'failed-exhausted'
-  correctCount: number
-  totalQuestions: number
-  attemptsUsed: number
-  maxAttempts: number
-  onRetry: () => void
-  onExit: () => void
-}) {
-  if (resultType === 'passed') {
-    return (
-      <div className="flex flex-col items-center gap-4 py-8 animate-in fade-in zoom-in-95 duration-300">
-        <span className="text-5xl">🎉</span>
-        <h3 className="text-xl font-bold">환영합니다, 진정한 팬!</h3>
-        <p className="text-sm text-muted-foreground">{correctCount}/{totalQuestions} 정답</p>
-        <p className="text-sm text-muted-foreground">대기열에 진입합니다...</p>
-        <div className="w-32 h-1 bg-muted rounded-full overflow-hidden">
-          <div
-            className="h-full bg-primary rounded-full transition-all ease-linear"
-            style={{ width: '100%', transitionDuration: '2000ms' }}
-          />
-        </div>
-      </div>
-    )
-  }
-
-  if (resultType === 'failed-can-retry') {
-    return (
-      <div className="flex flex-col items-center gap-4 py-8 animate-in fade-in duration-200">
-        <span className="text-4xl">😢</span>
-        <h3 className="text-lg font-bold">아쉽네요! 다시 도전해보세요</h3>
-        <p className="text-sm text-muted-foreground">{correctCount}/{totalQuestions} 정답</p>
-        <p className="text-sm text-muted-foreground">
-          남은 기회: <span className="font-semibold text-foreground">{maxAttempts - attemptsUsed}회</span>
-        </p>
-        <div className="flex gap-3 pt-2">
-          <Button variant="ghost" onClick={onExit}>나가기</Button>
-          <Button onClick={onRetry}>다시 도전하기</Button>
-        </div>
-      </div>
-    )
-  }
-
-  return (
-    <div className="flex flex-col items-center gap-4 py-8 animate-in fade-in duration-200">
-      <span className="text-4xl">💪</span>
-      <h3 className="text-lg font-bold">모든 시도를 사용했습니다</h3>
-      <p className="text-sm text-muted-foreground text-center leading-relaxed">
-        더 많은 팬 활동으로 실력을 쌓아보세요!<br />
-        다음 예매 회차에 다시 도전해주세요.
-      </p>
-      <Button onClick={onExit} className="mt-2">이벤트 페이지로 돌아가기</Button>
-    </div>
-  )
-}
-
-// ── VQA Phase Content ─────────────────────────────────
-
-function VQAContent() {
-  const {
-    phase, currentQuestion, currentIndex, totalQuestions,
-    timeRemaining, selectedIndex, isCorrect, correctCount,
-    attemptsUsed, maxAttempts, resultType, selectAnswer, retry, exitQuiz,
-  } = useVQAQuiz()
-
-  useEffect(() => {
-    function handleKeyDown(e: KeyboardEvent) {
-      if (e.key === 'Escape' && phase !== 'result') e.preventDefault()
-    }
-    window.addEventListener('keydown', handleKeyDown)
-    return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [phase])
-
-  function getOptionState(optionIndex: number): OptionState {
-    if (phase === 'answering') return 'default'
-    if (phase === 'evaluating') {
-      const correctIdx = currentQuestion?.correctIndex ?? -1
-      if (selectedIndex === null) {
-        if (optionIndex === correctIdx) return 'revealed-correct'
-        return 'disabled'
-      }
-      if (optionIndex === selectedIndex) return isCorrect ? 'selected-correct' : 'selected-incorrect'
-      if (optionIndex === correctIdx && !isCorrect) return 'revealed-correct'
-      return 'disabled'
-    }
-    return 'disabled'
-  }
-
-  return (
-    <>
-      <div className="text-center pt-8 pb-2 px-6">
-        <h2 className="text-xl font-bold">🎤 팬 인증</h2>
-        <p className="text-sm text-muted-foreground mt-1">
-          진정한 팬만이 통과할 수 있는 아티스트 퀴즈
-        </p>
-      </div>
-
-      {phase !== 'result' ? (
-        <>
-          <div className="flex items-center justify-between px-6 pt-4 pb-3">
-            <ProgressDots current={currentIndex} total={totalQuestions} />
-            <VQATimer seconds={timeRemaining} />
-          </div>
-          <div className="px-6 pb-3">
-            <p className="text-base font-semibold leading-relaxed">{currentQuestion?.question}</p>
-          </div>
-          <div className="px-6 pb-8 space-y-3">
-            {currentQuestion?.options.map((option, i) => (
-              <VQAOptionCard
-                key={`${currentIndex}-${i}`}
-                label={option}
-                index={i}
-                state={getOptionState(i)}
-                onSelect={() => selectAnswer(i)}
-                disabled={phase !== 'answering'}
-              />
-            ))}
-          </div>
-        </>
-      ) : (
-        <div className="px-6 pb-6">
-          {resultType && (
-            <VQAResultContent
-              resultType={resultType}
-              correctCount={correctCount}
-              totalQuestions={totalQuestions}
-              attemptsUsed={attemptsUsed}
-              maxAttempts={maxAttempts}
-              onRetry={retry}
-              onExit={exitQuiz}
-            />
-          )}
-        </div>
-      )}
-    </>
-  )
-}
 
 // ── Queue Phase Content ───────────────────────────────
 
@@ -441,7 +249,7 @@ export function BookingModal() {
         <div
           className={cn(
             'relative w-full rounded-2xl bg-white shadow-2xl animate-in fade-in zoom-in-95 duration-200 flex flex-col',
-            bookingState === 'vqa' ? 'max-w-[520px]' : 'max-w-[680px] max-h-[85vh]',
+            'max-w-[680px] max-h-[85vh]',
           )}
         >
           {/* Close button */}
@@ -453,7 +261,7 @@ export function BookingModal() {
             <X size={18} className="text-muted-foreground" />
           </button>
 
-          {bookingState === 'vqa' ? <VQAContent /> : <QueueContent />}
+          <QueueContent />
         </div>
       </div>
     </div>
