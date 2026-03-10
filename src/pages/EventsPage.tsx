@@ -97,7 +97,7 @@ function EventListRow({ event }: { event: EventListItem }) {
   return (
     <Link
       to={`/events/${event.id}/detail`}
-      className="group flex items-center gap-4 py-3 px-2 -mx-2 rounded-lg hover:bg-[#F6F5EE] transition-colors"
+      className="group flex items-center gap-4 py-3 px-2 -mx-2 rounded-lg hover:bg-[#F3F2F0] transition-colors"
     >
       <div className="w-[72px] aspect-[3/4] rounded-lg overflow-hidden bg-muted shrink-0">
         <img

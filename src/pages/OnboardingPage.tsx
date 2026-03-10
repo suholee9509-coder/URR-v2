@@ -11,15 +11,11 @@ type AuthProvider = 'kakao' | 'naver' | 'email'
 export default function OnboardingPage() {
   const navigate = useNavigate()
   const [flowState, setFlowState] = useState<FlowState>('auth')
-  const [, setAuthProvider] = useState<AuthProvider | null>(null)
-  const [, setEmailData] = useState<{ email: string; password: string } | null>(null)
   const [userName, setUserName] = useState('')
 
   // Step 1: Auth (social or email)
   const handleAuthComplete = useCallback(
     (data: { provider: AuthProvider; email?: string; password?: string; mode?: 'login' | 'register' }) => {
-      setAuthProvider(data.provider)
-
       // 소셜 로그인 or 이메일 로그인 → 바로 홈
       if (data.provider !== 'email' || data.mode === 'login') {
         navigate('/')
@@ -27,7 +23,6 @@ export default function OnboardingPage() {
       }
 
       // 이메일 회원가입 → 본인인증 단계로
-      setEmailData({ email: data.email!, password: data.password! })
       setFlowState('identity')
     },
     [navigate],

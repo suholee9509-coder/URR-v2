@@ -9,7 +9,7 @@ import {
 } from '@/components/ui/dialog'
 import { Button } from '@/components/ui/button'
 import { FaceValueBadge, TierBadge } from '@/components/urr'
-import { formatPrice } from '@/lib/format'
+import { formatPrice, formatDateFull, formatNumberWithComma } from '@/lib/format'
 import type { Ticket, Event, TierLevel } from '@/types'
 
 interface TransferListingModalProps {
@@ -30,10 +30,6 @@ function parseNumber(str: string): number {
   return Number(str.replace(/,/g, '')) || 0
 }
 
-function formatNumber(n: number): string {
-  return new Intl.NumberFormat('ko-KR').format(n)
-}
-
 export function TransferListingModal({ ticket, userTier, open, onClose, onListed }: TransferListingModalProps) {
   const navigate = useNavigate()
   const [step, setStep] = useState<Step>('price-input')
@@ -44,7 +40,7 @@ export function TransferListingModal({ ticket, userTier, open, onClose, onListed
   useEffect(() => {
     if (open && ticket) {
       setStep('price-input')
-      setPriceStr(formatNumber(ticket.price))
+      setPriceStr(formatNumberWithComma(ticket.price))
       setIsSubmitting(false)
     }
   }, [open, ticket])
@@ -79,14 +75,7 @@ export function TransferListingModal({ ticket, userTier, open, onClose, onListed
 
   // Date formatting
   const firstDate = ticket.event.dates[0]?.date ?? ''
-  const dateStr = firstDate
-    ? new Date(firstDate).toLocaleDateString('ko-KR', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-        weekday: 'short',
-      })
-    : ''
+  const dateStr = firstDate ? formatDateFull(firstDate) : ''
 
   function handlePriceChange(e: React.ChangeEvent<HTMLInputElement>) {
     const raw = e.target.value.replace(/[^0-9]/g, '')
@@ -94,7 +83,7 @@ export function TransferListingModal({ ticket, userTier, open, onClose, onListed
       setPriceStr('')
       return
     }
-    setPriceStr(formatNumber(Number(raw)))
+    setPriceStr(formatNumberWithComma(Number(raw)))
   }
 
   function handleNext() {

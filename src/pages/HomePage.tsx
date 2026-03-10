@@ -16,19 +16,15 @@ import {
   getArtistGradient,
 } from '@/data/mock-home'
 import { BOOKING_STATUS_LABELS } from '@/types'
+import { formatCompactNumber } from '@/lib/format'
+import { SKELETON_LOAD_DELAY } from '@/lib/constants'
 import { mockUser } from '@/data/mock-user'
-
-function formatViewCount(count: number): string {
-  if (count >= 10000) return `${(count / 10000).toFixed(1)}만`
-  if (count >= 1000) return `${(count / 1000).toFixed(1)}k`
-  return count.toLocaleString()
-}
 
 export default function HomePage() {
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    const timer = setTimeout(() => setIsLoading(false), 1200)
+    const timer = setTimeout(() => setIsLoading(false), SKELETON_LOAD_DELAY)
     return () => clearTimeout(timer)
   }, [])
 
@@ -65,7 +61,7 @@ export default function HomePage() {
               <ArtistCard
                 artist={artist}
                 selected={false}
-                className="w-full border-0 bg-transparent p-2 hover:bg-[#F6F5EE]"
+                className="w-full border-0 bg-transparent p-2 hover:bg-[#F3F2F0]"
               />
             </Link>
           ))}
@@ -137,7 +133,7 @@ export default function HomePage() {
             <Link
               key={event.id}
               to={`/events/${event.id}/detail`}
-              className="group flex items-center gap-3 py-3 border-b border-border hover:bg-[#F6F5EE] transition-colors rounded-sm px-1 -mx-1"
+              className="group flex items-center gap-3 py-3 border-b border-border hover:bg-[#F3F2F0] transition-colors rounded-sm px-1 -mx-1"
             >
               {/* Rank number */}
               <span className="text-sm font-bold text-foreground w-5 text-center shrink-0">
@@ -162,7 +158,7 @@ export default function HomePage() {
               {/* View count + status */}
               <div className="flex items-center gap-2 shrink-0">
                 <span className="text-xs text-muted-foreground tabular-nums">
-                  조 {formatViewCount(event.viewCount)}
+                  조 {formatCompactNumber(event.viewCount)}
                 </span>
                 <span
                   className={cn(
@@ -197,7 +193,7 @@ export default function HomePage() {
             <Link
               key={event.id + event.openDateTime}
               to={`/events/${event.id}/detail`}
-              className="group flex gap-3 p-3 rounded-lg border border-border hover:bg-[#F6F5EE] transition-colors bg-card"
+              className="group flex gap-3 p-3 rounded-lg border border-border hover:bg-[#F3F2F0] transition-colors bg-card"
             >
               {/* Thumbnail */}
               {event.poster ? (

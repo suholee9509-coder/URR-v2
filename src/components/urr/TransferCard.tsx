@@ -4,6 +4,7 @@ import { PriceDisplay } from './PriceDisplay'
 import { FaceValueBadge } from './FaceValueBadge'
 import { TierBadge } from './TierBadge'
 import { getArtistGradient } from '@/data/mock-home'
+import { formatDateShort } from '@/lib/format'
 import type { TransferListing, Event } from '@/types'
 
 interface TransferCardProps {
@@ -15,7 +16,7 @@ interface TransferCardProps {
 export function TransferCard({ listing, onClick, className }: TransferCardProps) {
   const pct = Math.round((listing.price / listing.faceValue) * 100)
   const firstDate = listing.event.dates[0]?.date ?? ''
-  const dateStr = firstDate ? new Date(firstDate).toLocaleDateString('ko-KR', { month: 'long', day: 'numeric', weekday: 'short' }) : ''
+  const dateStr = firstDate ? formatDateShort(firstDate) : ''
 
   return (
     <div

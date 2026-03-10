@@ -10,20 +10,8 @@ import {
   featuredArtists,
   newArtistCards,
 } from '@/data/mock-home'
+import { formatCompactNumber } from '@/lib/format'
 import type { FeaturedArtist } from '@/data/mock-home'
-
-/* ------------------------------------------------------------------ */
-/*  helpers                                                           */
-/* ------------------------------------------------------------------ */
-
-function formatFollowerShort(count: number): string {
-  const man = count / 10000
-  if (man >= 1) {
-    const formatted = man % 1 === 0 ? man.toFixed(0) : man.toFixed(1).replace(/\.0$/, '')
-    return `${formatted}만`
-  }
-  return count.toLocaleString()
-}
 
 /* ------------------------------------------------------------------ */
 /*  badge color by label                                              */
@@ -114,7 +102,7 @@ export default function ArtistsPage() {
                 <p className="text-sm font-medium truncate group-hover:text-primary transition-colors">{artist.name}</p>
                 <p className="text-xs text-muted-foreground flex items-center justify-center gap-1">
                   <Users size={11} />
-                  {formatFollowerShort(artist.followerCount)}
+                  {formatCompactNumber(artist.followerCount)}
                 </p>
               </div>
             </Link>
@@ -132,7 +120,7 @@ export default function ArtistsPage() {
           {newArtistCards.map((card) => (
             <div
               key={card.id}
-              className="rounded-xl bg-[#F9F8F5] hover:bg-[#F3F2ED] transition-colors px-5 pt-3 pb-4 flex flex-col shrink-0 w-[440px]"
+              className="rounded-xl bg-[#F5F4F3] hover:bg-[#F0EFED] transition-colors px-5 pt-3 pb-4 flex flex-col shrink-0 w-[440px]"
             >
               <span className={cn('text-[10px] font-semibold px-2 py-0.5 rounded-full border self-start mb-2', getBadgeStyle(card.label))}>
                 {card.label}
@@ -184,7 +172,7 @@ export default function ArtistsPage() {
             <Link
               key={artist.id}
               to={`/artists/${artist.id}`}
-              className="group flex items-center gap-3 py-3 border-b border-border hover:bg-[#F6F5EE] transition-colors rounded-sm px-1 -mx-1"
+              className="group flex items-center gap-3 py-3 border-b border-border hover:bg-[#F3F2F0] transition-colors rounded-sm px-1 -mx-1"
             >
               {/* Rank number */}
               <span className="text-sm font-bold text-foreground w-5 text-center shrink-0">
@@ -209,7 +197,7 @@ export default function ArtistsPage() {
               {/* Follower count (separate column) */}
               <div className="shrink-0 flex items-center gap-1 text-xs text-muted-foreground">
                 <Users size={12} />
-                {formatFollowerShort(artist.followerCount)}
+                {formatCompactNumber(artist.followerCount)}
               </div>
               {/* Membership button (black, rounded-full) */}
               <button

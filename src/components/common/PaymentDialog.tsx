@@ -4,19 +4,12 @@ import { X, Check, CreditCard } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
 import { cn } from '@/lib/utils'
-import { formatPrice } from '@/lib/format'
+import { formatPrice, formatPhone } from '@/lib/format'
+import { PAYMENT_METHODS } from '@/lib/constants'
+import type { PaymentMethod } from '@/lib/constants'
 import { PaymentProcessingOverlay } from '@/components/booking/PaymentProcessingOverlay'
 
-type PaymentMethod = 'card' | 'toss' | 'kakao' | 'naver' | 'phone'
 type Phase = 'form' | 'processing'
-
-const PAYMENT_METHODS: { id: PaymentMethod; label: string; color?: string }[] = [
-  { id: 'card', label: '신용/체크카드' },
-  { id: 'toss', label: 'toss pay', color: '#0064FF' },
-  { id: 'kakao', label: '카카오pay', color: '#FEE500' },
-  { id: 'naver', label: 'N pay', color: '#03C75A' },
-  { id: 'phone', label: '휴대폰' },
-]
 
 interface OrderItem {
   label: string
@@ -32,13 +25,6 @@ interface PaymentDialogProps {
   onCancel: () => void
   /** Optional extra info displayed below order items */
   orderDescription?: string
-}
-
-function formatPhone(value: string) {
-  const digits = value.replace(/\D/g, '').slice(0, 11)
-  if (digits.length <= 3) return digits
-  if (digits.length <= 7) return `${digits.slice(0, 3)}-${digits.slice(3)}`
-  return `${digits.slice(0, 3)}-${digits.slice(3, 7)}-${digits.slice(7)}`
 }
 
 export function PaymentDialog({

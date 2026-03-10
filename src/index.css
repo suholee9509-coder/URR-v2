@@ -101,7 +101,7 @@
     --secondary-foreground: #FFFFFF;
     --muted: oklch(0.968 0.003 264);
     --muted-foreground: oklch(0.556 0 0);
-    --accent: #F2F0E6; /* original: oklch(0.955 0.005 264) */
+    --accent: #F0EFED; /* original: oklch(0.955 0.005 264) */
     --accent-foreground: oklch(0.205 0 0);
     --destructive: oklch(0.577 0.245 27);
     --border: oklch(0.922 0.004 264);
@@ -109,15 +109,15 @@
     --ring: #FF5E32;
 
     /* Sidebar — originals: #FFFFFF, oklch(0.145 0 0) */
-    --sidebar: #FBFAF8;
+    --sidebar: #F7F6F5;
     --sidebar-foreground: #221415;
     --sidebar-primary: #FF5E32;
     --sidebar-primary-foreground: oklch(0.985 0 0);
-    --sidebar-accent: #F2F0E6; /* original: oklch(0.955 0.005 264) */
+    --sidebar-accent: #F0EFED; /* original: oklch(0.955 0.005 264) */
     --sidebar-accent-foreground: oklch(0.205 0 0);
     --sidebar-border: oklch(0.922 0.004 264);
     --sidebar-ring: #FF5E32;
-    --sidebar-active: #E3E1D9;
+    --sidebar-active: #EFEDEB;
     --sidebar-muted-foreground: oklch(0.556 0 0);
 
     /* Tier (멤버십 등급) */
@@ -127,14 +127,14 @@
     --tier-thunder-bg: #1F279220;
     --tier-cloud: #7E8CDA;
     --tier-cloud-bg: #7E8CDA20;
-    --tier-mist: #D5CCC0;
-    --tier-mist-bg: #D5CCC020;
+    --tier-mist: #9E9487;
+    --tier-mist-bg: #9E948720;
 
     /* Seat Grade (좌석 등급) */
-    --seat-grade-vip: #0080FF;
-    --seat-grade-r: #FC68AF;
-    --seat-grade-s: #8A07FD;
-    --seat-grade-a: #02AD4A;
+    --seat-grade-vip: #6171D2;
+    --seat-grade-r: #7754C7;
+    --seat-grade-s: #FF8C8B;
+    --seat-grade-a: #8A9348;
 
     /* Seat Status (좌석 상태) */
     --seat-available: oklch(0.60 0.17 152);

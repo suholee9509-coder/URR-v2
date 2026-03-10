@@ -16,10 +16,10 @@ const NEXT_TIER: Record<TierLevel, TierLevel | null> = {
 }
 
 const TIER_COLORS: Record<TierLevel, string> = {
-  mist: '#D5CCC0',
-  cloud: '#7E8CDA',
-  thunder: '#1F2792',
-  lightning: '#FF5E32',
+  mist: 'var(--tier-mist)',
+  cloud: 'var(--tier-cloud)',
+  thunder: 'var(--tier-thunder)',
+  lightning: 'var(--tier-lightning)',
 }
 
 interface MembershipCardProps {

@@ -5,35 +5,15 @@ import { Separator } from '@/components/ui/separator'
 import { cn } from '@/lib/utils'
 import { useBooking } from '@/hooks/useBooking'
 import { useSeatTimer } from '@/hooks/useSeatTimer'
-import { formatPrice, parseSeatDisplay } from '@/lib/format'
+import { formatPrice, parseSeatDisplay, formatDateDot, formatPhone } from '@/lib/format'
+import { PAYMENT_METHODS } from '@/lib/constants'
+import type { PaymentMethod } from '@/lib/constants'
 import { TimerDisplay, PriceDisplay } from '@/components/urr'
 import { TIER_EMOJIS, TIER_LABELS } from '@/types'
 import type { ConfirmationData } from '@/types'
 import { PaymentProcessingOverlay } from './PaymentProcessingOverlay'
 
 type PaymentPhase = 'confirm-seats' | 'payment-form' | 'processing' | 'failed' | 'failed-expired'
-
-type PaymentMethod = 'card' | 'toss' | 'kakao' | 'naver' | 'phone'
-
-const PAYMENT_METHODS: { id: PaymentMethod; label: string; color?: string }[] = [
-  { id: 'card', label: '신용/체크카드' },
-  { id: 'toss', label: 'toss pay', color: '#0064FF' },
-  { id: 'kakao', label: '카카오pay', color: '#FEE500' },
-  { id: 'naver', label: 'N pay', color: '#03C75A' },
-  { id: 'phone', label: '휴대폰' },
-]
-
-function formatEventDate(isoDate: string): string {
-  const d = new Date(isoDate)
-  const weekdays = ['일', '월', '화', '수', '목', '금', '토']
-  const y = d.getFullYear()
-  const m = String(d.getMonth() + 1).padStart(2, '0')
-  const day = String(d.getDate()).padStart(2, '0')
-  const w = weekdays[d.getDay()]
-  const h = String(d.getHours()).padStart(2, '0')
-  const min = String(d.getMinutes()).padStart(2, '0')
-  return `${y}.${m}.${day} (${w}) ${h}:${min}`
-}
 
 export function PaymentView() {
   const {
@@ -134,13 +114,6 @@ export function PaymentView() {
     resetBooking()
   }, [resetBooking])
 
-  // Format phone number
-  const formatPhone = (value: string) => {
-    const digits = value.replace(/\D/g, '').slice(0, 11)
-    if (digits.length <= 3) return digits
-    if (digits.length <= 7) return `${digits.slice(0, 3)}-${digits.slice(3)}`
-    return `${digits.slice(0, 3)}-${digits.slice(3, 7)}-${digits.slice(7)}`
-  }
 
   const isFormValid = buyerName.length >= 2
     && buyerPhone.replace(/-/g, '').length >= 10
@@ -168,7 +141,7 @@ export function PaymentView() {
                 <p className="text-sm font-semibold">{event?.title}</p>
                 {selectedDate && (
                   <p className="text-xs text-muted-foreground mt-0.5">
-                    {formatEventDate(selectedDate.date)}
+                    {formatDateDot(selectedDate.date)}
                   </p>
                 )}
               </div>
@@ -368,7 +341,7 @@ export function PaymentView() {
                   <p className="text-sm font-semibold leading-snug">{event?.title}</p>
                   {selectedDate && (
                     <p className="text-[11px] text-muted-foreground mt-0.5">
-                      {formatEventDate(selectedDate.date)}
+                      {formatDateDot(selectedDate.date)}
                     </p>
                   )}
                 </div>

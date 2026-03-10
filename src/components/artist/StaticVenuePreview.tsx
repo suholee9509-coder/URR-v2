@@ -1,12 +1,5 @@
 import { cn } from '@/lib/utils'
-
-const SECTION_COLORS: Record<string, string> = {
-  'sec-vip': '#0080FF',
-  'sec-floor-r': '#FC68AF',
-  'sec-r': '#FC68AF',
-  'sec-s': '#8A07FD',
-  'sec-a': '#02AD4A',
-}
+import { SECTION_COLORS } from '@/lib/constants'
 
 const DIMMED = '#9CA3AF'
 

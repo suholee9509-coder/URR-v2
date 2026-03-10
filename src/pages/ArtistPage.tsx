@@ -17,6 +17,7 @@ import { ArtistEventsTab } from '@/components/artist/ArtistEventsTab'
 import { ArtistTransferTab } from '@/components/artist/ArtistTransferTab'
 import { ArtistPageSkeleton } from '@/components/artist/ArtistPageSkeleton'
 import { MembershipGate } from '@/components/artist/MembershipGate'
+import { SKELETON_LOAD_DELAY } from '@/lib/constants'
 
 export default function ArtistPage() {
   const { artistId } = useParams<{ artistId: string }>()
@@ -44,7 +45,7 @@ export default function ArtistPage() {
   useEffect(() => {
     setIsLoading(true)
     setFollowing(mockUser.followedArtistIds.includes(artistId ?? ''))
-    const timer = setTimeout(() => setIsLoading(false), 1200)
+    const timer = setTimeout(() => setIsLoading(false), SKELETON_LOAD_DELAY)
     return () => clearTimeout(timer)
   }, [artistId])
 

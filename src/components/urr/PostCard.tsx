@@ -1,5 +1,6 @@
 import { Heart, MessageCircle, BadgeCheck } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { formatCompactNumber } from '@/lib/format'
 import type { CommunityPost } from '@/data/mock-community'
 
 interface PostCardProps {
@@ -22,12 +23,6 @@ function getRelativeTime(timestamp: string): string {
   const weeks = Math.floor(days / 7)
   if (weeks < 5) return `${weeks}주 전`
   return `${Math.floor(days / 30)}개월 전`
-}
-
-function formatCount(count: number): string {
-  if (count >= 10000) return `${(count / 10000).toFixed(1)}만`
-  if (count >= 1000) return `${(count / 1000).toFixed(1)}K`
-  return count.toLocaleString()
 }
 
 export function PostCard({ post, variant = 'default', artistGradient }: PostCardProps) {
@@ -119,11 +114,11 @@ export function PostCard({ post, variant = 'default', artistGradient }: PostCard
       >
         <span className="flex items-center gap-1.5">
           <Heart size={isCompact ? 14 : 16} />
-          {formatCount(post.likeCount)}
+          {formatCompactNumber(post.likeCount)}
         </span>
         <span className="flex items-center gap-1.5">
           <MessageCircle size={isCompact ? 14 : 16} />
-          {formatCount(post.commentCount)}
+          {formatCompactNumber(post.commentCount)}
         </span>
       </div>
     </div>

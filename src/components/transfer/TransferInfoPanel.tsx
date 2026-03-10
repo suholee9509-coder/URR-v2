@@ -13,7 +13,7 @@ import {
 } from 'lucide-react'
 import { StaticVenuePreview } from '@/components/artist/StaticVenuePreview'
 import { TierBadge } from '@/components/urr/TierBadge'
-import { formatPrice } from '@/lib/format'
+import { formatPrice, formatDateFull, formatDateWithTime } from '@/lib/format'
 import { getSellerProfile } from '@/data/mock-artist-page'
 import {
   Dialog,
@@ -69,22 +69,8 @@ export function TransferInfoPanel({ listing }: TransferInfoPanelProps) {
   const seller = getSellerProfile(listing.sellerId)
 
   const firstDate = listing.event.dates[0]?.date ?? ''
-  const dateStr = firstDate
-    ? new Date(firstDate).toLocaleDateString('ko-KR', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-        weekday: 'short',
-      })
-    : ''
-
-  const registeredStr = new Date(listing.createdAt).toLocaleDateString('ko-KR', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-    hour: '2-digit',
-    minute: '2-digit',
-  })
+  const dateStr = firstDate ? formatDateFull(firstDate) : ''
+  const registeredStr = formatDateWithTime(listing.createdAt)
 
   // Parse seat info
   const rowMatch = listing.seatInfo.match(/(\d+)열/)

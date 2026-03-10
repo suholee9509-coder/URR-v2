@@ -2,6 +2,7 @@ import { cn } from '@/lib/utils'
 import { Calendar, MapPin } from 'lucide-react'
 import { BookingStatusBadge } from './BookingStatusBadge'
 import { getArtistGradient } from '@/data/mock-home'
+import { formatDateShort } from '@/lib/format'
 import type { Event } from '@/types'
 
 interface EventCardProps {
@@ -13,7 +14,7 @@ interface EventCardProps {
 
 export function EventCard({ event, variant = 'default', artistName, className }: EventCardProps) {
   const firstDate = event.dates[0]?.date ?? ''
-  const dateStr = firstDate ? new Date(firstDate).toLocaleDateString('ko-KR', { month: 'long', day: 'numeric', weekday: 'short' }) : ''
+  const dateStr = firstDate ? formatDateShort(firstDate) : ''
 
   if (variant === 'compact') {
     return (

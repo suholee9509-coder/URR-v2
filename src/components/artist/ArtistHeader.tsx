@@ -4,6 +4,7 @@ import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import { TierBadge } from '@/components/urr/TierBadge'
 import { getArtistGradient } from '@/data/mock-home'
+import { formatCompactNumber } from '@/lib/format'
 import type { Artist, Membership } from '@/types'
 
 interface ArtistHeaderProps {
@@ -11,13 +12,6 @@ interface ArtistHeaderProps {
   membership?: Membership
   isFollowing: boolean
   onFollowToggle: () => void
-}
-
-function formatFollowerShort(count: number): string {
-  if (count >= 1000000) return `${(count / 10000).toLocaleString()}만`
-  if (count >= 10000) return `${(count / 10000).toFixed(1)}만`
-  if (count >= 1000) return `${(count / 1000).toFixed(1)}K`
-  return count.toLocaleString()
 }
 
 export function ArtistHeader({ artist, membership, isFollowing, onFollowToggle }: ArtistHeaderProps) {
@@ -64,7 +58,7 @@ export function ArtistHeader({ artist, membership, isFollowing, onFollowToggle }
             <div className="flex items-center gap-3">
               <span className="flex items-center gap-1.5 text-sm text-white/70">
                 <Users size={14} />
-                팔로워 {formatFollowerShort(artist.followerCount)}명
+                팔로워 {formatCompactNumber(artist.followerCount)}명
               </span>
               {artist.bio && (
                 <>

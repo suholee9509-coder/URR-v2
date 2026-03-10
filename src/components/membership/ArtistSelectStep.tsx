@@ -1,18 +1,13 @@
 import { Users } from 'lucide-react'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { cn } from '@/lib/utils'
+import { formatCompactNumber } from '@/lib/format'
 import type { Artist, Membership } from '@/types'
 
 interface ArtistSelectStepProps {
   artists: Artist[]
   memberships: Membership[]
   onSelect: (artist: Artist) => void
-}
-
-function formatFollowerShort(count: number): string {
-  if (count >= 10000) return `${(count / 10000).toFixed(1)}만`
-  if (count >= 1000) return `${(count / 1000).toFixed(1)}K`
-  return count.toLocaleString()
 }
 
 export function ArtistSelectStep({ artists, memberships, onSelect }: ArtistSelectStepProps) {
@@ -62,7 +57,7 @@ export function ArtistSelectStep({ artists, memberships, onSelect }: ArtistSelec
                 </div>
                 <span className="flex items-center gap-1 text-xs text-muted-foreground mt-0.5">
                   <Users size={12} />
-                  팔로워 {formatFollowerShort(artist.followerCount)}명
+                  팔로워 {formatCompactNumber(artist.followerCount)}명
                 </span>
               </div>
             </button>

@@ -8,6 +8,7 @@ import {
   getAllEvents,
 } from '@/data/mock-search'
 import { BookingStatusBadge } from '@/components/urr'
+import { formatDateCompact } from '@/lib/format'
 import type { Artist } from '@/types'
 import type { SearchableEvent } from '@/data/mock-search'
 
@@ -163,13 +164,7 @@ function ArtistResultRow({ artist }: { artist: Artist }) {
 
 function EventResultRow({ event }: { event: SearchableEvent }) {
   const firstDate = event.dates[0]?.date ?? ''
-  const dateStr = firstDate
-    ? new Date(firstDate).toLocaleDateString('ko-KR', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-      })
-    : ''
+  const dateStr = firstDate ? formatDateCompact(firstDate) : ''
 
   return (
     <Link

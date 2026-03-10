@@ -1,15 +1,7 @@
 import { cn } from '@/lib/utils'
 import { Check } from 'lucide-react'
+import { formatCompactNumber } from '@/lib/format'
 import type { Artist } from '@/types'
-
-function formatFollowerMan(count: number): string {
-  const man = count / 10000
-  if (man >= 1) {
-    const formatted = man % 1 === 0 ? man.toFixed(0) : man.toFixed(1).replace(/\.0$/, '')
-    return `팔로워 ${formatted}만`
-  }
-  return `팔로워 ${man.toFixed(1)}만`
-}
 
 interface ArtistCardProps {
   artist: Artist
@@ -46,7 +38,7 @@ export function ArtistCard({ artist, selected = false, variant = 'default', onCl
         </div>
         <div className="min-w-0">
           <p className="text-sm font-medium truncate">{artist.name}</p>
-          <p className="text-xs text-muted-foreground">{formatFollowerMan(artist.followerCount)}</p>
+          <p className="text-xs text-muted-foreground">{`팔로워 ${formatCompactNumber(artist.followerCount)}`}</p>
         </div>
       </div>
     )
@@ -77,7 +69,7 @@ export function ArtistCard({ artist, selected = false, variant = 'default', onCl
       </div>
       <div className="text-center">
         <p className="text-sm font-medium transition-colors group-hover:text-primary">{artist.name}</p>
-        <p className="text-xs text-muted-foreground">{formatFollowerMan(artist.followerCount)}</p>
+        <p className="text-xs text-muted-foreground">{`팔로워 ${formatCompactNumber(artist.followerCount)}`}</p>
       </div>
     </div>
   )

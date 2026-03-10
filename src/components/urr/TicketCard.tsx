@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button'
 import { PriceDisplay } from './PriceDisplay'
 import { TransferStatusBadge } from './TransferStatusBadge'
 import { getArtistGradient } from '@/data/mock-home'
+import { formatDateShort } from '@/lib/format'
 import type { Ticket, Event } from '@/types'
 
 interface TicketCardProps {
@@ -18,7 +19,7 @@ interface TicketCardProps {
 
 export function TicketCard({ ticket, variant = 'upcoming', isListed, onViewQR, onTransfer, onCancelTransfer, className }: TicketCardProps) {
   const firstDate = ticket.event.dates[0]?.date ?? ''
-  const dateStr = firstDate ? new Date(firstDate).toLocaleDateString('ko-KR', { month: 'long', day: 'numeric', weekday: 'short' }) : ''
+  const dateStr = firstDate ? formatDateShort(firstDate) : ''
 
   return (
     <div className={cn(

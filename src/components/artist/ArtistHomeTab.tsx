@@ -7,6 +7,7 @@ import { TransferCard } from '@/components/urr/TransferCard'
 import { PostCard } from '@/components/urr/PostCard'
 import { TierBadge } from '@/components/urr/TierBadge'
 import { getArtistGradient } from '@/data/mock-home'
+import { formatDateFull, formatDateShort } from '@/lib/format'
 import { TIER_LABELS, TIER_EMOJIS } from '@/types'
 import type { Artist, Event, Membership, TransferListing } from '@/types'
 import type { ArtistExtendedInfo } from '@/data/mock-artist-page'
@@ -26,23 +27,6 @@ interface ArtistHomeTabProps {
   onNavigateTab: (tab: string) => void
 }
 
-function formatEventDate(isoDate: string): string {
-  return new Date(isoDate).toLocaleDateString('ko-KR', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-    weekday: 'short',
-  })
-}
-
-function formatEventDateShort(isoDate: string): string {
-  return new Date(isoDate).toLocaleDateString('ko-KR', {
-    month: 'short',
-    day: 'numeric',
-    weekday: 'short',
-  })
-}
-
 export function ArtistHomeTab({
   artist,
   extendedInfo,
@@ -57,7 +41,7 @@ export function ArtistHomeTab({
   const navigate = useNavigate()
   const listedTransfers = transferListings.filter((t) => t.status === 'listed')
   const firstDate = nextEvent?.dates[0]?.date ?? ''
-  const dateStr = firstDate ? formatEventDate(firstDate) : ''
+  const dateStr = firstDate ? formatDateFull(firstDate) : ''
 
   return (
     <div className="space-y-12">
@@ -285,7 +269,7 @@ export function ArtistHomeTab({
               <div className="rounded-lg border border-border overflow-hidden">
                 {upcomingEvents.slice(1, 4).map((event, idx) => {
                   const evDate = event.dates[0]?.date ?? ''
-                  const evDateStr = evDate ? formatEventDateShort(evDate) : ''
+                  const evDateStr = evDate ? formatDateShort(evDate) : ''
                   return (
                     <Link
                       key={event.id}

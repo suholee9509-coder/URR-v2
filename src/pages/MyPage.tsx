@@ -9,6 +9,7 @@ import { MembershipTab } from '@/components/my-page/MembershipTab'
 import { TicketWalletTab } from '@/components/my-page/TicketWalletTab'
 import { TransferHistoryTab } from '@/components/my-page/TransferHistoryTab'
 import { SettingsTab } from '@/components/my-page/SettingsTab'
+import { SKELETON_LOAD_DELAY } from '@/lib/constants'
 import type { User } from '@/types'
 
 export default function MyPage() {
@@ -53,7 +54,7 @@ export default function MyPage() {
 
   useEffect(() => {
     setIsLoading(true)
-    const timer = setTimeout(() => setIsLoading(false), 1200)
+    const timer = setTimeout(() => setIsLoading(false), SKELETON_LOAD_DELAY)
     return () => clearTimeout(timer)
   }, [])
 

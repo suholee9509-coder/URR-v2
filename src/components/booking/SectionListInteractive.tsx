@@ -11,14 +11,7 @@ interface SectionListInteractiveProps {
   selectedSectionId?: string | null
 }
 
-const SECTION_COLORS: Record<string, string> = {
-  'sec-vip': '#0080FF',
-  'sec-r': '#FC68AF',
-  'sec-s': '#8A07FD',
-  'sec-a': '#02AD4A',
-  'sec-b': '#EF4444',
-  'sec-c': '#EF4444',
-}
+import { SECTION_COLORS } from '@/lib/constants'
 
 export function SectionListInteractive({
   hoveredSectionId,

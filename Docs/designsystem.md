@@ -99,10 +99,10 @@
 
 | CSS Variable | Light Value | Tailwind Class | Usage |
 |---|---|---|---|
-| `--seat-grade-a` | `#02AD4A` | `text-seat-grade-a` | A석 (그린) |
-| `--seat-grade-s` | `#8A07FD` | `text-seat-grade-s` | S석 (퍼플) |
-| `--seat-grade-r` | `#FC68AF` | `text-seat-grade-r` | R석 (핑크) |
-| `--seat-grade-vip` | `#0080FF` | `text-seat-grade-vip` | VIP석 (블루) |
+| `--seat-grade-a` | `#8A9348` | `text-seat-grade-a` | A석 |
+| `--seat-grade-s` | `#FF8C8B` | `text-seat-grade-s` | S석 |
+| `--seat-grade-r` | `#7754C7` | `text-seat-grade-r` | R석 |
+| `--seat-grade-vip` | `#6171D2` | `text-seat-grade-vip` | VIP석 |
 
 배경 사용 시: `bg-seat-grade-a`, `bg-seat-grade-s`, `bg-seat-grade-r`, `bg-seat-grade-vip`
 

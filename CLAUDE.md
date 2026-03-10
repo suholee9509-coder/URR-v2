@@ -78,9 +78,9 @@ src/
 ### 색상
 - **Primary**: `#FF5E32` (오렌지)
 - **Background**: `#FFFFFF`
-- **Sidebar**: `#FBFAF8`
-- **Accent**: `#F2F0E6`
-- **홈 섹션 호버**: `#F6F5EE`
+- **Sidebar**: `#F7F6F5`
+- **Accent**: `#F0EFED`
+- **홈 섹션 호버**: `#F3F2F0`
 
 ### 로고
 - **현재 사용**: `로고5.svg` (146x146 정사각형)

@@ -1,5 +1,6 @@
 import { QRCodeSVG } from 'qrcode.react'
 import { Calendar, MapPin } from 'lucide-react'
+import { formatDateFull } from '@/lib/format'
 import {
   Dialog,
   DialogContent,
@@ -18,14 +19,7 @@ export function QRCodeModal({ ticket, open, onClose }: QRCodeModalProps) {
   if (!ticket) return null
 
   const firstDate = ticket.event.dates[0]?.date ?? ''
-  const dateStr = firstDate
-    ? new Date(firstDate).toLocaleDateString('ko-KR', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-        weekday: 'short',
-      })
-    : ''
+  const dateStr = firstDate ? formatDateFull(firstDate) : ''
 
   return (
     <Dialog open={open} onOpenChange={(isOpen) => !isOpen && onClose()}>

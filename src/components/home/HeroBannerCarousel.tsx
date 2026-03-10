@@ -3,20 +3,11 @@ import { Link } from 'react-router-dom'
 import { ChevronLeft, ChevronRight, Calendar, MapPin } from 'lucide-react'
 import { BookingStatusBadge } from '@/components/urr'
 import { getArtistGradient } from '@/data/mock-home'
+import { formatDateFull } from '@/lib/format'
 import type { HomeBannerEvent } from '@/data/mock-home'
 
 interface HeroBannerCarouselProps {
   banners: HomeBannerEvent[]
-}
-
-function formatBannerDate(isoDate: string): string {
-  const d = new Date(isoDate)
-  return d.toLocaleDateString('ko-KR', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-    weekday: 'short',
-  })
 }
 
 export function HeroBannerCarousel({ banners }: HeroBannerCarouselProps) {
@@ -97,7 +88,7 @@ export function HeroBannerCarousel({ banners }: HeroBannerCarouselProps) {
                 <div className="flex items-center gap-4 text-sm text-white/70">
                   <span className="flex items-center gap-1.5">
                     <Calendar size={14} />
-                    {formatBannerDate(banner.date)}
+                    {formatDateFull(banner.date)}
                   </span>
                   <span className="flex items-center gap-1.5">
                     <MapPin size={14} />

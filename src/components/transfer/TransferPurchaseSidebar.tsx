@@ -12,7 +12,7 @@ import { Separator } from '@/components/ui/separator'
 import { PriceDisplay } from '@/components/urr/PriceDisplay'
 import { FaceValueBadge } from '@/components/urr/FaceValueBadge'
 import { PaymentDialog } from '@/components/common/PaymentDialog'
-import { formatPrice } from '@/lib/format'
+import { formatPrice, formatDateShort } from '@/lib/format'
 import { addMyTicket, addMyTransferRecord } from '@/data/mock-my-page'
 import { updateTransferListingStatus } from '@/data/mock-artist-page'
 import type { Event, TransferListing, Membership } from '@/types'
@@ -38,13 +38,7 @@ export function TransferPurchaseSidebar({
   const pct = Math.round((listing.price / listing.faceValue) * 100)
 
   const firstDate = listing.event.dates[0]?.date ?? ''
-  const dateStr = firstDate
-    ? new Date(firstDate).toLocaleDateString('ko-KR', {
-        month: 'long',
-        day: 'numeric',
-        weekday: 'short',
-      })
-    : ''
+  const dateStr = firstDate ? formatDateShort(firstDate) : ''
 
   const [showPaymentDialog, setShowPaymentDialog] = useState(false)
 

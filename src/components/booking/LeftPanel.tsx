@@ -3,7 +3,7 @@ import { cn } from '@/lib/utils'
 import { useBooking } from '@/hooks/useBooking'
 import { useCountdown } from '@/hooks/useCountdown'
 import { formatCountdown } from '@/lib/format'
-import { TierBadge, PriceDisplay } from '@/components/urr'
+import { TierBadge } from '@/components/urr'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
@@ -105,7 +105,6 @@ export function LeftPanel() {
     isLoading,
     selectedDateId,
     selectedDate,
-    sectionsForDate,
     userTier,
     bookingState,
     isWindowOpen,
@@ -189,24 +188,7 @@ export function LeftPanel() {
                   <span>{event.venue}</span>
                 </div>
 
-                {/* 5. Price table */}
-                <div className="space-y-1">
-                  <div className="flex items-center justify-between text-xs font-semibold text-muted-foreground uppercase tracking-wider px-1 pb-1">
-                    <span>구역</span>
-                    <span>가격</span>
-                  </div>
-                  {sectionsForDate.map((section) => (
-                    <div
-                      key={section.id}
-                      className="flex items-center justify-between py-1.5 px-1 text-sm"
-                    >
-                      <span className="font-medium">{section.name}</span>
-                      <PriceDisplay amount={section.price} size="sm" />
-                    </div>
-                  ))}
-                </div>
-
-                {/* 6. Tier booking schedule — filled card */}
+                {/* 5. Tier booking schedule — filled card */}
                 <div className="rounded-xl bg-muted/50 p-4 space-y-3">
                   <h4 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
                     등급별 예매 일정
@@ -236,38 +218,38 @@ export function LeftPanel() {
                     <TierBadge tier={userTier} size="sm" />
                   </div>
                 </div>
-
-                <Separator />
-
-                {/* 8. Book Now button */}
-                <div className="pb-2 pt-1">
-                  {isSoldOut ? (
-                    <Button disabled className="w-full" size="lg">
-                      매진
-                    </Button>
-                  ) : isBookingActive ? (
-                    <Button disabled className="w-full" size="lg">
-                      예매 진행 중
-                    </Button>
-                  ) : isWindowOpen ? (
-                    <Button
-                      className="w-full"
-                      size="lg"
-                      onClick={startBooking}
-                    >
-                      예매하기
-                    </Button>
-                  ) : (
-                    <Button disabled className="w-full" size="lg">
-                      <span className="tabular-nums">
-                        예매 오픈까지 {formatCountdown(countdownToOpen)}
-                      </span>
-                    </Button>
-                  )}
-                </div>
               </div>
             ) : null}
           </div>
+
+          {/* Book Now button — fixed bottom */}
+          {!isLoading && event && (
+            <div className="shrink-0 border-t border-border px-5 py-3">
+              {isSoldOut ? (
+                <Button disabled className="w-full" size="lg">
+                  매진
+                </Button>
+              ) : isBookingActive ? (
+                <Button disabled className="w-full" size="lg">
+                  예매 진행 중
+                </Button>
+              ) : isWindowOpen ? (
+                <Button
+                  className="w-full"
+                  size="lg"
+                  onClick={startBooking}
+                >
+                  예매하기
+                </Button>
+              ) : (
+                <Button disabled className="w-full" size="lg">
+                  <span className="tabular-nums">
+                    예매 오픈까지 {formatCountdown(countdownToOpen)}
+                  </span>
+                </Button>
+              )}
+            </div>
+          )}
         </>
       )}
     </div>
