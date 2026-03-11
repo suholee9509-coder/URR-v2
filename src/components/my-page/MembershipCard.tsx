@@ -165,7 +165,7 @@ export function MembershipCard({
                 <span className="text-sm font-medium">{membership.nickname}</span>
                 <button
                   onClick={() => setIsEditingNickname(true)}
-                  className="text-muted-foreground hover:text-foreground transition-colors"
+                  className="text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
                 >
                   <Pencil size={13} />
                 </button>

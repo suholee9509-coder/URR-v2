@@ -79,7 +79,7 @@ export function PaymentDialog({
               <h2 className="text-lg font-bold">{title}</h2>
               <button
                 onClick={handleCancel}
-                className="p-1.5 rounded-md hover:bg-accent transition-colors"
+                className="p-1.5 rounded-md hover:bg-accent transition-colors cursor-pointer"
               >
                 <X size={18} className="text-muted-foreground" />
               </button>
@@ -129,7 +129,7 @@ export function PaymentDialog({
                       key={method.id}
                       onClick={() => setSelectedMethod(method.id)}
                       className={cn(
-                        'h-11 px-3 rounded-lg border text-sm font-medium transition-all',
+                        'h-11 px-3 rounded-lg border text-sm font-medium transition-all cursor-pointer',
                         selectedMethod === method.id
                           ? 'border-primary bg-primary/5 text-primary ring-1 ring-primary'
                           : 'border-border bg-white text-foreground hover:bg-muted/50',
@@ -159,7 +159,7 @@ export function PaymentDialog({
               <div>
                 <button
                   onClick={() => setTermsAgreed(!termsAgreed)}
-                  className="flex items-center gap-2 group"
+                  className="flex items-center gap-2 group cursor-pointer"
                 >
                   <span
                     className={cn(

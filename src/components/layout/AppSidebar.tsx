@@ -72,7 +72,7 @@ export function AppSidebar() {
         )}
         <button
           onClick={toggleSidebar}
-          className="size-8 flex items-center justify-center rounded-md text-sidebar-muted-foreground hover:text-sidebar-foreground hover:bg-sidebar-accent transition-colors"
+          className="size-8 flex items-center justify-center rounded-md text-sidebar-muted-foreground hover:text-sidebar-foreground hover:bg-sidebar-accent transition-colors cursor-pointer"
           aria-label={collapsed ? '사이드바 펼치기' : '사이드바 접기'}
         >
           {collapsed ? <ChevronRight size={18} /> : <ChevronLeft size={18} />}
@@ -162,7 +162,7 @@ export function AppSidebar() {
             {hiddenCount > 0 && !collapsed && (
               <button
                 onClick={() => setShowAllArtists(!showAllArtists)}
-                className="flex items-center h-8 px-3 text-[13px] text-sidebar-muted-foreground hover:text-sidebar-foreground transition-colors"
+                className="flex items-center h-8 px-3 text-[13px] text-sidebar-muted-foreground hover:text-sidebar-foreground transition-colors cursor-pointer"
               >
                 {showAllArtists ? '접기' : `더 보기 (+${hiddenCount})`}
               </button>
