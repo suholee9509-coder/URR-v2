@@ -4,7 +4,7 @@ import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import { useGeneralQueueSimulation } from '@/hooks/useQueueSimulation'
 import { useNavigationBlock } from '@/hooks/useNavigationBlock'
-import logo from '@/assets/로고_최종.svg'
+import logo from '@/assets/logo_final.svg'
 
 // ── Leave Confirmation Dialog ─────────────────────────
 function LeaveDialog({

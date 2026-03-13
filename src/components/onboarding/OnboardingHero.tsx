@@ -1,4 +1,4 @@
-import urrLogo from '@/assets/로고_최종.svg'
+import urrLogo from '@/assets/logo_final.svg'
 
 interface OnboardingHeroProps {
   step: number

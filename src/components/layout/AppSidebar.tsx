@@ -12,7 +12,7 @@ import { useLayout } from '@/hooks/useLayout'
 import { mockUser } from '@/data/mock-user'
 import { mockArtists } from '@/data/mock-artists'
 import { cn } from '@/lib/utils'
-import urrLogo from '@/assets/로고_최종.svg'
+import urrLogo from '@/assets/logo_final.svg'
 
 const navItems = [
   { icon: Home, label: '홈', href: '/' },

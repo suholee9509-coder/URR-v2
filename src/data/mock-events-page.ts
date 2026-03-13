@@ -1,18 +1,18 @@
 import type { EventListItem } from '@/types'
 
 // --- Asset imports (reuse existing posters) ---
-import posterBTSYTC from '@/assets/공연_BTS Yet to Come in Cinema.png'
-import posterBPBornPink from '@/assets/공연_BlackPink Born Pink.png'
-import posterIVESWIA from '@/assets/공연_IVE Show What i am.png'
-import posterNJComplexcon from '@/assets/공연_NewJeans Complexcon.png'
-import posterSVTBetheSun from '@/assets/공연_Seventeen Be the Sun.png'
-import posterSKZDomin from '@/assets/Stray Kids domin world tour.png'
-import posterGIDLE from '@/assets/선예매임박공연_(G)I-DLE World Tour.png'
-import posterTXT from '@/assets/선예매임박공연_TXT World Tour.png'
-import posterNJFanmeet from '@/assets/선예매임박공연_NewJeans Fan Meeting.png'
-import posterIVE1st from '@/assets/선예매임박공연_IVE The 1ST World Tour.png'
-import posterSVTFollow from '@/assets/선예매임박공연_Seventeen Follow Again Tour.png'
-import posterSKZDominance from '@/assets/선예매임박공연_StrayKids Dominance.png'
+import posterBTSYTC from '@/assets/event_bts-yet-to-come-in-cinema.png'
+import posterBPBornPink from '@/assets/event_blackpink-born-pink.png'
+import posterIVESWIA from '@/assets/event_ive-show-what-i-am.png'
+import posterNJComplexcon from '@/assets/event_newjeans-complexcon.png'
+import posterSVTBetheSun from '@/assets/event_seventeen-be-the-sun.png'
+import posterSKZDomin from '@/assets/event_stray-kids-domin-world-tour.png'
+import posterGIDLE from '@/assets/presale_gi-dle-world-tour.png'
+import posterTXT from '@/assets/presale_txt-world-tour.png'
+import posterNJFanmeet from '@/assets/presale_newjeans-fan-meeting.png'
+import posterIVE1st from '@/assets/presale_ive-1st-world-tour.png'
+import posterSVTFollow from '@/assets/presale_seventeen-follow-again-tour.png'
+import posterSKZDominance from '@/assets/presale_straykids-dominance.png'
 
 // --- Category filter options ---
 export const eventCategoryFilters = [

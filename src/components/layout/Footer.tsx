@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import urrLogo from '@/assets/로고_최종.svg'
+import urrLogo from '@/assets/logo_final.svg'
 
 export function Footer() {
   return (
