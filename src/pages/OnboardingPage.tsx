@@ -16,13 +16,13 @@ export default function OnboardingPage() {
   // Step 1: Auth (social or email)
   const handleAuthComplete = useCallback(
     (data: { provider: AuthProvider; email?: string; password?: string; mode?: 'login' | 'register' }) => {
-      // 소셜 로그인 or 이메일 로그인 → 바로 홈
-      if (data.provider !== 'email' || data.mode === 'login') {
+      // 이메일 로그인 → 바로 홈
+      if (data.provider === 'email' && data.mode === 'login') {
         navigate('/')
         return
       }
 
-      // 이메일 회원가입 → 본인인증 단계로
+      // 회원가입 (소셜 첫 가입 or 이메일 회원가입) → 본인인증 단계로
       setFlowState('identity')
     },
     [navigate],
