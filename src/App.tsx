@@ -14,6 +14,7 @@ import BookingPage from '@/pages/BookingPage'
 import MyPage from '@/pages/MyPage'
 import NotificationsPage from '@/pages/NotificationsPage'
 import OnboardingPage from '@/pages/OnboardingPage'
+import QueuePage from '@/pages/QueuePage'
 import TransferDetailPage from '@/pages/TransferDetailPage'
 import MembershipPage from '@/pages/MembershipPage'
 import EventDetailPage from '@/pages/EventDetailPage'
@@ -29,6 +30,7 @@ function App() {
               {/* Onboarding: full-screen, no sidebar */}
               <Route element={<OnboardingLayout />}>
                 <Route path="/onboarding" element={<OnboardingPage />} />
+                <Route path="/queue" element={<QueuePage />} />
               </Route>
 
               {/* Main layout: sidebar + top bar */}

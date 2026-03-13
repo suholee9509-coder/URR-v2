@@ -12,11 +12,11 @@ import { QueueLeaveModal } from './QueueLeaveModal'
 
 /** Section label positions for percentage overlay on the venue map */
 const SECTION_LABEL_POS: Record<string, { x: number; y: number }> = {
-  'sec-vip': { x: 259, y: 200 },
-  'sec-floor-r': { x: 259, y: 280 },
-  'sec-r': { x: 259, y: 365 },
-  'sec-s': { x: 100, y: 330 },
-  'sec-a': { x: 80, y: 450 },
+  'sec-vip': { x: 447, y: 250 },
+  'sec-floor-r': { x: 447, y: 520 },
+  'sec-r': { x: 280, y: 490 },
+  'sec-s': { x: 200, y: 300 },
+  'sec-a': { x: 130, y: 450 },
 }
 
 function QueueContent() {
@@ -80,7 +80,7 @@ function QueueContent() {
   const percentageOverlay = (
     <g style={{ pointerEvents: 'none' }} className="select-none">
       {/* White wash layer to desaturate section colors */}
-      <rect x="0" y="0" width="519.03" height="566.63" fill="white" fillOpacity={0.55} />
+      <rect x="0" y="0" width="895" height="698" fill="white" fillOpacity={0.55} />
 
       {/* Drop shadow filter */}
       <defs>

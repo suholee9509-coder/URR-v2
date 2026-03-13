@@ -1,8 +1,23 @@
-import profileGDragon from '@/assets/Profile_G-Dragon.png'
+import profileGDragon from '@/assets/지드래곤_아티스트홈 프로필.png'
 import profileBTS from '@/assets/Artist_BTS.png'
 import profileAespa from '@/assets/Profile_aespa.png'
 import profileIVE from '@/assets/Profile_IVE.png'
 import profileBP from '@/assets/Profile_BlackPink.png'
+import sotong1_1 from '@/assets/소통1_1.png'
+import sotong1_2 from '@/assets/소통1_2.png'
+import sotong1_3 from '@/assets/소통1_3.png'
+import sotong2_1 from '@/assets/소통2_1.png'
+import sotong2_2 from '@/assets/소통2_2.png'
+import sotong2_3 from '@/assets/소통2_3.png'
+import sotong3_1 from '@/assets/소통3_1.png'
+import sotong3_2 from '@/assets/소통3_2.png'
+import sotong3_3 from '@/assets/소통3_3.png'
+import aespaSotong1_1 from '@/assets/aespa_소통_1_1.png'
+import aespaSotong1_2 from '@/assets/aespa_소통_1_2.png'
+import aespaSotong2_1 from '@/assets/aespa_소통_2_1.png'
+import aespaSotong3_1 from '@/assets/aespa_소통_3_1.png'
+import aespaSotong3_2 from '@/assets/aespa_소통_3_2.png'
+import aespaSotong3_3 from '@/assets/aespa_소통_3_3.png'
 
 export interface CommunityPost {
   id: string
@@ -40,7 +55,7 @@ const artistCommunityMap: Record<string, CommunityPost[]> = {
       isOfficial: true,
 
       content: '연습실에서 보내는 하루. 새 앨범 작업도 순조롭게 진행 중입니다. 조금만 더 기다려 주세요 🎵',
-      images: ['img-1', 'img-2'],
+      images: [sotong1_1, sotong1_2, sotong1_3],
       likeCount: 8900,
       commentCount: 1540,
       createdAt: '2026-02-28T20:30:00+09:00',
@@ -66,7 +81,7 @@ const artistCommunityMap: Record<string, CommunityPost[]> = {
       isOfficial: true,
 
       content: 'DETOX WORLD TOUR 티저 영상이 공개되었습니다! 고척스카이돔에서 만나요. 티저 보셨나요?',
-      images: ['img-1', 'img-2', 'img-3'],
+      images: [sotong2_1, sotong2_2, sotong2_3],
       likeCount: 15600,
       commentCount: 4100,
       createdAt: '2026-02-20T12:00:00+09:00',
@@ -79,7 +94,7 @@ const artistCommunityMap: Record<string, CommunityPost[]> = {
       isOfficial: true,
 
       content: '작업실에서 새벽까지... 새 음악이 곧 나옵니다. 기대해 주세요.',
-      images: ['img-1'],
+      images: [sotong3_1, sotong3_2, sotong3_3],
       likeCount: 4300,
       commentCount: 720,
       createdAt: '2026-02-15T03:20:00+09:00',

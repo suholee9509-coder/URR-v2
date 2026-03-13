@@ -1,11 +1,18 @@
 import type { Event, TransferListing, TransferStatus } from '@/types'
-import posterGDragon from '@/assets/Hero_G-dragon.png'
-import posterBTS from '@/assets/공연_BTS Yet to Come in Cinema.png'
-import posterAespa from '@/assets/Hero_aespa.png'
-import posterIVE from '@/assets/공연_IVE Show What i am.png'
-import posterIVEWorldTour from '@/assets/선예매임박공연_IVE The 1ST World Tour.png'
-import posterBP from '@/assets/공연_BlackPink Born Pink.png'
-import posterBPHero from '@/assets/Hero_Blackpink.png'
+import posterGDMAMA from '@/assets/다가오는 공연_G-Dragon 2026 MAMA.png'
+import posterGDDetox from '@/assets/다가오는 공연_G-Dragon DETOX WORLD TOUR.png'
+import posterGDPower from '@/assets/다가오는 공연_G-Dragon POWER CONCERT 2025.png'
+import posterBTSArirang from '@/assets/공연_BTS WORLD TOUR ARIRANG.png'
+import posterTWS from '@/assets/공연_2026 TWS 2ND FANMEETING.png'
+import posterSVT from '@/assets/공연_SEVENTEEN WORLD TOUR.png'
+import posterDAY6 from '@/assets/공연_DAY6 10th Anniversary Tour.png'
+import posterILLIT from '@/assets/공연_아일릿 press start.png'
+import posterMintFesta from '@/assets/공연_민트 페스타 MINT FESTA.png'
+import posterIndied from "@/assets/공연_INDIE'D HERE AND NOW.png"
+import posterKwonjina from '@/assets/공연_권진아 꽃말 콘서트png.png'
+import posterPanic from '@/assets/공연_패닉 콘서트 PANIC.png'
+import posterParkHyoshin from '@/assets/공연_박효신 LIVE A & E.png'
+import posterSeoulJazz from '@/assets/공연_서울재즈페스티벌 2026.png'
 
 // --- Extended artist info (agency, debut, genres) ---
 
@@ -71,7 +78,7 @@ const artistEventsMap: Record<string, Event[]> = {
         { id: 'gd-d1', date: '2026-06-01T18:00:00+09:00', bookingWindows: [], totalSeats: 15000, remainingSeats: 3200 },
         { id: 'gd-d2', date: '2026-06-02T18:00:00+09:00', bookingWindows: [], totalSeats: 15000, remainingSeats: 5100 },
       ],
-      poster: posterGDragon,
+      poster: posterGDMAMA,
       status: 'open',
     },
     {
@@ -82,7 +89,7 @@ const artistEventsMap: Record<string, Event[]> = {
       dates: [
         { id: 'gd-d3', date: '2026-09-20T19:00:00+09:00', bookingWindows: [], totalSeats: 20000, remainingSeats: 20000 },
       ],
-      poster: posterGDragon,
+      poster: posterGDDetox,
       status: 'upcoming',
     },
     {
@@ -93,7 +100,7 @@ const artistEventsMap: Record<string, Event[]> = {
       dates: [
         { id: 'gd-d4', date: '2025-12-25T18:00:00+09:00', bookingWindows: [], totalSeats: 50000, remainingSeats: 0 },
       ],
-      poster: posterGDragon,
+      poster: posterGDPower,
       status: 'closed',
     },
   ],
@@ -101,46 +108,46 @@ const artistEventsMap: Record<string, Event[]> = {
     {
       id: 'evt-bts-encore-2026',
       artistId: 'bts',
-      title: 'BTS YET TO COME ENCORE IN SEOUL',
+      title: 'BTS WORLD TOUR ARIRANG',
       venue: '잠실종합운동장 주경기장',
       dates: [
         { id: 'bts-d1', date: '2026-08-01T19:00:00+09:00', bookingWindows: [], totalSeats: 65000, remainingSeats: 12000 },
         { id: 'bts-d2', date: '2026-08-02T19:00:00+09:00', bookingWindows: [], totalSeats: 65000, remainingSeats: 18000 },
       ],
-      poster: posterBTS,
+      poster: posterBTSArirang,
       status: 'open',
     },
     {
       id: 'evt-bts-fanmeet-2026',
       artistId: 'bts',
-      title: 'BTS 2026 FAN MEETING: MAGIC SHOP',
+      title: '2026 TWS 2ND FANMEETING',
       venue: 'KSPO DOME (올림픽체조경기장)',
       dates: [
         { id: 'bts-d3', date: '2026-10-15T18:00:00+09:00', bookingWindows: [], totalSeats: 15000, remainingSeats: 15000 },
       ],
-      poster: posterBTS,
+      poster: posterTWS,
       status: 'upcoming',
     },
     {
       id: 'evt-bts-busan-2026',
       artistId: 'bts',
-      title: 'BTS PERMISSION TO DANCE - BUSAN',
+      title: 'SEVENTEEN WORLD TOUR',
       venue: '부산 아시아드 주경기장',
       dates: [
         { id: 'bts-d4', date: '2026-04-20T17:00:00+09:00', bookingWindows: [], totalSeats: 40000, remainingSeats: 0 },
       ],
-      poster: posterBTS,
+      poster: posterSVT,
       status: 'soldout',
     },
     {
       id: 'evt-bts-past-2025',
       artistId: 'bts',
-      title: 'BTS WORLD TOUR: LOVE YOURSELF 2025',
+      title: 'DAY6 10th Anniversary Tour',
       venue: '고척스카이돔',
       dates: [
         { id: 'bts-d5', date: '2025-11-10T18:00:00+09:00', bookingWindows: [], totalSeats: 20000, remainingSeats: 0 },
       ],
-      poster: posterBTS,
+      poster: posterDAY6,
       status: 'closed',
     },
   ],
@@ -148,34 +155,34 @@ const artistEventsMap: Record<string, Event[]> = {
     {
       id: 'evt-aespa-synk-2026',
       artistId: 'aespa',
-      title: 'aespa LIVE SYNK : PARALLEL',
+      title: '아일릿 press start',
       venue: 'KSPO DOME (올림픽체조경기장)',
       dates: [
         { id: 'ae-d1', date: '2026-09-20T18:00:00+09:00', bookingWindows: [], totalSeats: 15000, remainingSeats: 4500 },
       ],
-      poster: posterAespa,
+      poster: posterILLIT,
       status: 'open',
     },
     {
       id: 'evt-aespa-world-2026',
       artistId: 'aespa',
-      title: 'aespa WORLD TOUR: MYWORLD',
+      title: '민트 페스타 MINT FESTA',
       venue: '잠실실내체육관',
       dates: [
         { id: 'ae-d2', date: '2026-11-05T19:00:00+09:00', bookingWindows: [], totalSeats: 10000, remainingSeats: 10000 },
       ],
-      poster: posterAespa,
+      poster: posterMintFesta,
       status: 'upcoming',
     },
     {
       id: 'evt-aespa-past-2025',
       artistId: 'aespa',
-      title: 'aespa SYNK : HYPER LINE 2025',
+      title: "INDIE'D HERE AND NOW",
       venue: '고척스카이돔',
       dates: [
         { id: 'ae-d3', date: '2025-10-01T18:00:00+09:00', bookingWindows: [], totalSeats: 20000, remainingSeats: 0 },
       ],
-      poster: posterAespa,
+      poster: posterIndied,
       status: 'closed',
     },
   ],
@@ -183,23 +190,23 @@ const artistEventsMap: Record<string, Event[]> = {
     {
       id: 'evt-ive-show-2026',
       artistId: 'ive',
-      title: 'IVE THE 1ST WORLD TOUR: SHOW WHAT I HAVE',
+      title: '권진아 꽃말 콘서트',
       venue: 'KSPO DOME (올림픽체조경기장)',
       dates: [
         { id: 'ive-d1', date: '2026-07-12T18:00:00+09:00', bookingWindows: [], totalSeats: 15000, remainingSeats: 15000 },
       ],
-      poster: posterIVEWorldTour,
+      poster: posterKwonjina,
       status: 'upcoming',
     },
     {
       id: 'evt-ive-fanmeet-2026',
       artistId: 'ive',
-      title: 'IVE 2nd FAN MEETING: I HAEVE',
+      title: '패닉 콘서트 PANIC',
       venue: '잠실실내체육관',
       dates: [
         { id: 'ive-d2', date: '2026-05-18T17:00:00+09:00', bookingWindows: [], totalSeats: 10000, remainingSeats: 2300 },
       ],
-      poster: posterIVE,
+      poster: posterPanic,
       status: 'open',
     },
   ],
@@ -207,35 +214,35 @@ const artistEventsMap: Record<string, Event[]> = {
     {
       id: 'evt-blackpink-world-2026',
       artistId: 'blackpink',
-      title: 'BLACKPINK BORN PINK WORLD TOUR FINALE',
+      title: '박효신 LIVE A & E',
       venue: '고척스카이돔',
       dates: [
         { id: 'bp-d1', date: '2026-07-15T18:30:00+09:00', bookingWindows: [], totalSeats: 20000, remainingSeats: 1800 },
         { id: 'bp-d2', date: '2026-07-16T18:30:00+09:00', bookingWindows: [], totalSeats: 20000, remainingSeats: 3200 },
       ],
-      poster: posterBP,
+      poster: posterParkHyoshin,
       status: 'open',
     },
     {
       id: 'evt-blackpink-concert-2026',
       artistId: 'blackpink',
-      title: 'BLACKPINK IN YOUR AREA 2026',
+      title: '서울재즈페스티벌 2026',
       venue: '잠실종합운동장 주경기장',
       dates: [
         { id: 'bp-d3', date: '2026-12-01T18:00:00+09:00', bookingWindows: [], totalSeats: 65000, remainingSeats: 65000 },
       ],
-      poster: posterBPHero,
+      poster: posterSeoulJazz,
       status: 'upcoming',
     },
     {
       id: 'evt-blackpink-past-2025',
       artistId: 'blackpink',
-      title: 'BLACKPINK WORLD TOUR 2025 ENCORE',
+      title: '서울재즈페스티벌 2026 ENCORE',
       venue: '고척스카이돔',
       dates: [
         { id: 'bp-d4', date: '2025-09-20T18:00:00+09:00', bookingWindows: [], totalSeats: 20000, remainingSeats: 0 },
       ],
-      poster: posterBP,
+      poster: posterSeoulJazz,
       status: 'soldout',
     },
   ],

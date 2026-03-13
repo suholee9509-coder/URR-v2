@@ -10,7 +10,7 @@ interface ContentAreaProps {
 
 export function ContentArea({ children }: ContentAreaProps) {
   const { pathname } = useLocation()
-  const mainRef = useRef<HTMLMainElement>(null)
+  const mainRef = useRef<HTMLElement>(null)
 
   // Booking pages (/events/:eventId) use full width
   const isFullWidth = /^\/events\/[^/]+$/.test(pathname)

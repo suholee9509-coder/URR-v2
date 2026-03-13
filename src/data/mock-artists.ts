@@ -1,5 +1,5 @@
 import type { Artist } from '@/types'
-import avatarGDragon from '@/assets/Artist_G-Dragon.png'
+import avatarGDragon from '@/assets/지드래곤_아티스트홈 프로필.png'
 import avatarBTS from '@/assets/Artist_BTS.png'
 import avatarAespa from '@/assets/Artist_aespa.png'
 import avatarIVE from '@/assets/Artist_IVE.png'

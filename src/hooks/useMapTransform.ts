@@ -1,7 +1,7 @@
 import { useState, useCallback, useRef } from 'react'
 import { SECTION_BBOXES } from '@/components/booking/VenueMap'
 
-const SVG_VIEWBOX = { w: 519.03, h: 566.63 }
+const SVG_VIEWBOX = { w: 895, h: 698 }
 const ZOOM_TRANSITION_MS = 600
 // Extra multiplier beyond section-fill to zoom deep enough for individual seats
 const SEAT_ZOOM_MULTIPLIER = 2.5
