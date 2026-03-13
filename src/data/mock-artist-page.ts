@@ -6,13 +6,15 @@ import posterBTSArirang from '@/assets/공연_BTS WORLD TOUR ARIRANG.png'
 import posterTWS from '@/assets/공연_2026 TWS 2ND FANMEETING.png'
 import posterSVT from '@/assets/공연_SEVENTEEN WORLD TOUR.png'
 import posterDAY6 from '@/assets/공연_DAY6 10th Anniversary Tour.png'
-import posterILLIT from '@/assets/공연_아일릿 press start.png'
-import posterMintFesta from '@/assets/공연_민트 페스타 MINT FESTA.png'
-import posterIndied from "@/assets/공연_INDIE'D HERE AND NOW.png"
 import posterKwonjina from '@/assets/공연_권진아 꽃말 콘서트png.png'
 import posterPanic from '@/assets/공연_패닉 콘서트 PANIC.png'
 import posterParkHyoshin from '@/assets/공연_박효신 LIVE A & E.png'
 import posterSeoulJazz from '@/assets/공연_서울재즈페스티벌 2026.png'
+import posterAespaSynk from '@/assets/aespa공연_aespa LIVE SYNK PARALLEL.png'
+import posterAespaMyworld from '@/assets/aespa공연_WORLD TOUR MYWORLD.png'
+import posterAespaHyperline from '@/assets/aespa공연_aespa SYNK HYPER LINE.png'
+import posterAespaAexis from '@/assets/aespa공연_SYNK aeXIS LINE.png'
+import posterAespaMyworldEncore from '@/assets/aespa공연_ WORLD TOUR_ MYWORLD.png'
 
 // --- Extended artist info (agency, debut, genres) ---
 
@@ -160,29 +162,51 @@ const artistEventsMap: Record<string, Event[]> = {
       dates: [
         { id: 'ae-d1', date: '2026-09-20T18:00:00+09:00', bookingWindows: [], totalSeats: 15000, remainingSeats: 4500 },
       ],
-      poster: posterILLIT,
+      poster: posterAespaSynk,
       status: 'open',
     },
     {
       id: 'evt-aespa-world-2026',
       artistId: 'aespa',
-      title: 'aespa WORLD TOUR: MYWORLD',
+      title: 'aespa WORLD TOUR : MYWORLD',
       venue: '잠실실내체육관',
       dates: [
         { id: 'ae-d2', date: '2026-11-05T19:00:00+09:00', bookingWindows: [], totalSeats: 10000, remainingSeats: 10000 },
       ],
-      poster: posterMintFesta,
+      poster: posterAespaMyworld,
+      status: 'upcoming',
+    },
+    {
+      id: 'evt-aespa-aexis-2026',
+      artistId: 'aespa',
+      title: 'aespa SYNK : AEXIS LINE',
+      venue: '인스파이어 아레나',
+      dates: [
+        { id: 'ae-d4', date: '2026-12-20T18:00:00+09:00', bookingWindows: [], totalSeats: 12000, remainingSeats: 12000 },
+      ],
+      poster: posterAespaAexis,
+      status: 'upcoming',
+    },
+    {
+      id: 'evt-aespa-myworld-encore-2026',
+      artistId: 'aespa',
+      title: 'aespa WORLD TOUR : MYWORLD ENCORE',
+      venue: 'KSPO DOME (올림픽체조경기장)',
+      dates: [
+        { id: 'ae-d5', date: '2027-01-15T18:00:00+09:00', bookingWindows: [], totalSeats: 15000, remainingSeats: 15000 },
+      ],
+      poster: posterAespaMyworldEncore,
       status: 'upcoming',
     },
     {
       id: 'evt-aespa-past-2025',
       artistId: 'aespa',
-      title: 'aespa SYNK : HYPERLINE 2025',
+      title: 'aespa SYNK : HYPER LINE',
       venue: '고척스카이돔',
       dates: [
         { id: 'ae-d3', date: '2025-10-01T18:00:00+09:00', bookingWindows: [], totalSeats: 20000, remainingSeats: 0 },
       ],
-      poster: posterIndied,
+      poster: posterAespaHyperline,
       status: 'closed',
     },
   ],
@@ -291,6 +315,8 @@ const artistTransfersMap: Record<string, TransferListing[]> = {
     { id: 'tf-ae-03', ticketId: 'tk-ae-03', eventId: 'evt-aespa-synk-2026', sellerId: 'u-303', sellerTier: 'lightning', sellerTransactionCount: 18, price: 200000, faceValue: 176000, section: 'VIP석', seatInfo: 'A구역 1열 12번', status: 'listed', createdAt: '2026-02-26T08:30:00+09:00' },
     { id: 'tf-ae-04', ticketId: 'tk-ae-04', eventId: 'evt-aespa-synk-2026', sellerId: 'u-304', sellerTier: 'mist', sellerTransactionCount: 1, price: 95000, faceValue: 99000, section: 'A석', seatInfo: 'C구역 7열 22번', status: 'listed', createdAt: '2026-02-25T15:40:00+09:00' },
     { id: 'tf-ae-05', ticketId: 'tk-ae-05', eventId: 'evt-aespa-world-2026', sellerId: 'u-305', sellerTier: 'thunder', sellerTransactionCount: 9, price: 143000, faceValue: 143000, section: 'R석', seatInfo: 'B구역 3열 15번', status: 'listed', createdAt: '2026-02-24T13:20:00+09:00' },
+    { id: 'tf-ae-06', ticketId: 'tk-ae-06', eventId: 'evt-aespa-aexis-2026', sellerId: 'u-306', sellerTier: 'cloud', sellerTransactionCount: 4, price: 132000, faceValue: 132000, section: 'S석', seatInfo: 'B구역 6열 10번', status: 'listed', createdAt: '2026-02-23T11:00:00+09:00' },
+    { id: 'tf-ae-07', ticketId: 'tk-ae-07', eventId: 'evt-aespa-aexis-2026', sellerId: 'u-307', sellerTier: 'lightning', sellerTransactionCount: 20, price: 185000, faceValue: 176000, section: 'VIP석', seatInfo: 'A구역 2열 8번', status: 'listed', createdAt: '2026-02-22T16:30:00+09:00' },
   ],
   ive: [
     { id: 'tf-ive-01', ticketId: 'tk-ive-01', eventId: 'evt-ive-fanmeet-2026', sellerId: 'u-401', sellerTier: 'cloud', sellerTransactionCount: 3, price: 88000, faceValue: 88000, section: 'R석', seatInfo: 'A구역 6열 8번', status: 'listed', createdAt: '2026-02-28T09:00:00+09:00' },
