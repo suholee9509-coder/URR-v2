@@ -5,9 +5,9 @@ import { Separator } from '@/components/ui/separator'
 import { cn } from '@/lib/utils'
 import { useBooking } from '@/hooks/useBooking'
 import { useSeatTimer } from '@/hooks/useSeatTimer'
-import { formatPrice, parseSeatDisplay, formatDateDot, formatPhone } from '@/lib/format'
+import { usePaymentForm } from '@/hooks/usePaymentForm'
+import { formatPrice, parseSeatDisplay, formatDateDot } from '@/lib/format'
 import { PAYMENT_METHODS } from '@/lib/constants'
-import type { PaymentMethod } from '@/lib/constants'
 import { TimerDisplay, PriceDisplay } from '@/components/urr'
 import { TIER_EMOJIS, TIER_LABELS } from '@/types'
 import type { ConfirmationData } from '@/types'
@@ -32,10 +32,10 @@ export function PaymentView() {
   const retryTimer = useSeatTimer(60)
 
   // Payment form state
-  const [buyerName, setBuyerName] = useState('')
-  const [buyerPhone, setBuyerPhone] = useState('')
-  const [selectedMethod, setSelectedMethod] = useState<PaymentMethod>('card')
-  const [termsAgreed, setTermsAgreed] = useState(false)
+  const {
+    buyerName, buyerPhone, selectedMethod, termsAgreed, isFormValid,
+    handleNameChange, handlePhoneChange, setSelectedMethod, toggleTerms,
+  } = usePaymentForm()
 
   const section = useMemo(
     () => sectionsForDate.find((s) => s.id === selectedSectionId) ?? null,
@@ -114,10 +114,6 @@ export function PaymentView() {
     resetBooking()
   }, [resetBooking])
 
-
-  const isFormValid = buyerName.length >= 2
-    && buyerPhone.replace(/-/g, '').length >= 10
-    && termsAgreed
 
   // --- Phase 1: Seat Confirmation ---
   if (phase === 'confirm-seats') {
@@ -246,7 +242,7 @@ export function PaymentView() {
                         <input
                           type="text"
                           value={buyerName}
-                          onChange={(e) => setBuyerName(e.target.value)}
+                          onChange={(e) => handleNameChange(e.target.value)}
                           placeholder="성함을 입력하세요"
                           className="w-full h-10 px-3 rounded-lg border border-border bg-white text-sm focus:outline-none focus:ring-2 focus:ring-ring transition-colors"
                         />
@@ -256,7 +252,7 @@ export function PaymentView() {
                         <input
                           type="text"
                           value={buyerPhone}
-                          onChange={(e) => setBuyerPhone(formatPhone(e.target.value))}
+                          onChange={(e) => handlePhoneChange(e.target.value)}
                           placeholder="010-0000-0000"
                           className="w-full h-10 px-3 rounded-lg border border-border bg-white text-sm tabular-nums focus:outline-none focus:ring-2 focus:ring-ring transition-colors"
                           maxLength={13}
@@ -312,7 +308,7 @@ export function PaymentView() {
                 {/* Terms agreement */}
                 <div>
                   <button
-                    onClick={() => setTermsAgreed(!termsAgreed)}
+                    onClick={toggleTerms}
                     className="flex items-center gap-2 group"
                   >
                     <span

@@ -1,5 +1,6 @@
 import { useReducer, useCallback, useRef, useEffect } from 'react'
-import { pickRandomQuestions, type VQAQuestion } from '@/data/mock-vqa'
+import { pickRandomQuestions } from '@/data/mock-vqa'
+import type { VQAQuestion } from '@/types'
 import { useBooking } from '@/hooks/useBooking'
 
 // ── Types ──────────────────────────────────────────────

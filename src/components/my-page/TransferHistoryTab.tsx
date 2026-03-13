@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { ArrowLeftRight, Calendar, Pencil, X } from 'lucide-react'
 import { TransferStatusBadge } from '@/components/urr/TransferStatusBadge'
 import { PriceDisplay } from '@/components/urr/PriceDisplay'
+import { EmptyState } from '@/components/urr/EmptyState'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import {
@@ -320,14 +321,7 @@ export function TransferHistoryTab({ records }: TransferHistoryTabProps) {
   }
 
   if (localRecords.length === 0) {
-    return (
-      <div className="flex flex-col items-center gap-3 py-16 text-center">
-        <div className="size-12 rounded-full bg-muted flex items-center justify-center">
-          <ArrowLeftRight size={24} className="text-muted-foreground" />
-        </div>
-        <p className="text-base font-medium">양도 내역이 없습니다.</p>
-      </div>
-    )
+    return <EmptyState icon={ArrowLeftRight} iconContainer title="양도 내역이 없습니다." />
   }
 
   return (

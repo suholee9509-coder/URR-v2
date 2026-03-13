@@ -7,7 +7,8 @@ import {
   allEventsData,
   eventCategoryFilters,
 } from '@/data/mock-events-page'
-import type { EventCategoryFilter, EventListItem } from '@/data/mock-events-page'
+import type { EventCategoryFilter } from '@/data/mock-events-page'
+import type { EventListItem } from '@/types'
 
 /* ------------------------------------------------------------------ */
 /*  PopularEventCard — carousel card with poster overlay              */

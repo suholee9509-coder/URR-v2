@@ -1,28 +1,12 @@
 import { Heart, MessageCircle, BadgeCheck } from 'lucide-react'
 import { cn } from '@/lib/utils'
-import { formatCompactNumber } from '@/lib/format'
-import type { CommunityPost } from '@/data/mock-community'
+import { formatCompactNumber, formatRelativeTime } from '@/lib/format'
+import type { CommunityPost } from '@/types'
 
 interface PostCardProps {
   post: CommunityPost
   variant?: 'default' | 'compact'
   artistGradient?: string
-}
-
-function getRelativeTime(timestamp: string): string {
-  const now = new Date()
-  const then = new Date(timestamp)
-  const diff = now.getTime() - then.getTime()
-  const minutes = Math.floor(diff / 60000)
-  if (minutes < 1) return '방금 전'
-  if (minutes < 60) return `${minutes}분 전`
-  const hours = Math.floor(minutes / 60)
-  if (hours < 24) return `${hours}시간 전`
-  const days = Math.floor(hours / 24)
-  if (days < 7) return `${days}일 전`
-  const weeks = Math.floor(days / 7)
-  if (weeks < 5) return `${weeks}주 전`
-  return `${Math.floor(days / 30)}개월 전`
 }
 
 export function PostCard({ post, variant = 'default', artistGradient }: PostCardProps) {
@@ -71,7 +55,7 @@ export function PostCard({ post, variant = 'default', artistGradient }: PostCard
               <BadgeCheck size={isCompact ? 12 : 14} className="text-primary fill-primary/20 shrink-0" />
             )}
           </div>
-          <span className="text-xs text-muted-foreground">{getRelativeTime(post.createdAt)}</span>
+          <span className="text-xs text-muted-foreground">{formatRelativeTime(post.createdAt)}</span>
         </div>
 
       </div>
@@ -89,17 +73,15 @@ export function PostCard({ post, variant = 'default', artistGradient }: PostCard
       {/* Image gallery (default variant only) */}
       {!isCompact && post.images.length > 0 && (
         <div className="flex gap-2 mt-3">
-          {post.images.map((_, idx) => (
-            <div
+          {post.images.map((src, idx) => (
+            <img
               key={idx}
+              src={src}
+              alt={`${post.authorName} 게시글 이미지 ${idx + 1}`}
               className={cn(
-                'rounded-lg overflow-hidden',
-                post.images.length === 1 ? 'w-full aspect-[16/9]' : 'flex-1 aspect-[4/3]',
+                'rounded-lg object-cover',
+                post.images.length === 1 ? 'w-full aspect-[16/9]' : 'flex-1 aspect-[4/3] min-w-0',
               )}
-              style={{
-                background: artistGradient ?? 'linear-gradient(135deg, #374151, #6b7280)',
-                opacity: 0.7 + idx * 0.1,
-              }}
             />
           ))}
         </div>

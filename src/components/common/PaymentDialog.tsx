@@ -4,9 +4,9 @@ import { X, Check, CreditCard } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
 import { cn } from '@/lib/utils'
-import { formatPrice, formatPhone } from '@/lib/format'
+import { formatPrice } from '@/lib/format'
 import { PAYMENT_METHODS } from '@/lib/constants'
-import type { PaymentMethod } from '@/lib/constants'
+import { usePaymentForm } from '@/hooks/usePaymentForm'
 import { PaymentProcessingOverlay } from '@/components/booking/PaymentProcessingOverlay'
 
 type Phase = 'form' | 'processing'
@@ -37,14 +37,10 @@ export function PaymentDialog({
   orderDescription,
 }: PaymentDialogProps) {
   const [phase, setPhase] = useState<Phase>('form')
-  const [buyerName, setBuyerName] = useState('')
-  const [buyerPhone, setBuyerPhone] = useState('')
-  const [selectedMethod, setSelectedMethod] = useState<PaymentMethod>('card')
-  const [termsAgreed, setTermsAgreed] = useState(false)
-
-  const isFormValid = buyerName.length >= 2
-    && buyerPhone.replace(/-/g, '').length >= 10
-    && termsAgreed
+  const {
+    buyerName, buyerPhone, selectedMethod, termsAgreed, isFormValid,
+    handleNameChange, handlePhoneChange, setSelectedMethod, toggleTerms, resetForm,
+  } = usePaymentForm()
 
   const handleSubmit = useCallback(() => {
     setPhase('processing')
@@ -54,13 +50,10 @@ export function PaymentDialog({
   }, [onComplete])
 
   const handleCancel = useCallback(() => {
-    setBuyerName('')
-    setBuyerPhone('')
-    setSelectedMethod('card')
-    setTermsAgreed(false)
+    resetForm()
     setPhase('form')
     onCancel()
-  }, [onCancel])
+  }, [onCancel, resetForm])
 
   if (!open) return null
 
@@ -99,7 +92,7 @@ export function PaymentDialog({
                     <input
                       type="text"
                       value={buyerName}
-                      onChange={(e) => setBuyerName(e.target.value)}
+                      onChange={(e) => handleNameChange(e.target.value)}
                       placeholder="성함을 입력하세요"
                       className="w-full h-10 px-3 rounded-lg border border-border bg-white text-sm focus:outline-none focus:ring-2 focus:ring-ring transition-colors"
                     />
@@ -109,7 +102,7 @@ export function PaymentDialog({
                     <input
                       type="text"
                       value={buyerPhone}
-                      onChange={(e) => setBuyerPhone(formatPhone(e.target.value))}
+                      onChange={(e) => handlePhoneChange(e.target.value)}
                       placeholder="010-0000-0000"
                       className="w-full h-10 px-3 rounded-lg border border-border bg-white text-sm tabular-nums focus:outline-none focus:ring-2 focus:ring-ring transition-colors"
                       maxLength={13}
@@ -158,7 +151,7 @@ export function PaymentDialog({
               {/* Terms agreement */}
               <div>
                 <button
-                  onClick={() => setTermsAgreed(!termsAgreed)}
+                  onClick={toggleTerms}
                   className="flex items-center gap-2 group cursor-pointer"
                 >
                   <span

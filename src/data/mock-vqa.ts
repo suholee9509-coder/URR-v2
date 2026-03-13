@@ -1,9 +1,4 @@
-export interface VQAQuestion {
-  id: string
-  question: string
-  options: string[]
-  correctIndex: number
-}
+import type { VQAQuestion } from '@/types'
 
 export const gdragonQuestions: VQAQuestion[] = [
   {

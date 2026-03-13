@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { ChevronRight } from 'lucide-react'
 import { cn } from '@/lib/utils'
@@ -17,16 +16,11 @@ import {
 } from '@/data/mock-home'
 import { BOOKING_STATUS_LABELS } from '@/types'
 import { formatCompactNumber } from '@/lib/format'
-import { SKELETON_LOAD_DELAY } from '@/lib/constants'
+import { usePageLoading } from '@/hooks/usePageLoading'
 import { mockUser } from '@/data/mock-user'
 
 export default function HomePage() {
-  const [isLoading, setIsLoading] = useState(true)
-
-  useEffect(() => {
-    const timer = setTimeout(() => setIsLoading(false), SKELETON_LOAD_DELAY)
-    return () => clearTimeout(timer)
-  }, [])
+  const isLoading = usePageLoading()
 
   if (isLoading) return <HomePageSkeleton />
 

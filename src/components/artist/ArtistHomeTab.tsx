@@ -9,9 +9,8 @@ import { TierBadge } from '@/components/urr/TierBadge'
 import { getArtistGradient } from '@/data/mock-home'
 import { formatDateFull, formatDateShort } from '@/lib/format'
 import { TIER_LABELS, TIER_EMOJIS } from '@/types'
-import type { Artist, Event, Membership, TransferListing } from '@/types'
+import type { Artist, Event, Membership, TransferListing, CommunityPost } from '@/types'
 import type { ArtistExtendedInfo } from '@/data/mock-artist-page'
-import type { CommunityPost } from '@/data/mock-community'
 
 type EnrichedTransfer = TransferListing & { event: Event }
 

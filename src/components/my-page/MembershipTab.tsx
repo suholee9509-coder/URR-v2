@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { Users } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { MembershipCard } from './MembershipCard'
+import { EmptyState } from '@/components/urr/EmptyState'
 import { MembershipCancelDialog } from './MembershipCancelDialog'
 import type { Membership } from '@/types'
 
@@ -54,18 +55,13 @@ export function MembershipTab({ memberships, onCancelMembership, onNicknameChang
 
   if (memberships.length === 0) {
     return (
-      <div className="flex flex-col items-center gap-3 py-16 text-center">
-        <div className="size-12 rounded-full bg-muted flex items-center justify-center">
-          <Users size={24} className="text-muted-foreground" />
-        </div>
-        <p className="text-base font-medium">가입한 멤버십이 없습니다.</p>
-        <p className="text-sm text-muted-foreground">
-          아티스트 페이지에서 멤버십에 가입하세요!
-        </p>
-        <Button asChild className="mt-2">
-          <Link to="/artists">아티스트 찾기</Link>
-        </Button>
-      </div>
+      <EmptyState
+        icon={Users}
+        iconContainer
+        title="가입한 멤버십이 없습니다."
+        description="아티스트 페이지에서 멤버십에 가입하세요!"
+        action={<Button asChild><Link to="/artists">아티스트 찾기</Link></Button>}
+      />
     )
   }
 

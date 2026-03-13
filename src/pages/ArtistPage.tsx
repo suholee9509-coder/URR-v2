@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
-import { useParams, useLocation, useNavigate } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
+import { Lock } from 'lucide-react'
 import { getArtistById } from '@/data/mock-artists'
 import { mockUser } from '@/data/mock-user'
 import {
@@ -17,36 +18,30 @@ import { ArtistEventsTab } from '@/components/artist/ArtistEventsTab'
 import { ArtistTransferTab } from '@/components/artist/ArtistTransferTab'
 import { ArtistPageSkeleton } from '@/components/artist/ArtistPageSkeleton'
 import { MembershipGate } from '@/components/artist/MembershipGate'
-import { SKELETON_LOAD_DELAY } from '@/lib/constants'
+import { usePageLoading } from '@/hooks/usePageLoading'
+import { useTabNavigation } from '@/hooks/useTabNavigation'
+
+const ARTIST_TABS = [
+  { suffix: 'community', tab: 'community' },
+  { suffix: 'events', tab: 'events' },
+  { suffix: 'transfers', tab: 'transfers' },
+]
 
 export default function ArtistPage() {
   const { artistId } = useParams<{ artistId: string }>()
-  const { pathname } = useLocation()
-  const navigate = useNavigate()
 
-  const [isLoading, setIsLoading] = useState(true)
   const [following, setFollowing] = useState(false)
 
-  // Derive active tab from URL
-  const activeTab = pathname.endsWith('/community')
-    ? 'community'
-    : pathname.endsWith('/events')
-      ? 'events'
-      : pathname.endsWith('/transfers')
-        ? 'transfers'
-        : 'home'
+  const isLoading = usePageLoading([artistId])
+  const { activeTab, handleTabChange } = useTabNavigation(
+    `/artists/${artistId}`,
+    ARTIST_TABS,
+    'home',
+  )
 
-  const handleTabChange = (value: string) => {
-    const base = `/artists/${artistId}`
-    navigate(value === 'home' ? base : `${base}/${value}`)
-  }
-
-  // Reset loading & follow state when artist changes
+  // Reset follow state when artist changes
   useEffect(() => {
-    setIsLoading(true)
     setFollowing(mockUser.followedArtistIds.includes(artistId ?? ''))
-    const timer = setTimeout(() => setIsLoading(false), SKELETON_LOAD_DELAY)
-    return () => clearTimeout(timer)
   }, [artistId])
 
   if (isLoading) return <ArtistPageSkeleton />
@@ -62,7 +57,7 @@ export default function ArtistPage() {
     )
   }
 
-  const membership = mockUser.memberships.find((m) => m.artistId === artistId)
+  const membership = mockUser.memberships.find((m) => m.artistId === artistId && m.isActive)
   const extendedInfo = getArtistExtendedInfo(artist.id)
   const allEvents = getEventsByArtistId(artist.id)
   const { upcoming, past } = categorizeEvents(allEvents)
@@ -82,9 +77,15 @@ export default function ArtistPage() {
       <Tabs value={activeTab} onValueChange={handleTabChange}>
         <TabsList variant="line" className="w-full justify-start mt-8 border-b border-border">
           <TabsTrigger value="home" className="flex-none">홈</TabsTrigger>
-          <TabsTrigger value="community" className="flex-none">소통</TabsTrigger>
+          <TabsTrigger value="community" className="flex-none">
+            {!membership && <Lock size={12} className="mr-1 text-muted-foreground" />}
+            소통
+          </TabsTrigger>
           <TabsTrigger value="events" className="flex-none">공연</TabsTrigger>
-          <TabsTrigger value="transfers" className="flex-none">양도</TabsTrigger>
+          <TabsTrigger value="transfers" className="flex-none">
+            {!membership && <Lock size={12} className="mr-1 text-muted-foreground" />}
+            양도
+          </TabsTrigger>
         </TabsList>
 
         <TabsContent value="home" className="pt-8">

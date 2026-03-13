@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { Ticket as TicketIcon } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { TicketCard } from '@/components/urr/TicketCard'
+import { EmptyState } from '@/components/urr/EmptyState'
 import { QRCodeModal } from './QRCodeModal'
 import { TransferListingModal } from './TransferListingModal'
 import { addTransferListing } from '@/data/mock-artist-page'
@@ -64,18 +65,13 @@ export function TicketWalletTab({ tickets, user }: TicketWalletTabProps) {
 
   if (tickets.length === 0) {
     return (
-      <div className="flex flex-col items-center gap-3 py-16 text-center">
-        <div className="size-12 rounded-full bg-muted flex items-center justify-center">
-          <TicketIcon size={24} className="text-muted-foreground" />
-        </div>
-        <p className="text-base font-medium">아직 예매한 티켓이 없습니다.</p>
-        <p className="text-sm text-muted-foreground">
-          공연을 둘러보세요!
-        </p>
-        <Button asChild className="mt-2">
-          <Link to="/events">공연 찾기</Link>
-        </Button>
-      </div>
+      <EmptyState
+        icon={TicketIcon}
+        iconContainer
+        title="아직 예매한 티켓이 없습니다."
+        description="공연을 둘러보세요!"
+        action={<Button asChild><Link to="/events">공연 찾기</Link></Button>}
+      />
     )
   }
 

@@ -146,6 +146,40 @@ export interface VQAQuestion {
   correctIndex: number
 }
 
+export interface CommunityPost {
+  id: string
+  artistId: string
+  authorName: string
+  authorAvatar: string
+  isOfficial: boolean
+  content: string
+  images: string[]
+  likeCount: number
+  commentCount: number
+  createdAt: string
+}
+
+export type EventCategory =
+  | 'concert'
+  | 'fanmeeting'
+  | 'domestic'
+  | 'festival'
+  | 'musical'
+  | 'etc'
+
+export interface EventListItem {
+  id: string
+  artistId: string
+  artistName: string
+  title: string
+  venue: string
+  dateRange: string
+  status: BookingStatus
+  category: EventCategory
+  tags?: string[]
+  poster: string
+}
+
 // === Label Constants ===
 
 export const TIER_LABELS: Record<TierLevel, string> = {

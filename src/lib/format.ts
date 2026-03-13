@@ -104,6 +104,27 @@ export function parseSeatDisplay(seatId: string, sectionName: string): string {
   return `${sectionName} ${row}열 ${number}번`
 }
 
+/* ------------------------------------------------------------------ */
+/*  Relative time                                                      */
+/* ------------------------------------------------------------------ */
+
+/** "방금 전", "3분 전", "2시간 전", "5일 전", "2주 전", "1개월 전" */
+export function formatRelativeTime(timestamp: string): string {
+  const now = new Date()
+  const then = new Date(timestamp)
+  const diff = now.getTime() - then.getTime()
+  const minutes = Math.floor(diff / 60000)
+  if (minutes < 1) return '방금 전'
+  if (minutes < 60) return `${minutes}분 전`
+  const hours = Math.floor(minutes / 60)
+  if (hours < 24) return `${hours}시간 전`
+  const days = Math.floor(hours / 24)
+  if (days < 7) return `${days}일 전`
+  const weeks = Math.floor(days / 7)
+  if (weeks < 5) return `${weeks}주 전`
+  return `${Math.floor(days / 30)}개월 전`
+}
+
 export function formatCountdown(seconds: number): string {
   if (seconds <= 0) return '0:00'
   const h = Math.floor(seconds / 3600)

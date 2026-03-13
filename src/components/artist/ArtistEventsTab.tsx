@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { Calendar } from 'lucide-react'
 import { EventCard } from '@/components/urr/EventCard'
+import { EmptyState } from '@/components/urr/EmptyState'
 import type { Event } from '@/types'
 
 interface ArtistEventsTabProps {
@@ -13,12 +14,7 @@ export function ArtistEventsTab({ upcoming, past, artistName }: ArtistEventsTabP
   const hasEvents = upcoming.length > 0 || past.length > 0
 
   if (!hasEvents) {
-    return (
-      <div className="flex flex-col items-center gap-3 py-16 text-center">
-        <Calendar size={40} className="text-muted-foreground/40" />
-        <p className="text-sm text-muted-foreground">등록된 공연이 없습니다</p>
-      </div>
-    )
+    return <EmptyState icon={Calendar} description="등록된 공연이 없습니다" />
   }
 
   return (

@@ -4,6 +4,7 @@ import { ShoppingBag } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { TransferCard } from '@/components/urr/TransferCard'
+import { EmptyState } from '@/components/urr/EmptyState'
 import type { Event, TransferListing, Membership } from '@/types'
 
 type EnrichedTransfer = TransferListing & { event: Event }
@@ -150,10 +151,7 @@ export function ArtistTransferTab({ listings, events, membership, artistId }: Ar
           ))}
         </div>
       ) : (
-        <div className="flex flex-col items-center gap-3 py-16 text-center">
-          <ShoppingBag size={40} className="text-muted-foreground/40" />
-          <p className="text-sm text-muted-foreground">현재 양도 가능한 티켓이 없습니다</p>
-        </div>
+        <EmptyState icon={ShoppingBag} description="현재 양도 가능한 티켓이 없습니다" />
       )}
     </div>
   )

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Mail } from 'lucide-react'
-import urrLogo from '@/assets/로고5.svg'
+import urrLogo from '@/assets/로고_최종.svg'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Checkbox } from '@/components/ui/checkbox'

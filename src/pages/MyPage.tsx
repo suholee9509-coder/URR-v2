@@ -1,5 +1,4 @@
-import { useState, useEffect } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useState } from 'react'
 import { mockUser } from '@/data/mock-user'
 import { getMyTickets, getMyTransferRecords } from '@/data/mock-my-page'
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs'
@@ -9,26 +8,20 @@ import { MembershipTab } from '@/components/my-page/MembershipTab'
 import { TicketWalletTab } from '@/components/my-page/TicketWalletTab'
 import { TransferHistoryTab } from '@/components/my-page/TransferHistoryTab'
 import { SettingsTab } from '@/components/my-page/SettingsTab'
-import { SKELETON_LOAD_DELAY } from '@/lib/constants'
+import { usePageLoading } from '@/hooks/usePageLoading'
+import { useTabNavigation } from '@/hooks/useTabNavigation'
 import type { User } from '@/types'
 
+const MY_PAGE_TABS = [
+  { suffix: 'wallet', tab: 'wallet' },
+  { suffix: 'transfers', tab: 'transfers' },
+  { suffix: 'settings', tab: 'settings' },
+]
+
 export default function MyPage() {
-  const { pathname } = useLocation()
-  const navigate = useNavigate()
-  const [isLoading, setIsLoading] = useState(true)
+  const isLoading = usePageLoading()
+  const { activeTab, handleTabChange } = useTabNavigation('/my-page', MY_PAGE_TABS, 'membership')
   const [user, setUser] = useState<User>(() => ({ ...mockUser }))
-
-  const activeTab = pathname.endsWith('/wallet')
-    ? 'wallet'
-    : pathname.endsWith('/transfers')
-      ? 'transfers'
-      : pathname.endsWith('/settings')
-        ? 'settings'
-        : 'membership'
-
-  const handleTabChange = (value: string) => {
-    navigate(value === 'membership' ? '/my-page' : `/my-page/${value}`)
-  }
 
   const handleUpdateUser = (updates: Partial<Pick<User, 'name' | 'email'>>) => {
     setUser((prev) => ({ ...prev, ...updates }))
@@ -51,12 +44,6 @@ export default function MyPage() {
       ),
     }))
   }
-
-  useEffect(() => {
-    setIsLoading(true)
-    const timer = setTimeout(() => setIsLoading(false), SKELETON_LOAD_DELAY)
-    return () => clearTimeout(timer)
-  }, [])
 
   if (isLoading) return <MyPageSkeleton />
 

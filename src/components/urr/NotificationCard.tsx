@@ -1,4 +1,5 @@
 import { cn } from '@/lib/utils'
+import { formatRelativeTime } from '@/lib/format'
 import { Ticket, ArrowLeftRight, TrendingUp, CreditCard, Crown } from 'lucide-react'
 import type { Notification, NotificationType } from '@/types'
 
@@ -19,7 +20,7 @@ interface NotificationCardProps {
 
 export function NotificationCard({ notification, isUnread = false, onClick, className }: NotificationCardProps) {
   const Icon = typeIcons[notification.type]
-  const timeAgo = getRelativeTime(notification.timestamp)
+  const timeAgo = formatRelativeTime(notification.timestamp)
 
   return (
     <div
@@ -47,13 +48,3 @@ export function NotificationCard({ notification, isUnread = false, onClick, clas
   )
 }
 
-function getRelativeTime(timestamp: string): string {
-  const now = new Date()
-  const then = new Date(timestamp)
-  const diff = now.getTime() - then.getTime()
-  const minutes = Math.floor(diff / 60000)
-  if (minutes < 60) return `${minutes}분 전`
-  const hours = Math.floor(minutes / 60)
-  if (hours < 24) return `${hours}시간 전`
-  return `${Math.floor(hours / 24)}일 전`
-}

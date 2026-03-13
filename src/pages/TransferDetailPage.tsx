@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { ArrowLeft } from 'lucide-react'
 import { getTransferListingById } from '@/data/mock-artist-page'
@@ -6,6 +5,7 @@ import { mockUser } from '@/data/mock-user'
 import { TransferInfoPanel } from '@/components/transfer/TransferInfoPanel'
 import { TransferPurchaseSidebar } from '@/components/transfer/TransferPurchaseSidebar'
 import { Skeleton } from '@/components/ui/skeleton'
+import { usePageLoading } from '@/hooks/usePageLoading'
 
 function TransferDetailSkeleton() {
   return (
@@ -29,18 +29,12 @@ function TransferDetailSkeleton() {
 export default function TransferDetailPage() {
   const { artistId, listingId } = useParams<{ artistId: string; listingId: string }>()
   const navigate = useNavigate()
-  const [isLoading, setIsLoading] = useState(true)
-
-  useEffect(() => {
-    setIsLoading(true)
-    const timer = setTimeout(() => setIsLoading(false), 600)
-    return () => clearTimeout(timer)
-  }, [artistId, listingId])
+  const isLoading = usePageLoading([artistId, listingId], 600)
 
   if (isLoading) return <TransferDetailSkeleton />
 
   const listing = getTransferListingById(artistId!, listingId!)
-  const membership = mockUser.memberships.find((m) => m.artistId === artistId)
+  const membership = mockUser.memberships.find((m) => m.artistId === artistId && m.isActive)
 
   if (!listing) {
     return (

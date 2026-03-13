@@ -24,9 +24,10 @@ import {
   QueueStatusCard,
   FilterChip,
   ViewToggle,
+  EmptyState,
 } from '@/components/urr'
-import type { CommunityPost } from '@/data/mock-community'
 import type {
+  CommunityPost,
   TierLevel,
   BookingStatus,
   TransferStatus,
@@ -62,6 +63,9 @@ import {
   Music,
   X,
   Check,
+  ShoppingBag,
+  MessageCircle,
+  Ticket as TicketIcon,
 } from 'lucide-react'
 
 // ---------------------------------------------------------------------------
@@ -206,6 +210,7 @@ const TOC = [
   { id: 'icons', number: '23', title: '아이콘 시스템' },
   { id: 'sidebar-preview', number: '24', title: '사이드바 프리뷰' },
   { id: 'filter-chip', number: '25', title: 'FilterChip · ViewToggle' },
+  { id: 'empty-state', number: '26', title: 'EmptyState' },
 ]
 
 // ---------------------------------------------------------------------------
@@ -1345,6 +1350,64 @@ export default function StyleGuidePage() {
                   />
                   <ViewToggle value={demoView} onChange={setDemoView} />
                 </div>
+              </DemoBox>
+            </SubSection>
+          </Section>
+
+          {/* 26. EmptyState */}
+
+          <Section id="empty-state" number="26" title="EmptyState (빈 상태)">
+            <p className="text-sm text-muted-foreground mb-6">
+              데이터가 없을 때 사용하는 통일된 빈 상태 컴포넌트입니다. 아이콘 + 제목 + 설명 + 선택적 액션 버튼 조합으로 구성됩니다.
+            </p>
+
+            <SubSection title="Simple (아이콘 + 설명)">
+              <div className="grid grid-cols-3 gap-4">
+                <DemoBox label="소통 없음">
+                  <EmptyState icon={MessageCircle} description="등록된 소통 게시글이 없습니다" />
+                </DemoBox>
+                <DemoBox label="공연 없음">
+                  <EmptyState icon={Calendar} description="등록된 공연이 없습니다" />
+                </DemoBox>
+                <DemoBox label="양도 없음">
+                  <EmptyState icon={ShoppingBag} description="현재 양도 가능한 티켓이 없습니다" />
+                </DemoBox>
+              </div>
+            </SubSection>
+
+            <SubSection title="With Icon Container (아이콘 컨테이너 + 제목 + 설명 + 액션)">
+              <div className="grid grid-cols-3 gap-4">
+                <DemoBox label="티켓 없음">
+                  <EmptyState
+                    icon={TicketIcon}
+                    iconContainer
+                    title="아직 예매한 티켓이 없습니다."
+                    description="공연을 둘러보세요!"
+                    action={<Button size="sm">공연 찾기</Button>}
+                  />
+                </DemoBox>
+                <DemoBox label="멤버십 없음">
+                  <EmptyState
+                    icon={Users}
+                    iconContainer
+                    title="가입한 멤버십이 없습니다."
+                    description="아티스트 페이지에서 멤버십에 가입하세요!"
+                    action={<Button size="sm">아티스트 찾기</Button>}
+                  />
+                </DemoBox>
+                <DemoBox label="양도 내역 없음">
+                  <EmptyState
+                    icon={ArrowLeftRight}
+                    iconContainer
+                    title="양도 내역이 없습니다."
+                  />
+                </DemoBox>
+              </div>
+            </SubSection>
+
+            <SubSection title="Custom Size (큰 아이콘)">
+              <DemoBox label="알림 없음">
+                <EmptyState icon={Bell} iconSize={48} description="아직 알림이 없습니다." className="py-20" />
               </DemoBox>
             </SubSection>
           </Section>

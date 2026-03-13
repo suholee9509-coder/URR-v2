@@ -11,6 +11,7 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { cn } from '@/lib/utils'
+import { formatTimer } from '@/lib/format'
 
 type VerificationState = 'idle' | 'sent' | 'expired' | 'verifying' | 'duplicate'
 
@@ -22,12 +23,6 @@ interface IdentityStepProps {
     gender: 'male' | 'female'
   }) => void
   onBack: () => void
-}
-
-function formatTimer(seconds: number): string {
-  const m = Math.floor(seconds / 60)
-  const s = seconds % 60
-  return `${m}:${s.toString().padStart(2, '0')}`
 }
 
 function isUnder14(dobStr: string): boolean {

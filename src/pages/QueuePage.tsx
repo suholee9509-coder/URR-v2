@@ -2,9 +2,9 @@ import { useEffect, useState, useCallback } from 'react'
 import { useSearchParams, useNavigate } from 'react-router-dom'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
-import { useGeneralQueueSimulation } from '@/hooks/useGeneralQueueSimulation'
+import { useGeneralQueueSimulation } from '@/hooks/useQueueSimulation'
 import { useNavigationBlock } from '@/hooks/useNavigationBlock'
-import logo from '@/assets/로고5.svg'
+import logo from '@/assets/로고_최종.svg'
 
 // ── Leave Confirmation Dialog ─────────────────────────
 function LeaveDialog({

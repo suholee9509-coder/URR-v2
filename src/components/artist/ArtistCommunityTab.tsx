@@ -1,7 +1,8 @@
 import { MessageCircle } from 'lucide-react'
 import { PostCard } from '@/components/urr/PostCard'
+import { EmptyState } from '@/components/urr/EmptyState'
 import { getArtistGradient } from '@/data/mock-home'
-import type { CommunityPost } from '@/data/mock-community'
+import type { CommunityPost } from '@/types'
 
 interface ArtistCommunityTabProps {
   posts: CommunityPost[]
@@ -10,12 +11,7 @@ interface ArtistCommunityTabProps {
 
 export function ArtistCommunityTab({ posts, artistId }: ArtistCommunityTabProps) {
   if (posts.length === 0) {
-    return (
-      <div className="flex flex-col items-center gap-3 py-16 text-center">
-        <MessageCircle size={40} className="text-muted-foreground/40" />
-        <p className="text-sm text-muted-foreground">등록된 소통 게시글이 없습니다</p>
-      </div>
-    )
+    return <EmptyState icon={MessageCircle} description="등록된 소통 게시글이 없습니다" />
   }
 
   const sorted = [...posts].sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())

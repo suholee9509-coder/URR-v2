@@ -120,7 +120,7 @@ const artistEventsMap: Record<string, Event[]> = {
     {
       id: 'evt-bts-fanmeet-2026',
       artistId: 'bts',
-      title: '2026 TWS 2ND FANMEETING',
+      title: '2026 BTS FAN MEETING: MAGIC SHOP',
       venue: 'KSPO DOME (올림픽체조경기장)',
       dates: [
         { id: 'bts-d3', date: '2026-10-15T18:00:00+09:00', bookingWindows: [], totalSeats: 15000, remainingSeats: 15000 },
@@ -131,7 +131,7 @@ const artistEventsMap: Record<string, Event[]> = {
     {
       id: 'evt-bts-busan-2026',
       artistId: 'bts',
-      title: 'SEVENTEEN WORLD TOUR',
+      title: 'BTS YET TO COME IN BUSAN',
       venue: '부산 아시아드 주경기장',
       dates: [
         { id: 'bts-d4', date: '2026-04-20T17:00:00+09:00', bookingWindows: [], totalSeats: 40000, remainingSeats: 0 },
@@ -142,7 +142,7 @@ const artistEventsMap: Record<string, Event[]> = {
     {
       id: 'evt-bts-past-2025',
       artistId: 'bts',
-      title: 'DAY6 10th Anniversary Tour',
+      title: 'BTS PERMISSION TO DANCE ON STAGE',
       venue: '고척스카이돔',
       dates: [
         { id: 'bts-d5', date: '2025-11-10T18:00:00+09:00', bookingWindows: [], totalSeats: 20000, remainingSeats: 0 },
@@ -155,7 +155,7 @@ const artistEventsMap: Record<string, Event[]> = {
     {
       id: 'evt-aespa-synk-2026',
       artistId: 'aespa',
-      title: '아일릿 press start',
+      title: 'aespa LIVE SYNK : PARALLEL',
       venue: 'KSPO DOME (올림픽체조경기장)',
       dates: [
         { id: 'ae-d1', date: '2026-09-20T18:00:00+09:00', bookingWindows: [], totalSeats: 15000, remainingSeats: 4500 },
@@ -166,7 +166,7 @@ const artistEventsMap: Record<string, Event[]> = {
     {
       id: 'evt-aespa-world-2026',
       artistId: 'aespa',
-      title: '민트 페스타 MINT FESTA',
+      title: 'aespa WORLD TOUR: MYWORLD',
       venue: '잠실실내체육관',
       dates: [
         { id: 'ae-d2', date: '2026-11-05T19:00:00+09:00', bookingWindows: [], totalSeats: 10000, remainingSeats: 10000 },
@@ -177,7 +177,7 @@ const artistEventsMap: Record<string, Event[]> = {
     {
       id: 'evt-aespa-past-2025',
       artistId: 'aespa',
-      title: "INDIE'D HERE AND NOW",
+      title: 'aespa SYNK : HYPERLINE 2025',
       venue: '고척스카이돔',
       dates: [
         { id: 'ae-d3', date: '2025-10-01T18:00:00+09:00', bookingWindows: [], totalSeats: 20000, remainingSeats: 0 },
@@ -190,7 +190,7 @@ const artistEventsMap: Record<string, Event[]> = {
     {
       id: 'evt-ive-show-2026',
       artistId: 'ive',
-      title: '권진아 꽃말 콘서트',
+      title: 'IVE THE 1ST WORLD TOUR: SHOW WHAT I HAVE',
       venue: 'KSPO DOME (올림픽체조경기장)',
       dates: [
         { id: 'ive-d1', date: '2026-07-12T18:00:00+09:00', bookingWindows: [], totalSeats: 15000, remainingSeats: 15000 },
@@ -201,7 +201,7 @@ const artistEventsMap: Record<string, Event[]> = {
     {
       id: 'evt-ive-fanmeet-2026',
       artistId: 'ive',
-      title: '패닉 콘서트 PANIC',
+      title: 'IVE 2nd FAN MEETING: I HAVE',
       venue: '잠실실내체육관',
       dates: [
         { id: 'ive-d2', date: '2026-05-18T17:00:00+09:00', bookingWindows: [], totalSeats: 10000, remainingSeats: 2300 },
@@ -214,7 +214,7 @@ const artistEventsMap: Record<string, Event[]> = {
     {
       id: 'evt-blackpink-world-2026',
       artistId: 'blackpink',
-      title: '박효신 LIVE A & E',
+      title: 'BLACKPINK BORN PINK WORLD TOUR FINALE',
       venue: '고척스카이돔',
       dates: [
         { id: 'bp-d1', date: '2026-07-15T18:30:00+09:00', bookingWindows: [], totalSeats: 20000, remainingSeats: 1800 },
@@ -226,7 +226,7 @@ const artistEventsMap: Record<string, Event[]> = {
     {
       id: 'evt-blackpink-concert-2026',
       artistId: 'blackpink',
-      title: '서울재즈페스티벌 2026',
+      title: 'BLACKPINK IN YOUR AREA 2026',
       venue: '잠실종합운동장 주경기장',
       dates: [
         { id: 'bp-d3', date: '2026-12-01T18:00:00+09:00', bookingWindows: [], totalSeats: 65000, remainingSeats: 65000 },
@@ -237,7 +237,7 @@ const artistEventsMap: Record<string, Event[]> = {
     {
       id: 'evt-blackpink-past-2025',
       artistId: 'blackpink',
-      title: '서울재즈페스티벌 2026 ENCORE',
+      title: 'BLACKPINK THE SHOW 2025',
       venue: '고척스카이돔',
       dates: [
         { id: 'bp-d4', date: '2025-09-20T18:00:00+09:00', bookingWindows: [], totalSeats: 20000, remainingSeats: 0 },

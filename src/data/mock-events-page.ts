@@ -1,4 +1,4 @@
-import type { BookingStatus } from '@/types'
+import type { EventListItem } from '@/types'
 
 // --- Asset imports (reuse existing posters) ---
 import posterBTSYTC from '@/assets/공연_BTS Yet to Come in Cinema.png'
@@ -13,29 +13,6 @@ import posterNJFanmeet from '@/assets/선예매임박공연_NewJeans Fan Meeting
 import posterIVE1st from '@/assets/선예매임박공연_IVE The 1ST World Tour.png'
 import posterSVTFollow from '@/assets/선예매임박공연_Seventeen Follow Again Tour.png'
 import posterSKZDominance from '@/assets/선예매임박공연_StrayKids Dominance.png'
-
-// --- Types ---
-
-export type EventCategory =
-  | 'concert'
-  | 'fanmeeting'
-  | 'domestic'
-  | 'festival'
-  | 'musical'
-  | 'etc'
-
-export interface EventListItem {
-  id: string
-  artistId: string
-  artistName: string
-  title: string
-  venue: string
-  dateRange: string
-  status: BookingStatus
-  category: EventCategory
-  tags?: string[]
-  poster: string
-}
 
 // --- Category filter options ---
 export const eventCategoryFilters = [

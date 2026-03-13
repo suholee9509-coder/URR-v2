@@ -210,7 +210,7 @@ export function BookingProvider({ eventId, children }: BookingProviderProps) {
     dispatch({ type: 'SET_SEAT_TIMER', payload: seconds })
   }, [])
 
-  const value: BookingContextValue = {
+  const value: BookingContextValue = useMemo(() => ({
     bookingState: state.bookingState,
     event: state.event,
     selectedDateId: state.selectedDateId,
@@ -237,7 +237,17 @@ export function BookingProvider({ eventId, children }: BookingProviderProps) {
     resetBooking,
     setConfirmationData,
     setSeatTimerSecondsLeft,
-  }
+  }), [
+    state.bookingState, state.event, state.selectedDateId,
+    state.isLeftPanelExpanded, state.isLoading,
+    state.selectedSectionId, state.selectedSeatIds,
+    state.confirmationData, state.seatTimerSecondsLeft,
+    userTier, selectedDate, sectionsForDate, isWindowOpen,
+    isSoldOut, userWindowOpensAt, maxSeats,
+    selectDate, toggleLeftPanel, setLeftPanel, transitionTo,
+    startBooking, selectSection, toggleSeat, resetBooking,
+    setConfirmationData, setSeatTimerSecondsLeft,
+  ])
 
   return <BookingContext.Provider value={value}>{children}</BookingContext.Provider>
 }
