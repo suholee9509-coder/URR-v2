@@ -1,4 +1,4 @@
-import { ArrowLeft, Crown, Check, X } from 'lucide-react'
+import { ArrowLeft, Crown } from 'lucide-react'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import { TierBadge } from '@/components/urr/TierBadge'
@@ -17,12 +17,11 @@ const tierBenefits: {
   openTiming: string
   fee: string
   transferFee: string
-  vqa: boolean
 }[] = [
-  { tier: 'lightning', booking: '우선 예매', openTiming: '개별 오픈', fee: '1,000원', transferFee: '5%', vqa: false },
-  { tier: 'thunder', booking: '우선 예매', openTiming: '라이트닝 +1시간', fee: '2,000원', transferFee: '5%', vqa: false },
-  { tier: 'cloud', booking: '일반 예매', openTiming: '썬더 +2일', fee: '3,000원', transferFee: '10%', vqa: true },
-  { tier: 'mist', booking: '일반 예매', openTiming: '클라우드 +1시간', fee: '4,000원', transferFee: '10%', vqa: true },
+  { tier: 'lightning', booking: '우선 예매', openTiming: '개별 오픈', fee: '1,000원', transferFee: '5%' },
+  { tier: 'thunder', booking: '우선 예매', openTiming: '라이트닝 +1시간', fee: '2,000원', transferFee: '5%' },
+  { tier: 'cloud', booking: '일반 예매', openTiming: '썬더 +2일', fee: '3,000원', transferFee: '10%' },
+  { tier: 'mist', booking: '일반 예매', openTiming: '클라우드 +1시간', fee: '4,000원', transferFee: '10%' },
 ]
 
 export function MembershipIntroStep({ artist, onBack, onSubscribe }: MembershipIntroStepProps) {
@@ -78,7 +77,6 @@ export function MembershipIntroStep({ artist, onBack, onSubscribe }: MembershipI
                 <th className="text-left px-4 py-3 font-semibold">오픈 시점</th>
                 <th className="text-left px-4 py-3 font-semibold">예매 수수료</th>
                 <th className="text-left px-4 py-3 font-semibold">양도 수수료</th>
-                <th className="text-center px-4 py-3 font-semibold">VQA 면제</th>
               </tr>
             </thead>
             <tbody>
@@ -94,21 +92,11 @@ export function MembershipIntroStep({ artist, onBack, onSubscribe }: MembershipI
                   <td className="px-4 py-3 text-muted-foreground">{row.openTiming}</td>
                   <td className="px-4 py-3 text-muted-foreground">{row.fee}</td>
                   <td className="px-4 py-3 text-muted-foreground">{row.transferFee}</td>
-                  <td className="px-4 py-3 text-center">
-                    {row.vqa ? (
-                      <X size={14} className="mx-auto text-muted-foreground/50" />
-                    ) : (
-                      <Check size={14} className="mx-auto text-green-600" />
-                    )}
-                  </td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
-        <p className="text-xs text-muted-foreground">
-          * VQA 면제: 라이트닝, 썬더 등급은 본인인증 절차(VQA)가 면제됩니다
-        </p>
       </div>
 
       {/* Price + CTA */}

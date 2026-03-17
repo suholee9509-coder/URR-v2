@@ -61,7 +61,7 @@ export function ArtistHomeTab({
                   <p className="text-xs text-muted-foreground mt-0.5">
                     {new Date(membership.expiresAt).toLocaleDateString('ko-KR', { year: 'numeric', month: 'long', day: 'numeric' })} 만료
                     <span className="mx-1.5 text-border">·</span>
-                    {membership.tier === 'lightning' ? '최우선 예매 · VQA 면제' : membership.tier === 'thunder' ? '우선 예매 · VQA 면제' : membership.tier === 'cloud' ? '선예매 · VQA 필요' : '일반 예매 · VQA 필요'}
+                    {membership.tier === 'lightning' ? '최우선 예매 · 양도 수수료 5%' : membership.tier === 'thunder' ? '우선 예매 · 양도 수수료 5%' : membership.tier === 'cloud' ? '일반 예매 · 양도 수수료 10%' : '일반 예매 · 양도 수수료 10%'}
                   </p>
                 </div>
               </div>

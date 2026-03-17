@@ -4,7 +4,7 @@ export type TierLevel = 'lightning' | 'thunder' | 'cloud' | 'mist'
 export type BookingStatus = 'open' | 'upcoming' | 'soldout' | 'closed'
 export type TransferStatus = 'listed' | 'sold' | 'completed' | 'cancelled'
 export type SeatStatus = 'available' | 'selected' | 'taken' | 'locked'
-export type BookingState = 'idle' | 'vqa' | 'queue' | 'seats-section' | 'seats-individual' | 'payment' | 'confirmation'
+export type BookingState = 'idle' | 'queue' | 'seats-section' | 'seats-individual' | 'payment' | 'confirmation'
 export type NotificationType = 'booking' | 'transfer' | 'tier' | 'payment' | 'membership'
 
 // === Domain Entities ===

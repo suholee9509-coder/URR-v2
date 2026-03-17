@@ -383,7 +383,7 @@ export default function StyleGuidePage() {
               <div className="space-y-4">
                 <div className="flex items-baseline gap-4">
                   <span className="w-12 text-xs text-muted-foreground shrink-0">B1</span>
-                  <span className="text-base">16px · 본문 텍스트, VQA 질문</span>
+                  <span className="text-base">16px · 본문 텍스트</span>
                 </div>
                 <div className="flex items-baseline gap-4">
                   <span className="w-12 text-xs text-muted-foreground shrink-0">B2</span>
@@ -431,7 +431,7 @@ export default function StyleGuidePage() {
                 <div className="flex items-baseline gap-4">
                   <span className="w-16 text-xs text-muted-foreground shrink-0">Timer-md</span>
                   <span className="text-xl font-semibold font-mono tabular-nums">04:30</span>
-                  <span className="text-xs text-muted-foreground">20px SemiBold · VQA 타이머</span>
+                  <span className="text-xs text-muted-foreground">20px SemiBold · 타이머</span>
                 </div>
                 <div className="flex items-baseline gap-4">
                   <span className="w-16 text-xs text-muted-foreground shrink-0">Timer-sm</span>
@@ -489,7 +489,7 @@ export default function StyleGuidePage() {
                 <p><code className="bg-muted px-1.5 py-0.5 rounded text-xs">z-10</code> GNB Sidebar / Top Bar</p>
                 <p><code className="bg-muted px-1.5 py-0.5 rounded text-xs">z-20</code> Booking Left Panel</p>
                 <p><code className="bg-muted px-1.5 py-0.5 rounded text-xs">z-30</code> Queue Overlay Card</p>
-                <p><code className="bg-muted px-1.5 py-0.5 rounded text-xs">z-40</code> Modal / VQA / Payment</p>
+                <p><code className="bg-muted px-1.5 py-0.5 rounded text-xs">z-40</code> Modal / Payment</p>
                 <p><code className="bg-muted px-1.5 py-0.5 rounded text-xs">z-50</code> Toast Notification</p>
               </div>
             </SubSection>
@@ -1009,7 +1009,7 @@ export default function StyleGuidePage() {
                     <p className="text-[11px] text-muted-foreground mt-1">정가: 165,000원</p>
                   </div>
                 </DemoBox>
-                <DemoBox label="VQA 인증코드 입력 (monospace)">
+                <DemoBox label="인증코드 입력 (monospace)">
                   <div className="max-w-xs">
                     <Input placeholder="인증코드 6자리" className="font-mono text-center tracking-[0.3em] text-lg" maxLength={6} />
                   </div>
@@ -1095,7 +1095,7 @@ export default function StyleGuidePage() {
               <div className="space-y-4 max-w-md">
                 <div className="space-y-1.5">
                   <div className="flex justify-between text-sm">
-                    <span className="text-muted-foreground">VQA 진행</span>
+                    <span className="text-muted-foreground">인증 진행</span>
                     <span className="font-medium">2/3</span>
                   </div>
                   <Progress value={66} />
