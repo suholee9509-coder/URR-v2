@@ -9,30 +9,22 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogDescription,
-  DialogFooter,
-} from '@/components/ui/dialog'
 import { cn } from '@/lib/utils'
 import { formatTimer } from '@/lib/format'
 
-type VerificationState = 'idle' | 'sent' | 'expired' | 'verifying' | 'duplicate'
+type VerificationState = 'idle' | 'sent' | 'expired' | 'verifying'
 
-interface IdentityStepProps {
+interface GuardianIdentityStepProps {
   onComplete: (data: {
-    userName: string
-    phoneNumber: string
+    guardianName: string
+    guardianPhone: string
     birthDate: string
     gender: 'male' | 'female'
   }) => void
   onBack: () => void
 }
 
-export function IdentityStep({ onComplete, onBack }: IdentityStepProps) {
+export function GuardianIdentityStep({ onComplete, onBack }: GuardianIdentityStepProps) {
   const [carrier, setCarrier] = useState('')
   const [name, setName] = useState('')
   const [dob, setDob] = useState('')
@@ -43,7 +35,6 @@ export function IdentityStep({ onComplete, onBack }: IdentityStepProps) {
   const [verificationState, setVerificationState] = useState<VerificationState>('idle')
   const [code, setCode] = useState('')
   const [timerSeconds, setTimerSeconds] = useState(180)
-  const [showDuplicateDialog, setShowDuplicateDialog] = useState(false)
 
   // SMS 타이머
   useEffect(() => {
@@ -82,14 +73,9 @@ export function IdentityStep({ onComplete, onBack }: IdentityStepProps) {
     if (code.length !== 6) return
     setVerificationState('verifying')
     setTimeout(() => {
-      if (phone === '01099999999') {
-        setVerificationState('duplicate')
-        setShowDuplicateDialog(true)
-        return
-      }
       onComplete({
-        userName: name,
-        phoneNumber: phone,
+        guardianName: name,
+        guardianPhone: phone,
         birthDate: dob,
         gender: gender!,
       })
@@ -98,7 +84,6 @@ export function IdentityStep({ onComplete, onBack }: IdentityStepProps) {
 
   const isSubmitDisabled =
     verificationState === 'verifying' ||
-    verificationState === 'duplicate' ||
     verificationState !== 'sent' ||
     code.length !== 6
 
@@ -113,20 +98,25 @@ export function IdentityStep({ onComplete, onBack }: IdentityStepProps) {
         이전으로 돌아가기
       </button>
 
+      {/* 보호자 인증 헤더 */}
       <div className="flex items-center gap-3 mb-2">
-        <div className="size-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
-          <ShieldCheck size={20} className="text-primary" />
+        <div className="size-10 rounded-full bg-amber-100 flex items-center justify-center shrink-0">
+          <ShieldCheck size={20} className="text-amber-600" />
         </div>
-        <h1 className="text-2xl font-bold">본인 인증</h1>
+        <div>
+          <h1 className="text-2xl font-bold">보호자 본인인증</h1>
+        </div>
       </div>
-      <p className="text-sm text-muted-foreground mt-2">
-        1인 1계정 인증으로 봇과 매크로를 방지합니다.
+      <p className="text-sm text-muted-foreground mt-2 mb-8">
+        만 14세 미만 회원 가입을 위해{' '}
+        <span className="font-medium text-foreground">법정대리인(부모/후견인)</span>의 본인인증이
+        필요합니다.
       </p>
 
-      <div className="mt-8 space-y-4">
+      <div className="space-y-4">
         {/* Carrier */}
         <div>
-          <label className="text-sm font-medium mb-1.5 block">통신사</label>
+          <label className="text-sm font-medium mb-1.5 block">보호자 통신사</label>
           <Select value={carrier} onValueChange={setCarrier}>
             <SelectTrigger className="w-full">
               <SelectValue placeholder="통신사 선택" />
@@ -142,7 +132,7 @@ export function IdentityStep({ onComplete, onBack }: IdentityStepProps) {
 
         {/* Name */}
         <div>
-          <label className="text-sm font-medium mb-1.5 block">이름</label>
+          <label className="text-sm font-medium mb-1.5 block">보호자 이름</label>
           <Input
             value={name}
             onChange={(e) => setName(e.target.value)}
@@ -152,7 +142,7 @@ export function IdentityStep({ onComplete, onBack }: IdentityStepProps) {
 
         {/* DOB */}
         <div>
-          <label className="text-sm font-medium mb-1.5 block">생년월일</label>
+          <label className="text-sm font-medium mb-1.5 block">보호자 생년월일</label>
           <Input
             value={dob}
             onChange={(e) => setDob(e.target.value.replace(/\D/g, '').slice(0, 8))}
@@ -164,7 +154,7 @@ export function IdentityStep({ onComplete, onBack }: IdentityStepProps) {
 
         {/* Gender */}
         <div>
-          <label className="text-sm font-medium mb-1.5 block">성별</label>
+          <label className="text-sm font-medium mb-1.5 block">보호자 성별</label>
           <div className="flex rounded-lg border border-input overflow-hidden">
             <button
               type="button"
@@ -226,7 +216,7 @@ export function IdentityStep({ onComplete, onBack }: IdentityStepProps) {
 
         {/* Phone + Send code */}
         <div>
-          <label className="text-sm font-medium mb-1.5 block">휴대폰 번호</label>
+          <label className="text-sm font-medium mb-1.5 block">보호자 휴대폰 번호</label>
           <div className="flex gap-2">
             <Input
               value={phone}
@@ -293,39 +283,6 @@ export function IdentityStep({ onComplete, onBack }: IdentityStepProps) {
       >
         {verificationState === 'verifying' ? '확인 중...' : '다음'}
       </Button>
-
-      {/* 중복 계정 팝업 */}
-      <Dialog open={showDuplicateDialog} onOpenChange={setShowDuplicateDialog}>
-        <DialogContent className="sm:max-w-[400px]">
-          <DialogHeader>
-            <div className="flex items-center gap-2 mb-1">
-              <div className="size-8 rounded-full bg-muted flex items-center justify-center">
-                <ShieldCheck size={16} className="text-muted-foreground" />
-              </div>
-              <DialogTitle>이미 가입된 계정이 있습니다</DialogTitle>
-            </div>
-            <DialogDescription className="text-sm leading-relaxed pt-1">
-              이 번호로 가입된 계정이 있습니다.
-              <br />
-              <span className="font-medium text-foreground">가입 경로: 카카오</span>
-              <br />
-              <br />
-              기존 계정으로 로그인하시겠습니까?
-            </DialogDescription>
-          </DialogHeader>
-          <DialogFooter>
-            <Button
-              className="w-full"
-              onClick={() => {
-                setShowDuplicateDialog(false)
-                onBack()
-              }}
-            >
-              로그인 화면으로 돌아가기
-            </Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
     </div>
   )
 }

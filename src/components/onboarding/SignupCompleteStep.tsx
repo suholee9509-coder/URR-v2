@@ -27,7 +27,7 @@ export function SignupCompleteStep({ userName }: SignupCompleteStepProps) {
           <span className="text-sm font-medium">Lv.1 미스트 등급</span>
         </div>
         <p className="text-xs text-muted-foreground leading-relaxed">
-          아티스트 멤버십에 가입하면 실버 등급으로 업그레이드됩니다.
+          아티스트 멤버십에 가입하면 클라우드 등급으로 업그레이드됩니다.
           <br />
           멜론 연동 시 더 높은 등급을 받을 수 있어요!
         </p>
