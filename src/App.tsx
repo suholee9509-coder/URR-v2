@@ -19,6 +19,8 @@ import TransferDetailPage from '@/pages/TransferDetailPage'
 import MembershipPage from '@/pages/MembershipPage'
 import EventDetailPage from '@/pages/EventDetailPage'
 import StyleGuidePage from '@/pages/StyleGuidePage'
+import NotFoundPage from '@/pages/NotFoundPage'
+import ErrorPage from '@/pages/ErrorPage'
 
 function App() {
   return (
@@ -47,6 +49,8 @@ function App() {
                 <Route path="/my-page/*" element={<MyPage />} />
                 <Route path="/notifications" element={<NotificationsPage />} />
                 <Route path="/style-guide" element={<StyleGuidePage />} />
+                <Route path="/error" element={<ErrorPage />} />
+                <Route path="*" element={<NotFoundPage />} />
               </Route>
             </Routes>
           </LayoutProvider>
