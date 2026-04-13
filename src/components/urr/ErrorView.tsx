@@ -36,7 +36,7 @@ export function ErrorView({
   const resolvedTitle = title ?? copy.title
   const resolvedDescription = description ?? copy.description
 
-  const handleHome = () => navigate('/')
+  const handleHome = () => navigate('/home')
   const handleRetry = () => {
     if (onRetry) onRetry()
     else window.location.reload()
